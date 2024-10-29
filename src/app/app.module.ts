@@ -11,6 +11,8 @@ import { PriceListComponent } from './container/price-list/price-list.component'
 import { HowToOrderComponent } from './container/how-to-order/how-to-order.component';
 import { FaqComponent } from './container/faq/faq.component';
 import { ContactComponent } from './container/contact/contact.component';
+import { AdminProductComponent } from './container/admin/admin-product/admin-product.component';
+import { DashboardComponent } from './container/admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ContactComponent } from './container/contact/contact.component';
     PriceListComponent,
     HowToOrderComponent,
     FaqComponent,
-    ContactComponent
+    ContactComponent,
+    AdminProductComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

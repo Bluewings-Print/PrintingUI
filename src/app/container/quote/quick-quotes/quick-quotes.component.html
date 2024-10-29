@@ -1,1 +1,101 @@
-<p>quick-quotes works!</p>
+<main>
+    <form id="quickQuoteForm">
+        <h1>QUICK QUOTE</h1>
+        <p>For a more detailed quote form <a href="detailQuote.html">click here</a></p>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Value" required>
+            </div>
+            <div class="form-group">
+                <label for="purpose">What are they for?</label>
+                <select id="purpose" name="purpose">
+                    <option value="">Value</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="artwork">upload your Artwork</label>
+                <input type="file" id="artwork" name="artwork" class="file-input">
+                <label for="artwork" class="file-label">Select files</label>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Value" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" placeholder="Value" required>
+            </div>
+            <div class="form-group half-width">
+                <label for="garmentType">Garment Type</label>
+                <select id="garmentType" name="garmentType">
+                    <option value="">+ Choose</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Choose multiple options if required</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="mens" name="gender" value="mens">
+                    <label for="mens">Mens</label>
+                    <input type="checkbox" id="ladies" name="gender" value="ladies">
+                    <label for="ladies">Ladies</label>
+                    <input type="checkbox" id="kids" name="gender" value="kids">
+                    <label for="kids">Kids</label>
+                </div>
+            </div>
+            <div class="form-group half-width">
+                <label for="colour">Colour</label>
+                <select id="colour" name="colour">
+                    <option value="">+ Choose</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group third-width">
+                <label for="budget">Budget?</label>
+                <select id="budget" name="budget">
+                    <option value="">Value</option>
+                </select>
+            </div>
+            <div class="form-group third-width">
+                <label for="postcode">Delivery Postcode</label>
+                <input type="text" id="postcode" name="postcode" placeholder="Value">
+            </div>
+            <div class="form-group third-width">
+                <label for="dateRequired">Date Required</label>
+                <input type="date" id="dateRequired" name="dateRequired" placeholder="Choose date">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="additionalInfo">Additional Info</label>
+                <textarea id="additionalInfo" name="additionalInfo" placeholder="Value"></textarea>
+            </div>
+        </div>
+       
+        <div class="form-row footer-form">
+            <div class="form-group-tick">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I accept the terms</label>
+                <a href="#" class="terms-link">Read our T&Cs</a>
+            </div>
+            <div class="form-group recaptcha">
+                <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+            </div>
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
+</main>

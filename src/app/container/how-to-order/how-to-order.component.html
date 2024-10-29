@@ -1,1 +1,24 @@
-<p>how-to-order works!</p>
+<main class="contact-main">
+    <div class="contact-container">
+      <h1>Get in Touch</h1>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+  
+        <!-- Success/Error messages -->
+        <div class="message-success" id="messageSuccess">Your message has been sent successfully!</div>
+        <div class="message-error" id="messageError">Oops! Something went wrong. Please try again.</div>
+      </form>
+    </div>
+  </main>
