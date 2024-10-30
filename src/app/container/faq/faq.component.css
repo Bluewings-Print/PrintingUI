@@ -31,8 +31,7 @@ body {
   text-align: center;
   color: var(--white);
   margin-bottom: 3rem;
-  opacity: 0;
-  transform: translateY(-20px);
+  /* Removed opacity and transform */
 }
 
 .header h1 {
@@ -55,8 +54,7 @@ body {
   border-radius: 10px;
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: translateX(-20px);
+  /* Removed opacity and transform */
 }
 
 .faq-question {
@@ -94,7 +92,7 @@ body {
 .contact-section {
   text-align: center;
   margin-top: 3rem;
-  opacity: 0;
+  /* Removed opacity */
 }
 
 .contact-button {

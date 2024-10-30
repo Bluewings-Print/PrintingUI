@@ -12,12 +12,12 @@ const routes: Routes = [
   {
     path:'quickQuote',
     component:QuickQuotesComponent,
-    title:'login by admin'
+    title:'Quick quote page'
   },
   {
     path:'detailQuote',
     component: DetailQuotesComponent,
-    title:'login by employee'
+    title:'detail quote page'
   }
 ];
 
