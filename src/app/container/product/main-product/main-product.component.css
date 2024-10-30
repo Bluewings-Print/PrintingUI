@@ -1,0 +1,99 @@
+:root {
+    --primary: #a855f7;
+    --primary-dark: #581c87;
+    --primary-darker: #6b21a8;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --border-color: #e8e4fc;
+    --background: #f3f4f6;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+  }
+  
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  
+  .layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--spacing-xl);
+  }
+  
+  .sidebar {
+    position: sticky;
+    top: var(--spacing-xl);
+    height: max-content;
+  }
+  
+  .filter-card {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .filter-card h2,
+  .filter-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .search-box {
+    position: relative;
+  }
+  
+  .search-box input {
+    width: 100%;
+    padding: var(--spacing-md) 40px var(--spacing-md) var(--spacing-lg);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    font-size: 0.875rem;
+  }
+  
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  
+  .filter-content a {
+    display: block;
+    color: var(--text-secondary);
+    padding: var(--spacing-sm) 0;
+  }
+  
+  .color-options,
+  .size-options {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  

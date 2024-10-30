@@ -1,4 +1,5 @@
 import { Component,ElementRef,Renderer2,ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,9 @@ export class NavbarComponent {
   showShadow: boolean = false;
   activeTab: string = 'screen';
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2,
+    private router:Router
+  ) {}
 
   ngOnInit(): void {
     window.addEventListener('scroll', this.onScroll.bind(this));
@@ -29,6 +32,10 @@ export class NavbarComponent {
   onScroll(): void {
     this.showShadow = window.scrollY > 0;
   }
-
-
+  // detailQuote():void{
+  //   this.router.navigate(['/quickQuote']);
+  // }
+  // quickQuote():void{
+  //   this.router.navigate(['/detailQuote']);
+  // }
 }
