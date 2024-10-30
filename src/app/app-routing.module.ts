@@ -19,7 +19,10 @@ const routes: Routes = [
 {path: 'howToOrder', component: HowToOrderComponent},
 {path: 'faq', component: FaqComponent},
 {path: 'contact', component: ContactComponent},
-
+{
+  path: 'quote',
+  loadChildren: () => import('./container/quote/quote.module').then(m => m.QuoteModule)
+},
 ];
 
 @NgModule({
