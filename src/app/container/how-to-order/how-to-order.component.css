@@ -1,0 +1,365 @@
+/* styles.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body,
+html {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #c7a6ff 0%, #f0e6ff 100%);
+  color: #333;
+
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* header  */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  background-color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background-position: center;
+  background-size: cover;
+}
+/* 
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 50px;
+}
+
+.nav-links ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links ul li {
+    list-style: none;
+    padding: 0.5rem 1rem;
+    position: relative;
+}
+
+.nav-links ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-links ul li::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #6f36f4;
+    transition: width 0.3s ease;
+}
+
+.nav-links ul li:hover::after {
+    width: 70%;
+}
+
+.nav-links ul li:hover a {
+    color: #6f36f4;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 160px;
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+
+  .nav-item.dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+.fa-bars,
+.fa-window-close {
+    display: none;
+} */
+
+/* how to order body  */
+
+/* .container {
+    padding: 20px;
+} */
+
+/* h1, h2 {
+    text-align: center;
+    font-weight: 700;
+} */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  display: flex;
+  padding-right: 0;
+}
+
+.process-header {
+  padding-top: 70px;
+  margin-bottom: 40px;
+  margin-right: 40px;
+}
+
+.process-header h1 {
+  font-size: 40px;
+  color: #000;
+  /* text-transform: uppercase; */
+  letter-spacing: 2px;
+}
+
+.process-header h4 {
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+}
+.process-header p {
+  font-size: 16px;
+  color: #fff;
+}
+
+/* .info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    padding: 20px;
+    padding-right: 0;
+    
+    width: 150%;
+} */
+
+.info-section {
+  display: block;
+  position: relative;
+  padding: 20px;
+  padding-right: 0;
+  width: 150%;
+}
+
+.info-item {
+  width: 100%;
+  position: relative;
+  margin-bottom: 40px;
+  padding-left: 120px; /* Leave space for the icon-container */
+}
+
+.icon-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: block;
+  position: absolute; /* This will allow positioning */
+  top: 0;
+  left: 0;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  font-size: 30px;
+  color: #000;
+  transition: color 0.3s ease;
+}
+.info-item:hover .icon-container {
+  background-color: #000;
+}
+
+.info-item:hover .icon {
+  color: #fff;
+}
+
+.info-item h3 {
+  margin: 0;
+  color: #600ca9;
+}
+
+.info-item p {
+  margin: 0;
+  color: #7a7a7a;
+}
+
+/* Ensure the line doesn't appear after the last item */
+.info-item:last-child::before {
+  display: none;
+}
+
+.info-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 45px; /* Center it relative to the icon-container */
+  top: calc(100% - 70px); /* Start just below the icon */
+  width: 2px;
+  height: 120%; /* Adjust height to extend the line */
+  background-color: #ffffff;
+  z-index: 0;
+}
+
+.quote-button {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #6a0572;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  /* position: relative;
+    z-index: 2;
+    overflow: hidden;
+    vertical-align: middle;
+    display: inline-block;
+    border: none;
+    text-transform: capitalize;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 21.5px 50px;
+    min-width: 170px;
+    border-radius: 50px; */
+}
+
+.quote-button ::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  background-color: #6a0572;
+  z-index: -1;
+  transition: all 0.4s ease-out;
+}
+
+.containers {
+  max-width: 1200px;
+  margin: 0 auto;
+  /* padding: 40px; */
+  display: flex;
+  flex-direction: column;
+  padding-right: 0;
+}
+
+/* Add these styles to your existing CSS */
+.turn-header h4 {
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #000000;
+}
+.turn-header h1 {
+  font-size: 40px;
+  color: #000;
+  letter-spacing: 2px;
+}
+.turn-header p {
+  font-size: 16px;
+  color: #000000;
+  font-weight: 700;
+}
+
+.turn-header {
+  text-align: center;
+}
+.turn-sections {
+  /* display: block; */
+  /* position: relative; */
+  padding: 20px;
+  padding-right: 0;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  gap: 10px;
+}
+
+.turn-info-item {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.turn-icon-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #fff;
+
+  top: 0;
+  left: 0;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.turn-icon {
+  font-size: 30px;
+  color: #000;
+  transition: color 0.3s ease;
+}
+.turn-info-item:hover .turn-icon-container {
+  background-color: #000;
+}
+.turn-info-item:hover .turn-icon {
+  color: #fff;
+}
+.turn-info-item h3 {
+  margin: 0;
+  color: #600ca9;
+}
+.turn-info-item p {
+  margin: 0;
+  color: #7a7a7a;
+}
