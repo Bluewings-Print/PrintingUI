@@ -1,0 +1,169 @@
+/* product-details.component.scss */
+:host {
+  display: block;
+  background-color: #fff5ff;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  margin-bottom: 2rem;
+  color: #3a2a46;
+
+  a {
+    color: #7e22ce;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #a088b1;
+    }
+  }
+}
+
+.product-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.image-section {
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: white;
+
+    img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.1s ease-out;
+    }
+  }
+
+  .thumbnail-list {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    button {
+      width: 60px;
+      height: 60px;
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.2s;
+
+      &.active {
+        border-color: #7e22ce;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.product-info {
+  h1 {
+    color: #3a2a46;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .price {
+    font-size: 1.5rem;
+    color: #7e22ce;
+    margin-bottom: 2rem;
+  }
+
+  .details {
+    margin-bottom: 2rem;
+
+    .detail-item {
+      display: flex;
+      margin-bottom: 0.5rem;
+
+      .label {
+        width: 100px;
+        color: #a088b1;
+      }
+    }
+  }
+}
+
+.color-selection,
+.size-selection {
+  margin-bottom: 2rem;
+
+  h3 {
+    color: #3a2a46;
+    margin-bottom: 1rem;
+  }
+}
+
+.color-grid,
+.size-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: 0.5rem;
+
+  button {
+    width: 50px;
+    height: 50px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &.selected {
+      border-color: #7e22ce;
+    }
+  }
+}
+
+.add-to-cart {
+  width: 100%;
+  padding: 1rem;
+  background-color: #7e22ce;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #a088b1;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
