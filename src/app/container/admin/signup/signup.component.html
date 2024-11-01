@@ -1,0 +1,140 @@
+<div class="signup-container" [@fadeInOut]>
+  <div class="signup-card">
+    <div class="header-section">
+      <h1>Create Account</h1>
+      <p>Join our community and start shopping</p>
+    </div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input
+          id="fullName"
+          type="text"
+          formControlName="fullName"
+          placeholder="Enter your full name"
+          [class.error]="
+            signupForm.get('fullName')?.invalid &&
+            signupForm.get('fullName')?.touched
+          "
+        />
+        <span class="error-message" *ngIf="getErrorMessage('fullName')">
+          {{ getErrorMessage("fullName") }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+          [class.error]="
+            signupForm.get('email')?.invalid && signupForm.get('email')?.touched
+          "
+        />
+        <span class="error-message" *ngIf="getErrorMessage('email')">
+          {{ getErrorMessage("email") }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-input">
+          <input
+            id="password"
+            [type]="isPasswordVisible ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Create a password"
+            [class.error]="
+              signupForm.get('password')?.invalid &&
+              signupForm.get('password')?.touched
+            "
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility('password')"
+          >
+            <i
+              class="fas"
+              [class.fa-eye]="!isPasswordVisible"
+              [class.fa-eye-slash]="isPasswordVisible"
+            ></i>
+          </button>
+        </div>
+        <div
+          class="password-strength"
+          *ngIf="signupForm.get('password')?.value"
+        >
+          <span [style.color]="getPasswordStrength().color">
+            Password Strength: {{ getPasswordStrength().text }}
+          </span>
+        </div>
+        <span class="error-message" *ngIf="getErrorMessage('password')">
+          {{ getErrorMessage("password") }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-input">
+          <input
+            id="confirmPassword"
+            [type]="isConfirmPasswordVisible ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+            [class.error]="
+              signupForm.get('confirmPassword')?.invalid &&
+              signupForm.get('confirmPassword')?.touched
+            "
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility('confirmPassword')"
+          >
+            <i
+              class="fas"
+              [class.fa-eye]="!isConfirmPasswordVisible"
+              [class.fa-eye-slash]="isConfirmPasswordVisible"
+            ></i>
+          </button>
+        </div>
+        <span class="error-message" *ngIf="getErrorMessage('confirmPassword')">
+          {{ getErrorMessage("confirmPassword") }}
+        </span>
+      </div>
+
+      <div class="form-group terms">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="termsAccepted" />
+          <span
+            >I agree to the <a href="#">Terms of Service</a> and
+            <a href="#">Privacy Policy</a></span
+          >
+        </label>
+        <span
+          class="error-message"
+          *ngIf="
+            signupForm.get('termsAccepted')?.invalid &&
+            signupForm.get('termsAccepted')?.touched
+          "
+        >
+          You must accept the terms to continue
+        </span>
+      </div>
+
+      <button
+        type="submit"
+        class="signup-button"
+        [disabled]="signupForm.invalid"
+      >
+        Create Account
+      </button>
+
+      <p class="login-text">Already have an account? <a href="#">Log in</a></p>
+    </form>
+  </div>
+</div>

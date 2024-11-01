@@ -13,6 +13,9 @@ import { FaqComponent } from './container/faq/faq.component';
 import { ContactComponent } from './container/contact/contact.component';
 import { AdminProductComponent } from './container/admin/admin-product/admin-product.component';
 import { DashboardComponent } from './container/admin/dashboard/dashboard.component';
+import { LoginComponent } from './container/admin/login/login.component';
+import { SignupComponent } from './container/admin/signup/signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,11 +29,14 @@ import { DashboardComponent } from './container/admin/dashboard/dashboard.compon
     FaqComponent,
     ContactComponent,
     AdminProductComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
