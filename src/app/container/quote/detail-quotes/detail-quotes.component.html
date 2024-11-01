@@ -1,171 +1,113 @@
+<!-- detail-quote.component.html -->
 <main>
-    <form id="detailQuoteForm">
-
-        <h1>DETAIL QUOTE</h1>
-        <p class="fist-para">ORDER FORM</p>
-        
-        <div class="form-container">
-            <div class="details-section">
-                <h2>DETAILS</h2>
-                <div class="form-row">
-                    <div class="form-group half-width">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" placeholder="Value">
-                    </div>
-                    <div class="form-group half-width">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" placeholder="Value">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="company">Company</label>
-                    <input type="text" id="company" name="company" placeholder="Value">
-                </div>
-                <div class="form-row">
-                    <div class="form-group half-width">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Value">
-                    </div>
-                    <div class="form-group half-width">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="Value">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="streetAddress">Street Address</label>
-                    <input type="text" id="streetAddress" name="streetAddress" placeholder="Value">
-                </div>
-                <div class="form-row">
-                    <div class="form-group half-width">
-                        <label for="city">City</label>
-                        <input type="text" id="city" name="city" placeholder="Value">
-                    </div>
-                    <div class="form-group half-width">
-                        <label for="state">State</label>
-                        <input type="text" id="state" name="state" placeholder="Value">
-                    </div>
-                </div>
-                <div class="form-group postcode">
-                    <label for="postcode">Postcode</label>
-                    <input type="text" id="postcode" name="postcode" placeholder="Value">
-                </div>
+    <form [formGroup]="detailQuoteForm" (ngSubmit)="onSubmit()">
+      <h1>DETAIL QUOTE</h1>
+      <p class="fist-para">ORDER FORM</p>
+  
+      <div class="form-container">
+        <div class="details-section">
+          <h2>DETAILS</h2>
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" formControlName="firstName" placeholder="Value" />
             </div>
-            
-            <div class="order-info-section" id="orderInfoContainer">
-                
-                <!-- <div class="order-detail-form" id="order-forms-container">
-                    <div class="order-info-header">
-                        <div>
-                            <h2>ORDER INFO</h2>
-                        </div>
-                       <div>
-                        <p class="order-details">Order Details 1<br>see our full range here</p>
-                       </div>
-                    </div>
-                <div class="form-row-details">
-                    <div class="form-group third-width">
-                        <label for="brand">Brand</label>
-                        <input type="text" id="brand" name="brand" placeholder="Value">
-                    </div>
-                    <div class="form-group third-width">
-                        <label for="styleName">Style name/Code</label>
-                        <input type="text" id="styleName" name="styleName" placeholder="Value">
-                    </div>
-                    <div class="form-group third-width">
-                        <label for="color">Color</label>
-                        <input type="text" id="color" name="color" placeholder="Value">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group third-width">
-                        <label for="s6">Size/Quantity<br>S/6</label>
-                        
-                        <input type="text" id="s6" name="s6" placeholder="Value">
-                    </div>
-                    <div class="form-group third-width">
-                        <label for="s8"><br>S/8</label>
-                        <input type="text" id="s8" name="s8" placeholder="Value">
-                    </div>
-                    <div class="form-group third-width">
-                        <label for="m10"><br>M/10</label>
-                        <input type="text" id="m10" name="m10" placeholder="Value">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group third-width">
-                        <label for="l12">L/12</label>
-                        <input type="text" id="l12" name="l12" placeholder="Value">
-                    </div>
-                    <div class="form-group third-width">
-                        <label for="xl14">XL/14</label>
-                        <input type="text" id="xl14" name="xl14" placeholder="Value">
-                    </div>
-                    <div class="form-group third-width">
-                        <label for="xxl16">2XL/16</label>
-                        <input type="text" id="xxl16" name="xxl16" placeholder="Value">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group third-width">
-                        <label for="xxxl18">3XL/18</label>
-                        <input type="text" id="xxxl18" name="xxxl18" placeholder="Value">
-                    </div>
-                    <div class="form-group third-width">
-                        <label for="xxxxl20">4XL/20</label>
-                        <input type="text" id="xxxxl20" name="xxxxl20" placeholder="Value">
-                    </div>
-                    <div class="form-group third-width">
-                        <label for="xxxxxl22">5XL/22</label>
-                        <input type="text" id="xxxxxl22" name="xxxxxl22" placeholder="Value">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group half-width">
-                        <label for="frontArtwork">Artwork Upload <br>Front</label>
-                        <input type="file" id="frontArtwork" name="frontArtwork" class="file-input" accept="image/*">
-                        <label for="frontArtwork" class="file-label">Select files</label>
-                        <div id="frontPreview" class="image-preview"></div>
-                    </div>
-                    <div class="form-group half-width">
-                        <label for="backArtwork"><br>Back</label>
-                        <input type="file" id="backArtwork" name="backArtwork" class="file-input" accept="image/*">
-                        <label for="backArtwork" class="file-label">Select files</label>
-                        <div id="backPreview" class="image-preview"></div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group half-width">
-                        <label for="lhSleeve">LH Sleeve</label>
-                        <input type="file" id="lhSleeve" name="lhSleeve" class="file-input" accept="image/*">
-                        <label for="lhSleeve" class="file-label">Select files</label>
-                        <div id="lhSleevePreview" class="image-preview"></div>
-                    </div>
-                    <div class="form-group half-width">
-                        <label for="rhSleeve">RH Sleeve</label>
-                        <input type="file" id="rhSleeve" name="rhSleeve" class="file-input" accept="image/*">
-                        <label for="rhSleeve" class="file-label">Select files</label>
-                        <div id="rhSleevePreview" class="image-preview"></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="additionalInfo">Additional Info</label>
-                    <textarea id="additionalInfo" name="additionalInfo" placeholder="Value"></textarea>
-                </div>
-            </div> -->
-                <!-- <div class="form-group-tick">
-                    <div>
-                        <input type="checkbox" id="add-order-form" name="add-order-form">
-                    </div>
-                  <div>
-                      <label for="add-order-form">Add Another Order Form(tick to expand order form)</label>
-                  </div>
-                </div> -->
-             
+            <div class="form-group half-width">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" formControlName="lastName" placeholder="Value" />
             </div>
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" formControlName="company" placeholder="Value" />
+          </div>
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label for="email">Email</label>
+              <input type="email" id="email" formControlName="email" placeholder="Value" />
+            </div>
+            <div class="form-group half-width">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" formControlName="phone" placeholder="Value" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="streetAddress">Street Address</label>
+            <input type="text" id="streetAddress" formControlName="streetAddress" placeholder="Value" />
+          </div>
+          <div class="form-row">
+            <div class="form-group half-width">
+              <label for="city">City</label>
+              <input type="text" id="city" formControlName="city" placeholder="Value" />
+            </div>
+            <div class="form-group half-width">
+              <label for="state">State</label>
+              <input type="text" id="state" formControlName="state" placeholder="Value" />
+            </div>
+          </div>
+          <div class="form-group postcode">
+            <label for="postcode">Postcode</label>
+            <input type="text" id="postcode" formControlName="postcode" placeholder="Value" />
+          </div>
         </div>
-        <div class="form-group recaptcha">
-            <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+  
+        <div class="order-info-section" *ngFor="let order of orderForms.controls; let i = index">
+          <div class="order-info-header">
+            <h2>ORDER INFO</h2>
+            <p class="order-details">Order Details {{ i + 1 }}</p>
+          </div>
+  
+          <!-- Order Form Fields -->
+          <div class="form-row-details">
+            <div class="form-group third-width">
+              <label for="brand">Brand</label>
+              <input type="text" formControlName="brand" placeholder="Value" />
+            </div>
+            <div class="form-group third-width">
+              <label for="styleName">Style name/Code</label>
+              <input type="text" formControlName="styleName" placeholder="Value" />
+            </div>
+            <div class="form-group third-width">
+              <label for="color">Color</label>
+              <input type="text" formControlName="color" placeholder="Value" />
+            </div>
+          </div>
+  
+          <div class="form-row">
+            <div class="form-group third-width">
+              <label for="s6">Size/Quantity S/6</label>
+              <input type="text" formControlName="s6" placeholder="Value" />
+            </div>
+            <div class="form-group third-width">
+              <label for="s8">S/8</label>
+              <input type="text" formControlName="s8" placeholder="Value" />
+            </div>
+            <div class="form-group third-width">
+              <label for="m10">M/10</label>
+              <input type="text" formControlName="m10" placeholder="Value" />
+            </div>
+          </div>
+  
+          <div class="form-row">
+            <div class="form-group third-width">
+              <label for="l12">L/12</label>
+              <input type="text" formControlName="l12" placeholder="Value" />
+            </div>
+            <div class="form-group third-width">
+              <label for="xl14">XL/14</label>
+              <input type="text" formControlName="xl14" placeholder="Value" />
+            </div>
+            <div class="form-group third-width">
+              <label for="xxl16">2XL/16</label>
+              <input type="text" formControlName="xxl16" placeholder="Value" />
+            </div>
+          </div>
+  
+          <!-- Add more fields for each form control -->
         </div>
+  
+        <button type="button" (click)="addOrderForm()">Add Another Order Form</button>
         <button type="submit">Save</button>
+      </div>
     </form>
-</main>
+  </main>
