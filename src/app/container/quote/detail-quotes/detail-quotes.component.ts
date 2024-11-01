@@ -8,14 +8,18 @@ import { QuoteService } from '../quoteService/quote.service';
   styleUrls: ['./detail-quotes.component.css']
 })
 export class DetailQuotesComponent {
-  detailQuoteForm: FormGroup;
-  orderForms!: FormArray;
-  orderFormCount = 1;
+  detailQuoteForm!: FormGroup;
+
+    get orderForms(): FormArray {
+    return this.detailQuoteForm.get('orderForms') as FormArray;
+  }
 
   constructor(
     private fb: FormBuilder,
     private quotesService: QuoteService
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     this.detailQuoteForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -26,12 +30,8 @@ export class DetailQuotesComponent {
       city: [''],
       state: [''],
       postcode: [''],
-      orderForms: this.fb.array([this.createOrderForm()]) 
+      orderForms: this.fb.array([this.createOrderForm()])  // Start with one order form
     });
-  }
-
-  get orderFormsArray() {
-    return this.detailQuoteForm.get('orderForms') as FormArray;
   }
 
   createOrderForm(): FormGroup {
@@ -51,30 +51,62 @@ export class DetailQuotesComponent {
         xxxxxl22: ['']
       }),
       frontArtwork: [null],
+      frontArtworkPreview: [null],  // New control for preview
       backArtwork: [null],
+      backArtworkPreview: [null],   // New control for preview
       lhSleeve: [null],
+      lhSleevePreview: [null],      // New control for preview
       rhSleeve: [null],
+      rhSleevePreview: [null],      // New control for preview
       additionalInfo: ['']
     });
   }
-
-  addOrderForm() {
-    this.orderFormsArray.push(this.createOrderForm());
-    this.orderFormCount++;
-  }
-
-  removeOrderForm(index: number) {
-    if (this.orderFormCount > 1) {
-      this.orderFormsArray.removeAt(index);
-      this.orderFormCount--;
-    }
-  }
-
+  
   onFileChange(event: any, controlName: string, orderIndex: number) {
     const file = event.target.files[0];
     if (file) {
-      this.orderFormsArray.at(orderIndex).get(controlName)?.setValue(file);
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      // Set the file in the form control
+      this.orderForms.at(orderIndex).get(controlName)?.setValue(file);
+      if (!fileExtension || allowedExtensions.indexOf(fileExtension)===-1) {
+        // this.toastr.error('Invalid file type. Please select an image file (jpg, jpeg, png, or gif).', 'Error');
+        return;
+      }
+      const maxSize = 10 * 1024 * 1024;
+      if (file.size > maxSize) {
+        // this.toastr.error('File size exceeds 10MB. Please select a smaller file.', 'Error');
+        return;
+      }
     }
+    if (file) {
+      // Create an image preview URL
+      const reader = new FileReader();
+      reader.onload = () => {
+        const previewControlName = `${controlName}Preview`;
+        // Store the preview URL in a custom control to bind it in the template
+        this.orderForms.at(orderIndex).get(previewControlName)?.setValue(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+ toggleOrderForm(event: Event): void {
+  const isChecked = (event.target as HTMLInputElement).checked;
+  
+  if (isChecked) {
+    this.addOrder();
+  } else if (this.orderForms.length > 1) {
+    this.removeOrder();
+  }
+}
+removeOrder(): void {
+  if (this.orderForms.length > 1) {
+    this.orderForms.removeAt(this.orderForms.length - 1);
+  }
+}
+
+  addOrder(): void {
+    this.orderForms.push(this.createOrderForm());
   }
 
   async onSubmit() {
