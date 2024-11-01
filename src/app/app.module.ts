@@ -16,6 +16,8 @@ import { SignupComponent } from './container/admin/signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminComponent } from './container/admin/admin/admin.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { AdminComponent } from './container/admin/admin/admin.component';
     HowToOrderComponent,
     FaqComponent,
     ContactComponent,
-    AdminProductComponent,
+  
     DashboardComponent,
     LoginComponent,
     SignupComponent,
@@ -39,7 +41,8 @@ import { AdminComponent } from './container/admin/admin/admin.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
