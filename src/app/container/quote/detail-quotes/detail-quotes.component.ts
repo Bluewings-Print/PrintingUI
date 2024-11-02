@@ -67,8 +67,8 @@ export class DetailQuotesComponent {
     if (file) {
       const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
-      // Set the file in the form control
-      this.orderForms.at(orderIndex).get(controlName)?.setValue(file);
+     
+      // this.orderForms.at(orderIndex).get(controlName)?.setValue(file);
       if (!fileExtension || allowedExtensions.indexOf(fileExtension)===-1) {
         // this.toastr.error('Invalid file type. Please select an image file (jpg, jpeg, png, or gif).', 'Error');
         return;
@@ -78,18 +78,28 @@ export class DetailQuotesComponent {
         // this.toastr.error('File size exceeds 10MB. Please select a smaller file.', 'Error');
         return;
       }
-    }
-    if (file) {
-      // Create an image preview URL
+      const orderForm = this.orderForms.at(orderIndex);
+      orderForm.get(controlName)?.setValue(file);
+  
       const reader = new FileReader();
       reader.onload = () => {
         const previewControlName = `${controlName}Preview`;
-        // Store the preview URL in a custom control to bind it in the template
-        this.orderForms.at(orderIndex).get(previewControlName)?.setValue(reader.result);
+        orderForm.get(previewControlName)?.setValue(reader.result);
       };
       reader.readAsDataURL(file);
     }
-  }
+    }
+    // if (file) {
+    //   // Create an image preview URL
+    //   const reader = new FileReader();
+    //   reader.onload = () => {
+    //     const previewControlName = `${controlName}Preview`;
+    //     // Store the preview URL in a custom control to bind it in the template
+    //     this.orderForms.at(orderIndex).get(previewControlName)?.setValue(reader.result);
+    //   };
+    //   reader.readAsDataURL(file);
+    // }
+  // }
  toggleOrderForm(event: Event): void {
   const isChecked = (event.target as HTMLInputElement).checked;
   

@@ -133,17 +133,17 @@
       <div class="form-row">
           <div class="form-group half-width">
             <label for="frontArtwork">Artwork Upload <br>Front</label>
-            <input type="file" id="frontArtwork" (change)="onFileChange($event, 'frontArtwork', i)" class="file-input" accept="image/*"/>
-            <label for="frontArtwork" class="file-label">Select files</label>
-            <div id="frontPreview" class="image-preview">
+            <input type="file" [id]="'frontArtwork' + i" (change)="onFileChange($event, 'frontArtwork', i)" class="file-input" accept="image/*" />
+            <label [for]="'frontArtwork' + i" class="file-label">Select files</label>
+            <div class="image-preview">
               <img *ngIf="orderForm.get('frontArtworkPreview')?.value" [src]="orderForm.get('frontArtworkPreview')?.value" alt="Front Artwork Preview" />
             </div>
           </div>
           <div class="form-group half-width">
             <label for="backArtwork"><br>Back</label>
-            <input type="file" id="backArtwork" (change)="onFileChange($event, 'backArtwork', i)" class="file-input" accept="image/*"/>
-            <label for="backArtwork" class="file-label">Select files</label>
-            <div id="backPreview" class="image-preview">
+            <input type="file" [id]="'backArtwork' + i" (change)="onFileChange($event, 'backArtwork', i)" class="file-input" accept="image/*"/>
+            <label [for]="'backArtwork' + i" class="file-label">Select files</label>
+            <div class="image-preview">
               <img *ngIf="orderForm.get('backArtworkPreview')?.value" [src]="orderForm.get('backArtworkPreview')?.value" alt="Back Artwork Preview" />
             </div>
           </div>
@@ -151,17 +151,17 @@
       <div class="form-row">
           <div class="form-group half-width">
               <label for="lhSleeve">LH Sleeve</label>
-              <input type="file" id="lhSleeve" (change)="onFileChange($event, 'lhSleeve', i)" name="lhSleeve" class="file-input" accept="image/*">
-              <label for="lhSleeve" class="file-label">Select files</label>
-              <div id="lhSleevePreview" class="image-preview">
+              <input type="file" [id]="'lhSleeve' + i" (change)="onFileChange($event, 'lhSleeve', i)" name="lhSleeve" class="file-input" accept="image/*">
+              <label [for]="'lhSleeve' + i" class="file-label">Select files</label>
+              <div  class="image-preview">
                 <img *ngIf="orderForm.get('lhSleevePreview')?.value" [src]="orderForm.get('lhSleevePreview')?.value" alt="lhSleeve Artwork Preview" />
               </div>
           </div>
           <div class="form-group half-width">
               <label for="rhSleeve">RH Sleeve</label>
-              <input type="file" id="rhSleeve" (change)="onFileChange($event, 'rhSleeve', i)" name="lhSleeve" class="file-input" accept="image/*">
-              <label for="rhSleeve" class="file-label">Select files</label>
-              <div id="rhSleevePreview" class="image-preview">
+              <input type="file" [id]="'rhSleeve' + i" (change)="onFileChange($event, 'rhSleeve', i)" name="lhSleeve" class="file-input" accept="image/*">
+              <label [for]="'rhSleeve' + i" class="file-label">Select files</label>
+              <div class="image-preview">
                 <img *ngIf="orderForm.get('rhSleevePreview')?.value" [src]="orderForm.get('rhSleevePreview')?.value" alt="rhSleeve Artwork Preview" />
               </div>
       </div>
