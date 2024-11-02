@@ -1,46 +1,56 @@
 <main>
-    <form id="quickQuoteForm">
+    <form [formGroup]="quickQuoteForm" (ngSubmit)="onSubmit()" id="quickQuoteForm">
         <h1>QUICK QUOTE</h1>
-        <p>For a more detailed quote form <a routerLink="/quote/detailQuote"  routerLinkActive="active">click here</a></p>
+        <p>For a more detailed quote form <a routerLink="/quote/detailQuote" routerLinkActive="active">click here</a></p>
         
         <div class="form-row">
             <div class="form-group">
                 <label for="fullName">Full Name</label>
-                <input type="text" id="fullName" name="fullName" placeholder="Value" required>
+                <input type="text" id="fullName" formControlName="fullName" placeholder="Value" required>
             </div>
+
             <div class="form-group">
                 <label for="purpose">What are they for?</label>
-                <select id="purpose" name="purpose">
+                <select id="purpose" formControlName="purpose">
                     <option value="">+ Choose</option>
                     <option value="Promo event">Promo event</option>
                     <option value="Band">Band</option>
                     <option value="Work">Work</option>
                     <option value="Buck/Hen Night">Buck/Hen Night</option>
-                    <option value="">Other (Please provide details)</option>
+                    <option value="other">Other (Please provide details)</option>
                 </select>
+                <input type="text" formControlName="otherPurposeDetail" placeholder="Please specify" *ngIf="quickQuoteForm.get('purpose')?.value === 'other'">
             </div>
-            <div class="form-group">
-                <label for="artwork">upload your Artwork</label>
-                <input type="file" id="artwork" name="artwork" class="file-input">
-                <label for="artwork" class="file-label">Select files</label>
+        </div>
+
+        <div class="form-group">
+            <label for="artwork">Upload your Artwork</label>
+            <input type="file" id="artwork" (change)="onFileSelected($event)" multiple accept="image/*">
+            <label for="artwork" class="file-label">Select files (up to 5)</label>
+            <div class="file-preview" *ngIf="selectedFiles.length > 0">
+                <div *ngFor="let file of selectedFiles">
+                    <img [src]="file.url" [alt]="file.name" width="50">
+                    <p>{{ file.name }} - {{ file.size }}</p>
+                </div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Value" required>
+                <input type="email" id="email" formControlName="email" placeholder="Value" required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group half-width">
                 <label for="quantity">Quantity</label>
-                <input type="number" id="quantity" name="quantity" placeholder="Value" required>
+                <input type="number" id="quantity" formControlName="quantity" placeholder="Value" required>
             </div>
+
             <div class="form-group half-width">
                 <label for="garmentType">Garment Type</label>
-                <select id="garmentType" name="garmentType">
+                <select id="garmentType" formControlName="garmentType">
                     <option value="">+ Choose</option>
                     <option value="T-shirt">T-shirt</option>
                     <option value="Singlet">Singlet</option>
@@ -50,26 +60,28 @@
                     <option value="Beanie">Beanie</option>
                     <option value="Tote">Tote</option>
                     <option value="Bag">Bag</option>
-                    <option value="">Other(please provide detail)</option>
+                    <option value="other">Other (please provide detail)</option>
                 </select>
+                <input type="text" formControlName="otherGarmentTypeDetail" placeholder="Please specify" *ngIf="quickQuoteForm.get('garmentType')?.value === 'other'">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label>Choose multiple options if required</label>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="mens" name="gender" value="mens">
+                <div class="checkbox-group" formGroupName="gender">
+                    <input type="checkbox" id="mens" formControlName="mens">
                     <label for="mens">Mens</label>
-                    <input type="checkbox" id="ladies" name="gender" value="ladies">
+                    <input type="checkbox" id="ladies" formControlName="ladies">
                     <label for="ladies">Ladies</label>
-                    <input type="checkbox" id="kids" name="gender" value="kids">
+                    <input type="checkbox" id="kids" formControlName="kids">
                     <label for="kids">Kids</label>
                 </div>
             </div>
+
             <div class="form-group half-width">
                 <label for="colour">Colour</label>
-                <select id="colour" name="colour">
+                <select id="colour" formControlName="colour">
                     <option value="Black">Black</option>
                     <option value="White">White</option>
                     <option value="Red">Red</option>
@@ -79,45 +91,44 @@
                     <option value="Pink">Pink</option>
                     <option value="Purple">Purple</option>
                     <option value="Gold">Gold</option>
+                    <option value="other">Other (please provide detail)</option>
                 </select>
+                <input type="text" formControlName="otherColourDetail" placeholder="Please specify" *ngIf="quickQuoteForm.get('colour')?.value === 'other'">
             </div>
         </div>
-
-        <div class="form-row">
-            <div class="form-group third-width">
-                <label for="budget">Budget?</label>
-                <select id="budget" name="budget">
+            <div class="form-row">
+                <div class="form-group third-width">
+                    <label for="budget">Budget?</label>
+                    <select id="budget" name="budget" formControlName="budget">
                     <option value="">+ Select</option>
-                    <option value="">$ - Promo</option>
-                    <option value="">$$ - Trend</option>
-                    <option value="">&&& - Premium</option>
-                </select>
+                    <option value="$ - Promo">$ - Promo</option>
+                    <option value="$$ - Trend">$$ - Trend</option>
+                    <option value="&&& - Premium">&&& - Premium</option>
+                    </select>
+                </div>
+                <div class="form-group third-width">
+                    <label for="postcode">Delivery Postcode</label>
+                    <input type="text" id="postcode" name="postcode" placeholder="Value" formControlName="postcode">
+                </div>
+                <div class="form-group third-width">
+                    <label for="dateRequired">Date Required</label>
+                    <input type="date" id="dateRequired" name="dateRequired" placeholder="Choose date" formControlName="dateRequired">
+                </div>
             </div>
-            <div class="form-group third-width">
-                <label for="postcode">Delivery Postcode</label>
-                <input type="text" id="postcode" name="postcode" placeholder="Value">
+    
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="additionalInfo">Additional Info</label>
+                    <textarea id="additionalInfo" name="additionalInfo" placeholder="Value" formControlName="additionalInfo"></textarea>
+                </div>
             </div>
-            <div class="form-group third-width">
-                <label for="dateRequired">Date Required</label>
-                <input type="date" id="dateRequired" name="dateRequired" placeholder="Choose date">
-            </div>
-        </div>
+      
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="additionalInfo">Additional Info</label>
-                <textarea id="additionalInfo" name="additionalInfo" placeholder="Value"></textarea>
-            </div>
-        </div>
-       
         <div class="form-row footer-form">
             <div class="form-group-tick">
-                <input type="checkbox" id="terms" name="terms" required>
+                <input type="checkbox" id="terms" formControlName="terms" required>
                 <label for="terms">I accept the terms</label>
                 <a href="#" class="terms-link">Read our T&Cs</a>
-            </div>
-            <div class="form-group recaptcha">
-                <div class="g-recaptcha" data-sitekey="your_site_key"></div>
             </div>
         </div>
 
