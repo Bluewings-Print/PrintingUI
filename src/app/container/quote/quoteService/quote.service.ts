@@ -55,7 +55,13 @@ export class QuoteService {
       catchError((err) => this.handleError(err))
     );
   }
-
+submitQuickQuote(formData: FormData):Observable<any> {
+  const url = `${this.apiDomain}/Quote/AddQuickQuote`;
+  return this.httpClient.post<any>(url, formData).pipe(
+    tap((data) => console.log('Form submitted:', data)),
+    catchError((err) => this.handleError(err))
+  );
+}
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 401) {
