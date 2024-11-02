@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,13 +11,10 @@ import { HowToOrderComponent } from './container/how-to-order/how-to-order.compo
 import { FaqComponent } from './container/faq/faq.component';
 import { ContactComponent } from './container/contact/contact.component';
 import { DashboardComponent } from './container/admin/dashboard/dashboard.component';
-import { LoginComponent } from './container/admin/login/login.component';
-import { SignupComponent } from './container/admin/signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminComponent } from './container/admin/admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
-
 
 @NgModule({
   declarations: [
@@ -30,10 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     HowToOrderComponent,
     FaqComponent,
     ContactComponent,
-  
     DashboardComponent,
-    LoginComponent,
-    SignupComponent,
     DashboardComponent,
     AdminComponent
   ],
@@ -44,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
