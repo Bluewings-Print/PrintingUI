@@ -1,4 +1,4 @@
-<main class="contact-main">
+<!-- <main class="contact-main">
     <div class="contact-container">
       <h1>Get in Touch</h1>
       <form id="contactForm">
@@ -16,9 +16,103 @@
         </div>
         <button type="submit" class="submit-btn">Send Message</button>
   
-        <!-- Success/Error messages -->
         <div class="message-success" id="messageSuccess">Your message has been sent successfully!</div>
         <div class="message-error" id="messageError">Oops! Something went wrong. Please try again.</div>
       </form>
     </div>
-  </main>
+  </main> -->
+  <section class="contact-us">
+
+    <div class="row">
+      
+        <div class="contact-col">
+            <h4>Contact Us</h4>
+            <h1>Have questions? Get in touch!</h1>
+            <div>
+                <i class="fa fa-home"></i>
+                <span>
+                    <h5>Australia 55</h5>
+                    <p>Sydney, West Bengal 700041</p>
+                </span>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i> 
+                <span>
+                    <h5>55785675/94804575</h5>
+                    <p>Monday to Saturday, 11AM to 4PM</p>
+                </span>
+            </div>
+    <div>
+        <i class="fa fa-envelope"></i> 
+        <span>
+            <h5>blueWings gmail.com</h5>
+            <p>Email us your query</p>
+        </span>
+    </div>
+</div>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" id="contactForm" class="contact-form">
+    <div class="form-group">
+        <label for="name">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Name
+        </label>
+        <input type="text" formControlName="name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Email Address
+        </label>
+        <input type="email" formControlName="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            Phone
+        </label>
+        <input type="tel" formControlName="phone" name="phone">
+    </div>
+    <div class="form-group">
+        <label for="subject">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            Subject
+        </label>
+        <input type="text" formControlName="subject" name="subject">
+    </div>
+    <div class="form-group">
+        <label for="message">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="17" y1="10" x2="3" y2="10"></line>
+                <line x1="21" y1="6" x2="3" y2="6"></line>
+                <line x1="21" y1="14" x2="3" y2="14"></line>
+                <line x1="17" y1="18" x2="3" y2="18"></line>
+            </svg>
+            How can we help you? Feel free to get in touch!
+        </label>
+        <textarea formControlName="message" name="message" required></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Get in Touch</button>
+    <div class="privacy-policy">
+        <input type="checkbox" id="privacy" name="privacy" required>
+        <label for="privacy">I agree with the site's <a href="#">privacy policy</a>.</label>
+    </div>
+</form>
+</div>
+</section>
+
+
+<section class="location">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.4317473737788!2d88.3353068144325!3d22.487978841739732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02709682497b07%3A0xba3819e046b23e68!2sSyamaprasad%20Institute%20of%20Education%20and%20Training!5e0!3m2!1sen!2sin!4v1652087208088!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>

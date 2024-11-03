@@ -63,6 +63,42 @@ submitQuickQuote(formData: FormData):Observable<any> {
   );
 }
 
+getAllDetailQuoteDetails(): any {
+  const url = `${this.apiDomain}/Quote/GetAllDetailQuote`;
+  return this.httpClient.get<any>(url).pipe(
+    tap((data) => {
+      return data;
+    }),
+    catchError((err) => this.handleError(err))
+  );
+}
+
+getAllQuickQuoteDetails(): any {
+  const url = `${this.apiDomain}/Quote/GetAllQuickQuote`;
+  return this.httpClient.get<any>(url).pipe(
+    tap((data) => {
+      return data;
+    }),
+    catchError((err) => this.handleError(err))
+  );
+}
+
+
+
+deleteQuote(QuotesId:string): any {
+  if (QuotesId) {
+
+    const url = `${this.apiDomain}/Quote/deleteQuote/${QuotesId}`;
+  
+    return this.httpClient.delete(url).pipe(
+      tap((data) => {
+        return data;
+      }),
+      catchError((err) => this.handleError(err))
+    );
+  }
+}
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 401) {
       console.log('An error occured:', error.error)
