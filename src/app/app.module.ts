@@ -10,10 +10,8 @@ import { PriceListComponent } from './container/price-list/price-list.component'
 import { HowToOrderComponent } from './container/how-to-order/how-to-order.component';
 import { FaqComponent } from './container/faq/faq.component';
 import { ContactComponent } from './container/contact/contact.component';
-import { DashboardComponent } from './container/admin/dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdminComponent } from './container/admin/admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -26,10 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     PriceListComponent,
     HowToOrderComponent,
     FaqComponent,
-    ContactComponent,
-    DashboardComponent,
-    DashboardComponent,
-    AdminComponent
+    ContactComponent
   ],
   imports: [
     BrowserModule,
