@@ -1,10 +1,70 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Contact } from './contactModel/contact.model';
+import { FormBuilder, FormGroup , Validators } from '@angular/forms';
+import { ContactServiceService } from './contactService/contact-service.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
 
+  contactForm!: FormGroup;
+  isSubmitted = false;
+  isLoading = false;
+  successMessage = 'Form Submitted successfully';
+  errorMessage = 'Error! Form did not submitted';
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private contactService: ContactServiceService
+  ) {}
+
+
+  ngOnInit(): void {
+    this.contactForm = this.formBuilder.group({
+      name: this.formBuilder.control('', [Validators.required]),
+      email:this.formBuilder.control('', [Validators.required, Validators.email]) ,
+      phone:this.formBuilder.control('',[Validators.pattern('^[0-9]*$')]),
+      subject:this.formBuilder.control('', [Validators.required]),
+      message:this.formBuilder.control('', [Validators.required])
+    });
+  }
+
+  // Submit the contact form
+  onSubmit(): void {
+    this.isSubmitted = true;
+    this.errorMessage = '';
+    this.successMessage = '';
+   let contact_ID = this.contactService.generateRandomContactID();
+    if (this.contactForm.invalid) {
+      const formData = new Contact;
+      formData.ContactId = contact_ID;
+      formData.name = this.contactForm.value.name;
+      formData.email = this.contactForm.value.email;
+      formData.phone = this.contactForm.value.phone;
+      formData.subject = this.contactForm.value.subject;
+      formData.message = this.contactForm.value.message;
+
+    this.isLoading = true;
+    // const formData: Contact = this.contactForm.value;
+
+    this.contactService.submitContactDetail(formData).subscribe({
+      next: (response) => {
+        this.successMessage = 'Your message has been sent successfully!';
+        this.contactForm.reset();
+        this.isSubmitted = false;
+        console.log('Form submission successful:', response);
+      },
+      error: (error) => {
+        this.errorMessage = 'Failed to send your message. Please try again later.';
+        console.error('Error in form submission:', error);
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
+  }
+  }
 }

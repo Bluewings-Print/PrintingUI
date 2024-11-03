@@ -202,7 +202,7 @@
         </div>
     </div>
 
-    <form id="contactForm" class="contact-form">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" id="contactForm" class="contact-form">
         <div class="form-group">
             <label for="name">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -211,7 +211,7 @@
                 </svg>
                 Name
             </label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" formControlName="name" name="name" required>
         </div>
         <div class="form-group">
             <label for="email">
@@ -221,7 +221,7 @@
                 </svg>
                 Email Address
             </label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" formControlName="email" name="email" required>
         </div>
         <div class="form-group">
             <label for="phone">
@@ -230,7 +230,7 @@
                 </svg>
                 Phone
             </label>
-            <input type="tel" id="phone" name="phone">
+            <input type="tel" formControlName="phone" name="phone">
         </div>
         <div class="form-group">
             <label for="subject">
@@ -241,7 +241,7 @@
                 </svg>
                 Subject
             </label>
-            <input type="text" id="subject" name="subject">
+            <input type="text" formControlName="subject" name="subject">
         </div>
         <div class="form-group">
             <label for="message">
@@ -253,7 +253,7 @@
                 </svg>
                 How can we help you? Feel free to get in touch!
             </label>
-            <textarea id="message" name="message" required></textarea>
+            <textarea formControlName="message" name="message" required></textarea>
         </div>
         <button type="submit" class="submit-btn">Get in Touch</button>
         <div class="privacy-policy">
