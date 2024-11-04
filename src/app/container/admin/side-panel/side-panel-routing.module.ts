@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SidePanelComponent } from './side-panel.component';
 import { QuoteManagementComponent } from './quote-management/quote-management.component';
 import { HelpManagementComponent } from './help-management/help-management.component';
+import { DetailQuoteComponent } from './detail-quote/detail-quote.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
       { path: 'categoryManagement', loadChildren: () => import('./category-management/category-management.module').then(m => m.CategoryManagementModule) },
       { path: 'productManagement', loadChildren: () => import('./product-management/product-management.module').then(m => m.ProductManagementModule) },
       { path: 'quoteManagement', component: QuoteManagementComponent },
+      { path: 'detailQuoteManagement', component: DetailQuoteComponent },
       { path: 'helpManagement', component: HelpManagementComponent }
     ]
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../productService/product.service';
+
 import { Product } from '../productModel/product.model';
+import { ProductService } from '../../admin/side-panel/product-management/productService/product.service';
 
 // interface Product {
 //   name: string;
@@ -47,7 +48,7 @@ export class MainProductComponent implements OnInit {
 
   filteredProducts: Product[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService){}
 
   ngOnInit(): void {
     this.filteredProducts = this.products;
