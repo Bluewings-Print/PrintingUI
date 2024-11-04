@@ -1,1 +1,23 @@
-<p>view-category works!</p>
+<div class="content">
+    <div class="section" id="categories">
+      <div class="card">
+        <h2>Categories</h2>
+        <button class="btn btn-primary" onclick="showModal('category')">
+          <i class="fas fa-plus"></i> Add Category
+        </button>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="categoryTable">
+              <!-- Data will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
