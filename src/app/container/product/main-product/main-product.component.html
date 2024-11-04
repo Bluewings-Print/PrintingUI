@@ -1,82 +1,79 @@
-<main>
-  <div class="container">
-    <h1>Products</h1>
+<div class="container">
+  <div class="sidebar">
+    <h2>Search here</h2>
+    <input type="text" [(ngModel)]="searchText" placeholder="Type something" />  
 
-    <div class="layout">
-      <aside class="sidebar">
-        <!-- Search -->
-        <form class="filter-card" role="search">
-          <h2>Search here</h2>
-          <div class="search-box">
-            <label for="search" class="visually-hidden">Search products</label>
-            <input type="search" id="search" placeholder="Type something" />
-            <button type="submit" aria-label="Search">
-              <span aria-hidden="true">🔍</span>
-            </button>
-          </div>
-        </form>
-
-        <!-- Categories -->
-        <div class="filter-card">
-          <div class="filter-section">
-            <div class="filter-header" (click)="toggleFilterSection('Filter by category')">
-              <h2 class="filter-title">Filter by category</h2>
-              <button class="toggle-btn" [attr.aria-expanded]="isFilterExpanded('Filter by category')" 
-                      aria-label="Toggle categories">
-                {{getToggleIcon('Filter by category')}}
-              </button>
-            </div>
-            <nav class="filter-content" [style.display]="isFilterExpanded('Filter by category') ? 'block' : 'none'">
-              <a href="#" class="active" aria-current="page">All categories</a>
-              <a href="#">T-Shirts</a>
-              <a href="#">Hoodies</a>
-              <a href="#">Polos</a>
-              <a href="#">Caps</a>
-            </nav>
-          </div>
-        </div>
-
-        <!-- Size -->
-        <div class="filter-card">
-          <div class="filter-section">
-            <div class="filter-header" (click)="toggleFilterSection('Size')">
-              <h2 class="filter-title">Size</h2>
-              <button class="toggle-btn" [attr.aria-expanded]="isFilterExpanded('Size')" 
-                      aria-label="Toggle sizes">
-                {{getToggleIcon('Size')}}
-              </button>
-            </div>
-            <div class="size-options" role="group" aria-label="Size selection" 
-                 [style.display]="isFilterExpanded('Size') ? 'block' : 'none'">
-              <button *ngFor="let size of ['XS', 'S', 'M', 'L', 'XL', 'XXL']"
-                      class="size-option"
-                      [class.active]="selectedSize === size"
-                      [attr.aria-pressed]="selectedSize === size"
-                      (click)="selectSize(size)">
-                {{size}}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Add other filter sections similarly -->
-      </aside>
-
-      <!-- Products Grid -->
-      <main class="products-grid">
-        <div *ngFor="let product of products" class="product-card">
-          <div class="product-image" [style.backgroundColor]="product.color">
-            Product Image
-          </div>
-          <div class="product-info">
-            <h3>{{product.name}}</h3>
-            <p>${{product.price}}</p>
-            <button class="customize-btn">Customize</button>
-          </div>
-        </div>
-      </main>
+    <!-- Filter by Category -->
+    <div class="filter-group">
+      <h3 (click)="toggleFilter('category')">
+        Filter by Category <span>{{ showCategory ? '-' : '+' }}</span>
+      </h3>
+      <ul *ngIf="showCategory">
+        <li *ngFor="let category of categories" (click)="filterByCategory(category)">
+          {{ category }}
+        </li>
+      </ul>
     </div>
 
-    <button class="load-more">Load more...</button>
+    <!-- Filter by Size -->
+    <div class="filter-group">
+      <h3 (click)="toggleFilter('size')">
+        Size <span>{{ showSize ? '-' : '+' }}</span>
+      </h3>
+      <ul *ngIf="showSize">
+        <li *ngFor="let size of sizes" (click)="filterBySize(size)">
+          {{ size }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Filter by Color -->
+    <div class="filter-group">
+      <h3 (click)="toggleFilter('color')">
+        Color <span>{{ showColor ? '-' : '+' }}</span>
+      </h3>
+      <ul *ngIf="showColor">
+        <li *ngFor="let color of colors" (click)="filterByColor(color)">
+          {{ color }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Filter by Brand -->
+    <div class="filter-group">
+      <h3 (click)="toggleFilter('brand')">
+        Brand <span>{{ showBrand ? '-' : '+' }}</span>
+      </h3>
+      <ul *ngIf="showBrand">
+        <li *ngFor="let brand of brands" (click)="filterByBrand(brand)">
+          {{ brand }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Filter by Price -->
+    <div class="filter-group">
+      <h3 (click)="toggleFilter('price')">
+        Price <span>{{ showPrice ? '-' : '+' }}</span>
+      </h3>
+      <ul *ngIf="showPrice">
+        <li *ngFor="let price of prices" (click)="filterByPrice(price)">
+          {{ price }}
+        </li>
+      </ul>
+    </div>
   </div>
-</main>
+
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of filteredProducts | filter: searchText">
+      <div class="product-image" [style.background-color]="product.color">
+        Product Image
+      </div>
+      <div class="product-details">
+        <h4>{{ product.name }}</h4>
+        <p>${{ product.price }}</p>
+        <button (click)="customizeProduct(product)">Customize</button>
+      </div>
+    </div>
+  </div>
+</div>

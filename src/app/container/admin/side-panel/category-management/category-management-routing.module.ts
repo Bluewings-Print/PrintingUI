@@ -6,31 +6,31 @@ import { ViewCategoryComponent } from './view-category/view-category.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 
 const routes: Routes = [
-    {
-      path: '',
-      component: ViewCategoryComponent,
-      title: 'Categories'
-    },
-    {
-      path: 'AddCategory',
-      component: AddCategoryComponent,
-      title: 'Add Category'
-    },
-    {
-      path: 'ViewCategory',
-      component: ViewCategoryComponent,
-      title: 'view Categories'
-    },
-    {
-      path: 'UpdateCategory',
-      component: EditCategoryComponent,
-      title: 'Update Category'
-    },
-    {
-      path: 'DeleteCategory',
-      component: DeleteCategoryComponent,
-      title: 'Delete Category'
-    }
+  {
+    path: '',
+    component: ViewCategoryComponent, children: [
+      {
+        path: 'AddCategory',
+        component: AddCategoryComponent,
+        title: 'Add Category'
+      },
+      {
+        path: 'ViewCategory',
+        component: ViewCategoryComponent,
+        title: 'view Categories'
+      },
+      {
+        path: 'UpdateCategory',
+        component: EditCategoryComponent,
+        title: 'Update Category'
+      },
+      {
+        path: 'DeleteCategory',
+        component: DeleteCategoryComponent,
+        title: 'Delete Category'
+      }
+    ]
+  }
 ];
 
 @NgModule({
