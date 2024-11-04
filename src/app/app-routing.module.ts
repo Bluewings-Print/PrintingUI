@@ -20,8 +20,8 @@ const routes: Routes = [
     loadChildren: () => import('./container/auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'admin',
-    loadChildren: () => import('./container/admin/admin.module').then(m => m.AdminModule)
+    path: 'sidePanel',
+    loadChildren: () => import('./container/admin//side-panel/side-panel.module').then(m => m.SidePanelModule)
   },
   { path: 'priceList', component: PriceListComponent },
   { path: 'howToOrder', component: HowToOrderComponent },
