@@ -1,15 +1,48 @@
-<div class="mobile-menu">
-    <i class="fas fa-bars"></i>
-  </div>
-
-  <div class="sidebar">
-    <div class="logo">Admin Panel</div>
-    <div class="nav-item active" data-section="categories">
-      <i class="fas fa-folder-open"></i> Categories
+<!-- <div class="dashboard-container" [class.sidebar-collapsed]="isSidebarCollapsed">
+  <aside class="sidebar" [@sidebarState]="isSidebarCollapsed ? 'collapsed' : 'expanded'">
+    <div class="sidebar-header">
+      <img src="assets/logo.png" alt="Logo" class="logo" />
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        <i class="fas" [class.fa-bars]="isSidebarCollapsed" [class.fa-times]="!isSidebarCollapsed"></i>
+      </button>
     </div>
-    <div class="nav-item" data-section="products">
-      <i class="fas fa-box"></i> Products
-    </div>
-  </div>
 
-  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis totam dignissimos mollitia corporis corrupti nobis harum, impedit quod ullam culpa laborum magnam!</p>
+    <nav class="nav-menu">
+      <a routerLink="/admin/categories" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item">
+        <i class="fas fa-th-large"></i>
+        <span class="nav-text" [@textFade]="isSidebarCollapsed ? 'hidden' : 'visible'">
+          Categories
+        </span>
+      </a>
+
+      <a routerLink="/admin/products" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item">
+        <i class="fas fa-box"></i>
+        <span class="nav-text" [@textFade]="isSidebarCollapsed ? 'hidden' : 'visible'">
+          Products
+        </span>
+      </a>
+
+      <a routerLink="/admin/quotes" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item">
+        <i class="fas fa-quote-right"></i>
+        <span class="nav-text" [@textFade]="isSidebarCollapsed ? 'hidden' : 'visible'">
+          Quotes
+        </span>
+      </a>
+
+      <a routerLink="/admin/help" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item">
+        <i class="fas fa-question-circle"></i>
+        <span class="nav-text" [@textFade]="isSidebarCollapsed ? 'hidden' : 'visible'">
+          Help Center
+        </span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div> -->

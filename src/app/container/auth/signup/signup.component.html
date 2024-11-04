@@ -111,8 +111,8 @@
         <label class="checkbox-label">
           <input type="checkbox" formControlName="termsAccepted" />
           <span
-            >I agree to the <a href="#">Terms of Service</a> and
-            <a href="#">Privacy Policy</a></span
+            >I agree to the <a routerLink="/terms">Terms of Service</a> and
+            <a routerLink="/privacy">Privacy Policy</a></span
           >
         </label>
         <span
@@ -134,7 +134,7 @@
         Create Account
       </button>
 
-      <p class="login-text">Already have an account? <a href="#">Log in</a></p>
+      <p class="login-text">Already have an account? <a routerLink="/auth/login">Log in</a></p>
     </form>
   </div>
 </div>
