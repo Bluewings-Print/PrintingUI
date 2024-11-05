@@ -36,7 +36,6 @@ import { SidePanelComponent } from './container/admin/side-panel/side-panel.comp
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
