@@ -8,21 +8,12 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
       <div class="form-group">
         <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          formControlName="email"
-          placeholder="Enter your email"
-          [class.error]="
+        <input id="email" type="email" formControlName="email" placeholder="Enter your email" [class.error]="
             loginForm.get('email')?.invalid && loginForm.get('email')?.touched
-          "
-        />
-        <span
-          class="error-message"
-          *ngIf="
+          " />
+        <span class="error-message" *ngIf="
             loginForm.get('email')?.invalid && loginForm.get('email')?.touched
-          "
-        >
+          ">
           {{ emailError }}
         </span>
       </div>
@@ -30,35 +21,19 @@
       <div class="form-group">
         <label for="password">Password</label>
         <div class="password-input">
-          <input
-            id="password"
-            [type]="isPasswordVisible ? 'text' : 'password'"
-            formControlName="password"
-            placeholder="Enter your password"
-            [class.error]="
+          <input id="password" [type]="isPasswordVisible ? 'text' : 'password'" formControlName="password"
+            placeholder="Enter your password" [class.error]="
               loginForm.get('password')?.invalid &&
               loginForm.get('password')?.touched
-            "
-          />
-          <button
-            type="button"
-            class="toggle-password"
-            (click)="togglePasswordVisibility()"
-          >
-            <i
-              class="fas"
-              [class.fa-eye]="!isPasswordVisible"
-              [class.fa-eye-slash]="isPasswordVisible"
-            ></i>
+            " />
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+            <i class="fas" [class.fa-eye]="!isPasswordVisible" [class.fa-eye-slash]="isPasswordVisible"></i>
           </button>
         </div>
-        <span
-          class="error-message"
-          *ngIf="
+        <span class="error-message" *ngIf="
             loginForm.get('password')?.invalid &&
             loginForm.get('password')?.touched
-          "
-        >
+          ">
           {{ passwordError }}
         </span>
       </div>
@@ -68,14 +43,14 @@
           <input type="checkbox" formControlName="rememberMe" />
           <span>Remember me</span>
         </label>
-        <a href="#" class="forgot-password">Forgot Password?</a>
+        <a routerLink="/auth/forgot-password" class="forgot-password">Forgot Password?</a>
       </div>
 
       <button type="submit" class="login-button" [disabled]="loginForm.invalid">
         Login
       </button>
 
-      <p class="signup-text">Don't have an account? <a href="#">Sign up</a></p>
+      <p class="signup-text">Don't have an account? <a routerLink="/auth/signup">Sign up</a></p>
     </form>
   </div>
 </div>
