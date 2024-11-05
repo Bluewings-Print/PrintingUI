@@ -1,0 +1,350 @@
+:root {
+    --primary: #7E22CE;
+    --secondary: #A088B1;
+    --background: #3A2A46;
+    --text: #FFF5FF;
+  }
+  
+  .products-container {
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  /* Header Section */
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  
+    h1 {
+      color: var(--background);
+      font-size: 28px;
+      font-weight: 600;
+    }
+  }
+  
+  .add-button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  
+    &:hover {
+      background-color: darken(#7E22CE, 10%);
+      transform: translateY(-2px);
+    }
+  }
+  
+  /* Controls Section */
+  .controls-section {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .search-box {
+    flex: 1;
+    position: relative;
+  
+    i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--secondary);
+    }
+  
+    input {
+      width: 90%;
+      padding: 12px 12px 12px 40px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+  
+      &:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+    }
+  }
+  
+  .filter-box select {
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: white;
+    min-width: 150px;
+  }
+  
+  /* Products Grid */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  
+  .product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+  
+  .product-image {
+    height: 200px;
+    overflow: hidden;
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .image-preview {
+    max-width: 100%; /* Make the preview responsive */
+    max-height: 200px; /* Set a max height */
+    margin-top: 10px; /* Add some spacing */
+  }
+  
+  .product-info {
+    padding: 16px;
+  
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--background);
+    }
+  
+    .price {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 8px 0;
+    }
+  
+    .category {
+      color: var(--secondary);
+      font-size: 14px;
+    }
+  
+    .stock {
+      font-size: 14px;
+      &.low-stock {
+        color: #dc2626;
+      }
+    }
+  }
+  
+  .product-actions {
+    display: flex;
+    gap: 8px;
+    padding: 16px;
+    border-top: 1px solid #e2e8f0;
+  
+    button {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+  
+      &.edit-btn {
+        background-color: #f3e8ff;
+        color: var(--primary);
+  
+        &:hover {
+          background-color: darken(#f3e8ff, 5%);
+        }
+      }
+  
+      &.delete-btn {
+        background-color: #fee2e2;
+        color: #dc2626;
+  
+        &:hover {
+          background-color: darken(#fee2e2, 5%);
+        }
+      }
+    }
+  }
+  
+  /* Modal Styles */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .modal-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    h2 {
+      margin: 0;
+      color: var(--background);
+    }
+  
+    .close-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--secondary);
+      font-size: 20px;
+  
+      &:hover {
+        color: var(--background);
+      }
+    }
+  }
+  
+  form {
+    padding: 24px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--background);
+      font-weight: 500;
+    }
+  
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 14px;
+  
+      &:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+    }
+  
+    .error {
+      color: #dc2626;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+  
+    button {
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+  
+      &.cancel-btn {
+        background: none;
+        border: 1px solid #e2e8f0;
+        color: var(--secondary);
+  
+        &:hover {
+          background-color: #f8fafc;
+        }
+      }
+  
+      &.submit-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+  
+        &:hover {
+          background-color: darken(#7E22CE, 10%);
+        }
+  
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  
+  /* Delete Modal Specific Styles */
+  .delete-modal {
+    .modal-content {
+      max-width: 400px;
+    }
+  
+    .modal-body {
+      padding: 24px;
+      text-align: center;
+  
+      .warning {
+        color: #dc2626;
+        margin-top: 8px;
+        font-size: 14px;
+      }
+    }
+  
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .header-section {
+      flex-direction: column;
+      gap: 16px;
+      align-items: stretch;
+    }
+  
+    .controls-section {
+      flex-direction: column;
+    }
+  
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+  }
+  

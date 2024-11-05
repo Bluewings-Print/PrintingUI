@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 interface Category {
   id: number;
@@ -13,8 +13,10 @@ interface Category {
 @Component({
   selector: 'app-view-category',
   templateUrl: './view-category.component.html',
-  styleUrls: ['./view-category.component.css']
+  styleUrls: ['./view-category.component.css'],
+  encapsulation: ViewEncapsulation.None // Disables encapsulation
 })
+
 export class ViewCategoryComponent implements OnInit{
   categories: Category[] = [];
   searchTerm: string = '';
