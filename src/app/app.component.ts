@@ -14,7 +14,7 @@ export class AppComponent {
   ) {}
   ngDoCheck(): void {
     const currentUrl = this.router.url;
-  if (currentUrl.includes('/login') || currentUrl.includes('/signup')) {
+  if (currentUrl.includes('/login') || currentUrl.includes('/signup')||currentUrl.includes('/sidePanel')) {
     this.isMenuRequire = false;
   } else {
     this.isMenuRequire = true;

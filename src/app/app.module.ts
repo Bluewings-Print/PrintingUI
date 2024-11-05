@@ -13,6 +13,8 @@ import { ContactComponent } from './container/contact/contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { SidePanelComponent } from './container/admin/side-panel/side-panel.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +26,17 @@ import { HttpClientModule } from '@angular/common/http';
     PriceListComponent,
     HowToOrderComponent,
     FaqComponent,
-    ContactComponent
+    ContactComponent,
+    SidePanelComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
