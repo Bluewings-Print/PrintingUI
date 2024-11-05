@@ -6,6 +6,7 @@ import { ViewCategoryComponent } from './view-category/view-category.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 import { DeleteCategoryComponent } from './delete-category/delete-category.component';
 import { CategorymentRoutingModule } from './category-management-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CategorymentRoutingModule } from './category-management-routing.module'
   ],
   imports: [
     CommonModule,
-    CategorymentRoutingModule
+    CategorymentRoutingModule,
+    FormsModule
   ]
 })
 export class CategoryManagementModule { }
