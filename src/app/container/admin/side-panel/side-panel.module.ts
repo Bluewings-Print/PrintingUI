@@ -20,13 +20,14 @@ import { DetailQuoteComponent } from './detail-quote/detail-quote.component';
     DetailQuoteComponent
   ],
   imports: [
-    CommonModule,
+    // CommonModule,
     SidePanelRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    RouterModule,
+    
+    // BrowserAnimationsModule,
+    // HttpClientModule,
+    // RouterModule,
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  // schemas:[CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class SidePanelModule { }
