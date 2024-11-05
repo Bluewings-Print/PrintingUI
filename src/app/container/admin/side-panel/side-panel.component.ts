@@ -1,5 +1,5 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-side-panel',
@@ -26,7 +26,8 @@ import { Component } from '@angular/core';
       })),
       transition('visible <=> hidden', animate('200ms ease'))
     ])
-  ]
+  ], 
+  encapsulation: ViewEncapsulation.None // Disables encapsulation
 })
 export class SidePanelComponent {
   isSidebarCollapsed = false;

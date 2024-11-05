@@ -1,23 +1,164 @@
-<div class="content">
-    <div class="section" id="categories">
-      <div class="card">
-        <h2>Categories</h2>
-        <button class="btn btn-primary" onclick="showModal('category')">
-          <i class="fas fa-plus"></i> Add Category
+<div class="page-container">
+  <!-- Header Section -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="title-section">
+        <h1>Categories</h1>
+        <p class="subtitle">Manage your product categories</p>
+      </div>
+      <div class="header-actions">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input 
+            type="text" 
+            [(ngModel)]="searchTerm"
+            placeholder="Search categories..."
+          >
+        </div>
+        <button class="primary-btn" (click)="openAddModal()">
+          <i class="fas fa-plus"></i>
+          Add Category
         </button>
-        <div class="table-container">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="categoryTable">
-              <!-- Data will be populated by JavaScript -->
-            </tbody>
-          </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories Section -->
+  <div class="categories-section">
+    <div class="categories-grid">
+      <div class="category-card" *ngFor="let category of filteredCategories">
+        <div class="card-content">
+          <div class="card-header">
+            <h3>{{category.name}}</h3>
+            <div class="status-badge" [class.active]="category.status === 'active'">
+              {{category.status}}
+            </div>
+          </div>
+          
+          <p class="description">{{category.description}}</p>
+          
+          <div class="card-stats">
+            <div class="stat">
+              <i class="fas fa-box"></i>
+              <span>{{category.productsCount}} Products</span>
+            </div>
+            <div class="stat">
+              <i class="fas fa-clock"></i>
+              <span>Updated {{category.updatedAt | date:'mediumDate'}}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-actions">
+          <button class="action-btn edit" (click)="openEditModal(category)" title="Edit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="action-btn toggle" 
+            (click)="toggleStatus(category)"
+            [title]="category.status === 'active' ? 'Deactivate' : 'Activate'">
+            <i class="fas" [class.fa-toggle-on]="category.status === 'active'" 
+               [class.fa-toggle-off]="category.status === 'inactive'"></i>
+          </button>
+          <button class="action-btn delete" (click)="openDeleteModal(category)" title="Delete">
+            <i class="fas fa-trash"></i>
+          </button>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Add Category Modal -->
+  <div class="modal-overlay" *ngIf="showAddModal" (click)="closeModals()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Add New Category</h2>
+        <button class="close-btn" (click)="closeModals()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form (submit)="addCategory()">
+        <div class="form-group">
+          <label for="name">Category Name</label>
+          <input 
+            type="text" 
+            id="name"
+            [(ngModel)]="newCategory.name"
+            name="name"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea 
+            id="description"
+            [(ngModel)]="newCategory.description"
+            name="description"
+            required
+          ></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="secondary-btn" (click)="closeModals()">Cancel</button>
+          <button type="submit" class="primary-btn">Add Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Category Modal -->
+  <div class="modal-overlay" *ngIf="showEditModal" (click)="closeModals()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Edit Category</h2>
+        <button class="close-btn" (click)="closeModals()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form (submit)="updateCategory()" *ngIf="selectedCategory">
+        <div class="form-group">
+          <label for="edit-name">Category Name</label>
+          <input 
+            type="text" 
+            id="edit-name"
+            [(ngModel)]="selectedCategory.name"
+            name="name"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="edit-description">Description</label>
+          <textarea 
+            id="edit-description"
+            [(ngModel)]="selectedCategory.description"
+            name="description"
+            required
+          ></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="secondary-btn" (click)="closeModals()">Cancel</button>
+          <button type="submit" class="primary-btn">Update Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-overlay" *ngIf="showDeleteModal" (click)="closeModals()">
+    <div class="modal-content delete-modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Delete Category</h2>
+        <button class="close-btn" (click)="closeModals()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="delete-content" *ngIf="selectedCategory">
+        <i class="fas fa-exclamation-triangle warning-icon"></i>
+        <p>Are you sure you want to delete <strong>{{selectedCategory.name}}</strong>?</p>
+        <p class="warning-text">This action cannot be undone.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="secondary-btn" (click)="closeModals()">Cancel</button>
+        <button class="danger-btn" (click)="deleteCategory()">Delete Category</button>
+      </div>
+    </div>
+  </div>
+</div>
