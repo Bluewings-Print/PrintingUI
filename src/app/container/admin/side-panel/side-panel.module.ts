@@ -20,9 +20,9 @@ import { DetailQuoteComponent } from './detail-quote/detail-quote.component';
     DetailQuoteComponent
   ],
   imports: [
-    // CommonModule,
+    CommonModule,
     SidePanelRoutingModule,
-    
+     
     // BrowserAnimationsModule,
     // HttpClientModule,
     // RouterModule,
