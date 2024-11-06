@@ -5,19 +5,19 @@ import { DetailQuotesComponent } from './detail-quotes/detail-quotes.component';
 
 const routes: Routes = [
   // {
-  //   path:'',
-  //   redirectTo:'LoginPIN',
-  //   pathMatch:'full'
+  //   path: '',
+  //   redirectTo: 'LoginPIN',
+  //   pathMatch: 'full'
   // },
   {
-    path:'quickQuote',
-    component:QuickQuotesComponent,
-    title:'Quick quote page'
+    path: 'quickQuote',
+    component: QuickQuotesComponent,
+    title: 'Quick Quote Page'
   },
   {
-    path:'detailQuote',
+    path: 'detailQuote',
     component: DetailQuotesComponent,
-    title:'detail quote page'
+    title: 'Detail Quote Page'
   }
 ];
 

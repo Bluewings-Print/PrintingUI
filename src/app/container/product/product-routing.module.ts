@@ -5,14 +5,14 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 
 const routes: Routes = [
   {
-    path:'mainProduct',
-    component:MainProductComponent,
-    title:'main page for product'
+    path: 'mainProduct',
+    component: MainProductComponent,
+    title: 'Main Product Page'
   },
   {
-    path:'detailProduct',
+    path: 'detailProduct',
     component: ProductDetailsComponent,
-    title:'product detail apge'
+    title: 'Product Details Page'
   }
 ];
 

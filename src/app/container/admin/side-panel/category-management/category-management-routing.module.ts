@@ -8,7 +8,8 @@ import { EditCategoryComponent } from './edit-category/edit-category.component';
 const routes: Routes = [
   {
     path: '',
-    component: ViewCategoryComponent, children: [
+    component: ViewCategoryComponent,
+    children: [
       {
         path: 'AddCategory',
         component: AddCategoryComponent,
@@ -17,7 +18,7 @@ const routes: Routes = [
       {
         path: 'ViewCategory',
         component: ViewCategoryComponent,
-        title: 'view Categories'
+        title: 'View Categories'
       },
       {
         path: 'UpdateCategory',
