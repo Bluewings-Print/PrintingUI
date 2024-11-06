@@ -1,1 +1,57 @@
-<p>help-management works!</p>
+<div class="queries-container">
+    <header class="queries-header">
+        <h1>Contact Queries</h1>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" [(ngModel)]="searchTerm" (input)="filterQueries()" placeholder="Search queries...">
+        </div>
+    </header>
+
+    <div class="queries-grid">
+        <div *ngFor="let query of filteredQueries" class="query-card" [class.expanded]="query.isExpanded"
+            (click)="toggleExpand(query)">
+            <div class="query-header">
+                <div class="query-id">#{{query.queryId}}</div>
+                <div class="query-status" [class]="query.status.toLowerCase()">
+                    {{query.status}}
+                </div>
+            </div>
+
+            <div class="query-basic-info">
+                <div class="info-item">
+                    <i class="fas fa-user"></i>
+                    <span>{{query.name}}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>{{query.phone}}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>{{query.email}}</span>
+                </div>
+            </div>
+
+            <div class="query-details" [@expandCollapse]="query.isExpanded ? 'expanded' : 'collapsed'">
+                <div class="details-section">
+                    <h3>Description</h3>
+                    <p>{{query.description}}</p>
+                </div>
+                <div class="details-section">
+                    <h3>Message</h3>
+                    <p>{{query.message}}</p>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-reply">
+                        <i class="fas fa-reply"></i>
+                        Reply
+                    </button>
+                    <button class="btn-mark-resolved">
+                        <i class="fas fa-check"></i>
+                        Mark as Resolved
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
