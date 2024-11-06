@@ -7,12 +7,34 @@ import { DetailQuoteComponent } from './detail-quote/detail-quote.component';
 
 const routes: Routes = [
   {
-    path: '', component: SidePanelComponent, children: [
-      { path: 'categoryManagement', loadChildren: () => import('./category-management/category-management.module').then(m => m.CategoryManagementModule) },
-      { path: 'productManagement', loadChildren: () => import('./product-management/product-management.module').then(m => m.ProductManagementModule) },
-      { path: 'quoteManagement', component: QuoteManagementComponent },
-      { path: 'detailQuoteManagement', component: DetailQuoteComponent },
-      { path: 'helpManagement', component: HelpManagementComponent }
+    path: '', 
+    component: SidePanelComponent, 
+    children: [
+      { 
+        path: 'categoryManagement', 
+        loadChildren: () => import('./category-management/category-management.module').then(m => m.CategoryManagementModule), 
+        title: 'Category Management'
+      },
+      { 
+        path: 'productManagement', 
+        loadChildren: () => import('./product-management/product-management.module').then(m => m.ProductManagementModule), 
+        title: 'Product Management' 
+      },
+      { 
+        path: 'quoteManagement', 
+        component: QuoteManagementComponent, 
+        title: 'Quote Management' 
+      },
+      { 
+        path: 'detailQuoteManagement', 
+        component: DetailQuoteComponent, 
+        title: 'Quote Details' 
+      },
+      { 
+        path: 'helpManagement', 
+        component: HelpManagementComponent, 
+        title: 'Help Management' 
+      }
     ]
   }
 ];

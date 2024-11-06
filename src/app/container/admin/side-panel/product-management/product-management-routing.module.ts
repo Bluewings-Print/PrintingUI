@@ -10,7 +10,6 @@ const routes: Routes = [
     path: '',
     component: ViewProductComponent,
     children: [
-
       {
         path: 'AddProduct',
         component: AddProductComponent,
@@ -19,12 +18,12 @@ const routes: Routes = [
       {
         path: 'ViewProduct',
         component: ViewProductComponent,
-        title: 'view Products'
+        title: 'View Products'
       },
       {
         path: 'UpdateProduct',
         component: EditProductComponent,
-        title: 'Update Category'
+        title: 'Update Product'
       },
       {
         path: 'DeleteProduct',
