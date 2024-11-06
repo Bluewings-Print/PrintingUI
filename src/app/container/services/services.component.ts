@@ -37,16 +37,16 @@ export class ServicesComponent implements OnInit {
   // Submit the contact form
   onSubmit(): void {
     this.isSubmitted = true;
-    this.errorMessage = '';
-    this.successMessage = '';
+    this.errorMessage = 'Error sending contact information!';
+    this.successMessage = 'Contact information send successfully';
    let contact_ID = this.contactService.generateRandomContactID();
-    if (this.contactForm.invalid) {
+    if (this.contactForm.valid) {
       const formData = new Contact;
       formData.ContactId = contact_ID;
-      formData.name = this.contactForm.value.name;
+      formData.firstName = this.contactForm.value.name;
       formData.email = this.contactForm.value.email;
-      formData.phone = this.contactForm.value.phone;
-      formData.subject = this.contactForm.value.subject;
+      formData.phoneNumber = this.contactForm.value.phone;
+      formData.description = this.contactForm.value.subject;
       formData.message = this.contactForm.value.message;
 
     this.isLoading = true;

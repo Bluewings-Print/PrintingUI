@@ -14,7 +14,7 @@ export class ContactServiceService {
   constructor(private httpClient: HttpClient) {}
 
   submitContactDetail(formData: Contact): Observable<any> {
-    const url = `${this.apiDomain}/Contact/AddContactDetail`;
+    const url = `${this.apiDomain}/Contact/AddContact`;
     return this.httpClient.post<any>(url, formData).pipe(
       tap((data) => console.log('Form submitted:', data)),
       catchError((err) => this.handleError(err))
