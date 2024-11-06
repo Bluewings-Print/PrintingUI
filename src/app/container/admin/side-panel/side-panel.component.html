@@ -46,6 +46,11 @@
           Help Center
         </span>
       </a>
+
+      <button class="logout-btn nav-item" routerLink="/home">
+        <i class="fas fa-sign-out-alt"></i>
+        <span class="nav-text" [@textFade]="isSidebarCollapsed ? 'hidden' : 'visible'">Logout</span>
+      </button>
     </nav>
   </aside>
 
