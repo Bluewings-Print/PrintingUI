@@ -38,13 +38,13 @@ export class ContactComponent implements OnInit {
     this.errorMessage = '';
     this.successMessage = '';
    let contact_ID = this.contactService.generateRandomContactID();
-    if (this.contactForm.invalid) {
+    if (!this.contactForm.invalid) {
       const formData = new Contact;
-      formData.ContactId = contact_ID;
-      formData.name = this.contactForm.value.name;
+      // formData.ContactId = contact_ID;
+      formData.firstName = this.contactForm.value.name;
       formData.email = this.contactForm.value.email;
-      formData.phone = this.contactForm.value.phone;
-      formData.subject = this.contactForm.value.subject;
+      formData.phoneNumber = this.contactForm.value.phone;
+      formData.description = this.contactForm.value.subject;
       formData.message = this.contactForm.value.message;
 
     this.isLoading = true;

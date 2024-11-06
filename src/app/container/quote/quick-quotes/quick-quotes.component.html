@@ -70,11 +70,11 @@
             <div class="form-group">
                 <label>Choose multiple options if required</label>
                 <div class="checkbox-group" formGroupName="gender">
-                    <input type="checkbox" id="mens" formControlName="mens">
+                    <input type="checkbox" value="mens" formControlName="mens">
                     <label for="mens">Mens</label>
-                    <input type="checkbox" id="ladies" formControlName="ladies">
+                    <input type="checkbox" value="ladies" formControlName="ladies">
                     <label for="ladies">Ladies</label>
-                    <input type="checkbox" id="kids" formControlName="kids">
+                    <input type="checkbox" value="kids" formControlName="kids">
                     <label for="kids">Kids</label>
                 </div>
             </div>
@@ -100,10 +100,11 @@
                 <div class="form-group third-width">
                     <label for="budget">Budget?</label>
                     <select id="budget" name="budget" formControlName="budget">
+                        <!--  -->
                     <option value="">+ Select</option>
                     <option value="$ - Promo">$ - Promo</option>
                     <option value="$$ - Trend">$$ - Trend</option>
-                    <option value="&&& - Premium">&&& - Premium</option>
+                    <option value="$$$ - Premium">$$$ - Premium</option>
                     </select>
                 </div>
                 <div class="form-group third-width">
@@ -126,7 +127,7 @@
 
         <div class="form-row footer-form">
             <div class="form-group-tick">
-                <input type="checkbox" id="terms" formControlName="terms" required>
+                <input type="checkbox" id="terms"  required>
                 <label for="terms">I accept the terms</label>
                 <a href="#" class="terms-link">Read our T&Cs</a>
             </div>
