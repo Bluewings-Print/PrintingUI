@@ -2,6 +2,9 @@ import { Component, OnInit  } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { QuoteService } from '../quoteService/quote.service';
 import { DetailedQuote, OrderDetails } from './detailQuotes.model';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-detail-quotes',
@@ -17,7 +20,8 @@ export class DetailQuotesComponent {
 
   constructor(
     private builder: FormBuilder,
-    private quotesService: QuoteService
+    private quotesService: QuoteService,
+    private router: Router
   ) { }
 
  
@@ -128,7 +132,6 @@ export class DetailQuotesComponent {
       return;
     }
 
-    const formData = new FormData();
     const detailedQuote: DetailedQuote = {
       firstName: this.detailQuoteForm.get('firstName')?.value,
       lastName: this.detailQuoteForm.get('lastName')?.value,
@@ -145,20 +148,22 @@ export class DetailQuotesComponent {
     };
 
     // Process each order form
-    this.orderForms.controls.forEach((orderForm: any, index: number) => {
-      const orderDetail: OrderDetails = {
-        brand: orderForm.get('brand').value,
-        gender: orderForm.get('gender').value,
-        color: orderForm.get('color').value,
-        sizeQuantity: {},
-        frontImagePath: '',
-        backImagePath: '',
-        lhSleevePath: '',
-        rhSleevePath: '',
-        additionalInfo: orderForm.get('additionalInfo').value
-      };
+    this.orderForms.controls.forEach((orderForm: any) => {
+      if(orderForm.valid){
+        const orderDetail: OrderDetails = {
+          brand: orderForm.get('brand')?.value,
+          gender: orderForm.get('gender')?.value,
+          color: orderForm.get('color')?.value,
+          sizeQuantity: {},
+          frontImagePath: '',
+          backImagePath: '',
+          lhSleevePath: '',
+          rhSleevePath: '',
+          additionalInfo: orderForm.get('additionalInfo')?.value
+        };
+  
 
-      // Process size quantities
+         // Process size quantities
       const sizeQuantityGroup = orderForm.get('sizeQuantity');
       Object.keys(sizeQuantityGroup.controls).forEach(key => {
         const value = sizeQuantityGroup.get(key)?.value;
@@ -167,32 +172,48 @@ export class DetailQuotesComponent {
         }
       });
 
-      // Append files to FormData
-      const files = {
-        frontArtwork: orderForm.get('frontArtwork').value,
-        backArtwork: orderForm.get('backArtwork').value,
-        lhSleeve: orderForm.get('lhSleeve').value,
-        rhSleeve: orderForm.get('rhSleeve').value
-        // frontImagePath: orderForm.get('frontArtwork').value,
-        // backImagePath: orderForm.get('backArtwork').value,
-        // lhSleevePath: orderForm.get('lhSleeve').value,
-        // rhSleevePath: orderForm.get('rhSleeve').value
-      };
+      if(orderDetail.brand|| orderDetail.gender|| orderDetail.color||
+        Object.keys(orderDetail.sizeQuantity).length>0
+      ){
 
-      Object.entries(files).forEach(([key, file]) => {
-        if (file) {
-          formData.append(`orderDetails[${index}].${key}`, file);
-        }
-      });
+        detailedQuote.orderDetails.push(orderDetail);
+      }
+  // const files = {
+      //   // frontArtwork: orderForm.get('frontArtwork').value,
+      //   // backArtwork: orderForm.get('backArtwork').value,
+      //   // lhSleeve: orderForm.get('lhSleeve').value,
+      //   // rhSleeve: orderForm.get('rhSleeve').value
+      //   frontImagePath: orderForm.get('frontArtwork').value,
+      //   backImagePath: orderForm.get('backArtwork').value,
+      //   lhSleevePath: orderForm.get('lhSleeve').value,
+      //   rhSleevePath: orderForm.get('rhSleeve').value
+      // };
 
-      detailedQuote.orderDetails.push(orderDetail);
+      // Object.entries(files).forEach(([key, file]) => {
+      //   if (file) {
+      //     formData.append(orderDetails[${index}].${key}, file);
+      //   }
+      // });
+
+      }
+       
+    
     });
 
-    formData.append('detailedQuote', JSON.stringify(detailedQuote));
-
     try {
-      await this.quotesService.submitDetailQuote(formData);
-      console.log('Quote submitted successfully');
+      await this.quotesService.submitDetailQuote(detailedQuote).subscribe(
+        (response) => {
+          console.log('Quote submitted successfully', response);
+          this.detailQuoteForm.reset();
+          this.router.navigate(['/quote/quickQuote']).then(() => {
+            this.router.navigate(['/quote/detailQuote']);
+          });
+          // this.selectedFiles = [];
+        },
+        (error) => {
+          console.error('Error submitting quote:', error);
+        }
+      );
     } catch (error) {
       console.error('Error submitting quote:', error);
     }
