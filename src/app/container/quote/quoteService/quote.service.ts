@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { QuickQuotes } from '../quick-quotes/quickQuotes.model';
+import { DetailedQuote } from '../detail-quotes/detailQuotes.model';
 
 // export interface DetailQuoteData {
 //   // Personal Details
@@ -49,13 +50,16 @@ export class QuoteService {
 
   constructor(private httpClient: HttpClient) {}
 
-  submitDetailQuote(quote: FormData):Observable<any> {
+  submitDetailQuote(quote: DetailedQuote):Observable<any> {
     const url = `${this.apiDomain}/Quote/AddDetailedQuote`;
     // const httpHeaders = this.getHeaders();
     // const body = JSON.stringify(quote);
     return this.httpClient.post<any>(url,quote).pipe(
       tap((data) => console.log('Form submitted:', data)),
-      catchError((err) => this.handleError(err))
+      catchError((err) => {
+        console.error('Error:',err);
+        throw err;
+      })
     );
   }
 submitQuickQuote(formData: QuickQuotes):Observable<any> {
