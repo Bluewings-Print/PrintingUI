@@ -72,7 +72,7 @@ export class QuoteService {
   }
 
   getAllDetailQuoteDetails(): Observable<any[]> {
-    const url = `${this.apiDomain}/Quote/GetAllDetailQuote`;
+    const url = `${this.apiDomain}/Quote/GetAllDetailedQuote`;
     return this.httpClient.get<any[]>(url).pipe(
       tap((data) => {
         console.log(data);

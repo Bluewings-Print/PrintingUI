@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ToastrService } from 'ngx-toastr';
 import { QuoteService } from 'src/app/container/quote/quoteService/quote.service';
@@ -21,33 +21,20 @@ import { Subscription } from 'rxjs';
     ]),
     trigger('expandCollapse', [
       state('void', style({ height: '0', opacity: '0' })),
-      state('*', style({ height: '*', opacity: '1' })),
+      state('', style({ height: '', opacity: '1' })),
       transition('void <=> *', animate('300ms ease-in-out')),
     ]),
   ],
-
 })
-export class DetailQuoteComponent implements OnInit {
-  orders: any;
-  // filteredOrders: any;
- 
-  // searchTerm: string = '';
-  // orderProductDetails: any;
+export class DetailQuoteComponent implements OnInit, OnDestroy {
+  quotes: DetailedQuote[] = [];
+  expandedQuoteId: string | null = null;
+  showImages: { [key: number]: boolean } = {};
+  loading = false;
+  error: string | null = null;
+  private subscription: Subscription | null = null;
 
-  // selectedOrder: any = null;
-  // showBillPreview: boolean = false;
-  // selectedOrderProducts: any = [];
-
-
-  quotes: DetailedQuote[] = []; 
-  orderDetails: OrderDetails[] = [];
-expandedQuoteId: string | null = null;
-showImages: { [key: number]: boolean } = {};
-loading = false;
-error: string | null = null;
-private subscription: Subscription | null = null;
-
-  constructor(private quoteService: QuoteService, private toastrService: ToastrService) { }
+  constructor(private quoteService: QuoteService, private toastrService: ToastrService) {}
 
   ngOnInit() {
     this.loadOrders();
@@ -58,70 +45,38 @@ private subscription: Subscription | null = null;
       this.subscription.unsubscribe();
     }
   }
-  
+
   loadOrders(): void {
     this.loading = true;
     this.error = null;
-  
-    this.subscription =  this.quoteService.getAllDetailQuoteDetails().subscribe(
-      {
-        next: (data: any[]) => {
-          // Extracts each `entity` object
-          this.quotes = data.map((item: any) => item.entity);
-          this.loading = false;
-        },
-        error: (error: Error) => {
-          this.error = error.message;
-          this.loading = false;
-          console.error('Error fetching quotes:', error);
-        },
-        complete: () => {
-          this.loading = false;
-        }
-      });
+
+    this.subscription = this.quoteService.getAllDetailQuoteDetails().subscribe({
+      next: (data: any[]) => {
+        this.quotes = data.map((item: any) => item.entity);
+        this.loading = false;
+      },
+      error: (error: Error) => {
+        this.error = error.message;
+        this.loading = false;
+        console.error('Error fetching quotes:', error);
+      },
+    });
   }
 
-  toggleDetails(quoteId: any): void {
+  toggleDetails(quoteId: string): void {
     this.expandedQuoteId = this.expandedQuoteId === quoteId ? null : quoteId;
   }
-  
 
-  toggleOrderDetails(order: any) {
-    order.showDetails = !order.showDetails;
+  isExpanded(quoteId: string): boolean {
+    return this.expandedQuoteId === quoteId;
   }
 
   toggleImages(quoteId: any): void {
     this.showImages[quoteId] = !this.showImages[quoteId];
   }
-  
-  isExpanded(quoteId: any): boolean {
-    return this.expandedQuoteId === quoteId;
-  }
+
+
   retryLoad(): void {
     this.loadOrders();
   }
-
-  // filterOrders() {
-  //   this.filteredOrders = this.orders.filter((order:any) =>
-  //     order.orderDetails.some((detail:any) =>
-  //       detail.brand.toLowerCase().includes(this.searchTerm.toLowerCase())
-  //     )
-  //   );
-  // }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
