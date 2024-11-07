@@ -21,15 +21,25 @@ export class ContactService {
     );
   }
 
-  getAllContactDetails(): any {
+  getAllContactDetails(): Observable<any[]> {
     const url = `${this.apiDomain}/Contact/GetAllContact`;
-    return this.httpClient.get<any>(url).pipe(
+    return this.httpClient.get<any[]>(url).pipe(
       tap((data) => {
         return data;
       }),
       catchError((err) => this.handleError(err))
     );
   }
+
+  // getAllQuickQuoteDetails(): Observable<any[]> {
+  //   const url = `${this.apiDomain}/Quote/GetAllQuickQuote`;
+  //   return this.httpClient.get<any[]>(url).pipe(
+  //     tap((data) => {
+  //       return data;
+  //     }),
+  //     catchError((err) => this.handleError(err))
+  //   );
+  // }
 
   deleteContact(ContactId: string): any {
     if (ContactId) {
