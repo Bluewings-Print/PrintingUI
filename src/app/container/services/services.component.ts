@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ContactServiceService } from '../contact/contactService/contact-service.service';
-import { Contact } from '../contact/contactModel/contact.model';
+import { ContactService } from '../contact/contactService/contact-service.service';
+import { ContactModel } from '../contact/contactModel/contact.model';
 // import { ContactServiceService } from '../services/contact-service.service';
 // import { Contact } from '../contactModel/contact.model';
 
@@ -20,7 +20,7 @@ export class ServicesComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private contactService: ContactServiceService
+    private contactService: ContactService
   ) {}
 
 
@@ -40,12 +40,12 @@ export class ServicesComponent implements OnInit {
     this.errorMessage = 'Error sending contact information!';
     this.successMessage = 'Contact information send successfully';
    let contact_ID = this.contactService.generateRandomContactID();
-    if (this.contactForm.valid) {
-      const formData = new Contact;
-      formData.ContactId = contact_ID;
+    if (this.contactForm.invalid) {
+      const formData = new ContactModel;
+      formData.id = contact_ID;
       formData.firstName = this.contactForm.value.name;
-      formData.email = this.contactForm.value.email;
       formData.phoneNumber = this.contactForm.value.phone;
+      formData.email = this.contactForm.value.email;
       formData.description = this.contactForm.value.subject;
       formData.message = this.contactForm.value.message;
 
