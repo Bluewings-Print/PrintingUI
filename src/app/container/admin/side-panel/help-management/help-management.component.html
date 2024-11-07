@@ -2,8 +2,12 @@
     <header class="queries-header">
         <h1>Contact Queries</h1>
         <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" [(ngModel)]="searchTerm" (input)="filterQueries()" placeholder="Search queries...">
+            <div>
+                <input type="text" [(ngModel)]="searchTerm" (input)="filterQueries()" placeholder="Search queries...">
+            </div>
+           <div>
+               <i class="fas fa-search"></i>
+           </div>
         </div>
     </header>
 

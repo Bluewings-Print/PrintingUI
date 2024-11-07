@@ -1,4 +1,5 @@
 export class QuickQuotes {
+  id!:string;
     // docType: string = 'quickQuote'; // assuming a default docType for the model, adjust if needed
     fullName!: string;
     eventName!: string;

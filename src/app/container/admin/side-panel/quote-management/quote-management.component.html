@@ -26,7 +26,7 @@
             </div>
             <div class="info-group">
               <span class="label">Purpose:</span>
-              <span class="value">{{quote.purpose}}</span>
+              <span class="value">{{quote.eventName}}</span>
             </div>
             <div class="info-group">
               <span class="label">Quantity:</span>
@@ -34,7 +34,7 @@
             </div>
             <div class="info-group">
               <span class="label">Garment Type:</span>
-              <span class="value">{{quote.garmentType}}</span>
+              <span class="value">{{quote.categoryId}}</span>
             </div>
           </div>
           <button class="expand-btn" (click)="toggleDetails(quote.id)">
@@ -47,11 +47,11 @@
           <div class="details-grid">
             <div class="detail-item">
               <span class="label">Gender:</span>
-              <span class="value">{{quote.gender}}</span>
+              <span class="value">{{quote.genders}}</span>
             </div>
             <div class="detail-item">
               <span class="label">Colour:</span>
-              <span class="value">{{quote.colour}}</span>
+              <span class="value">{{quote.color}}</span>
             </div>
             <div class="detail-item">
               <span class="label">Budget:</span>
@@ -59,16 +59,16 @@
             </div>
             <div class="detail-item">
               <span class="label">Postcode:</span>
-              <span class="value">{{quote.postCode}}</span>
+              <span class="value">{{quote.deliveryPostCode}}</span>
             </div>
             <div class="detail-item">
               <span class="label">Date Required:</span>
               <span class="value">{{quote.dateRequired | date}}</span>
             </div>
-            <div class="detail-item">
+            <!-- <div class="detail-item">
               <span class="label">Date Posted:</span>
               <span class="value">{{quote.datePosted | date}}</span>
-            </div>
+            </div> -->
           </div>
   
           <div class="additional-info">
@@ -77,12 +77,12 @@
           </div>
   
           <div class="images-section">
-            <button class="image-toggle-btn" (click)="toggleImages(quote.id)">
+            <!-- <button class="image-toggle-btn" (click)="toggleImages(quote.id)">
               {{ showImages[quote.id] ? 'Hide Images' : 'Show Images' }}
-            </button>
-            <div class="image-container" *ngIf="showImages[quote.id]">
+            </button> -->
+            <!-- <div class="image-container" *ngIf="showImages[quote.id]">
               <img [src]="quote.product_Image" alt="Product Image">
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

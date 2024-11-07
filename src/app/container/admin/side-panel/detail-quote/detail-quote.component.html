@@ -1,1 +1,66 @@
-<p>detail-quote works!</p>
+<div class="order-history-container">
+
+  <div class="loading-spinner" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Loading quotes...</p>
+  </div>
+
+  <div class="error-message" *ngIf="error">
+    <p>{{ error }}</p>
+    <button (click)="retryLoad()" class="retry-btn">Retry</button>
+  </div>
+
+    <h1>Order Detail History</h1>
+    <!-- <div class="search-container">
+        <input type="text" placeholder="Search by brand..." [(ngModel)]="searchTerm" (input)="filterOrders()">
+    </div> -->
+     <div class="order-list" *ngIf="!loading && !error">
+        <div class="order-header-labels">
+            <span>Order ID</span>
+            <span>Customer Name</span>
+            <span>Company</span>
+            <span>Created Date</span>
+        </div>
+        <div *ngFor="let order of quotes" class="order-item" [@fadeInOut]>
+            <div class="order-header" (click)="toggleOrderDetails(order)">
+                <span>#{{ order.orderDetails[0].brand || 'N/A' }}</span>
+                <span>{{ order.firstName }} {{ order.lastName }}</span>
+                <span>{{ order.companyName }}</span>
+                <span>{{ order.phone| date:'dd.MM.yyyy H:mm'}}</span>
+                <!-- <i class="fas" [ngClass]="{'fa-chevron-down': !order.showDetails, 'fa-chevron-up': order.showDetails}"></i> -->
+                <button class="expand-btn" (click)="toggleDetails(order.id)">
+                  {{ isExpanded(order.id) ? 'Hide Details' : 'Show Details' }}
+                </button>
+              </div>
+            <div class="order-details" *ngIf="order.id" [@expandCollapse]>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Gender</th>
+                            <th>Color</th>
+                            <th>Size Quantity</th>
+                            <th>Additional Info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let detail of order.orderDetails">
+                            <td>{{ detail.brand }}</td>
+                            <td>{{ detail.gender }}</td>
+                            <td>{{ detail.color }}</td>
+                            <td>
+                                <ng-container *ngFor="let size of detail.sizeQuantity | keyvalue">
+                                    {{ size.key }}: {{ size.value }}
+                                </ng-container>
+                            </td>
+                            <td>{{ detail.additionalInfo }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="no-data" *ngIf="!loading && !error && quotes.length === 0">
+      <p>No quotes found.</p>
+    </div>
+</div>
