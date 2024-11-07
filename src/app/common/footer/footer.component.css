@@ -1,32 +1,115 @@
-
 footer {
-    background-color: #333;
-    color: white;
-    padding: 2rem 0;
-    text-align: center;
+  background: linear-gradient(135deg, #3a2a46, #2b1e39);
+  color: #fff5ff;
+  padding: 3rem 0;
+  border-top: 3px solid #7e22ce;
 }
+
 .footer-content {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
+
 .footer-section {
-    flex: 1;
+  flex: 1;
+  padding: 0 1.5rem;
 }
+
 .footer-section h3 {
-    margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff5ff;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #7e22ce;
+  padding-bottom: 0.5rem;
 }
+
 .footer-section ul {
-    list-style-type: none;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
 }
+
 .footer-section ul li {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-section ul li a {
+  color: #a088b1;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 0.3rem;
+  display: block;
+}
+
+.footer-section ul li a:hover {
+  color: #7e22ce;
+  text-decoration: underline;
+}
+
+.logo-social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  padding-right: 1.5rem;
+}
+
+.footer-logo {
+  height: 125px;
+  margin-bottom: 0;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.social-media {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-media a {
+  color: #a088b1;
+  font-size: 1.3rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-media a:hover {
+  color: #7e22ce;
+  transform: scale(1.1);
+}
+
+a[routerLink="/auth/login"] {
+  display: block;
+  color: #fff5ff;
+  margin-top: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a[routerLink="/auth/login"]:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-    }
-    .footer-section {
-        margin-bottom: 2rem;
-    }
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .footer-section {
+    margin-bottom: 2rem;
+    text-align: center;
+    border: none;
+    padding: 0;
+  }
+
+  .logo-social {
+    border: none;
+    padding: 0;
+  }
 }

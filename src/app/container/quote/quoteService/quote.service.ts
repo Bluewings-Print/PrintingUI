@@ -48,13 +48,21 @@ import { DetailedQuote } from '../detail-quotes/detailQuotes.model';
 export class QuoteService {
   private apiDomain = environment.apiDomain
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   submitDetailQuote(quote: DetailedQuote):Observable<any> {
     const url = `${this.apiDomain}/Quote/AddDetailedQuote`;
     // const httpHeaders = this.getHeaders();
     // const body = JSON.stringify(quote);
-    return this.httpClient.post<any>(url,quote).pipe(
+    return this.httpClient.post<any>(url, quote).pipe(
+      tap((data) => console.log('Form submitted:', data)),
+      catchError((err) => this.handleError(err))
+    );
+  }
+  submitQuickQuote(formData: QuickQuotes): Observable<any> {
+    const url = `${this.apiDomain}/Quote/AddQuickQuote`;
+    // const httpHeaders = this.getHeaders();
+    return this.httpClient.post<any>(url, formData).pipe(
       tap((data) => console.log('Form submitted:', data)),
       catchError((err) => {
         console.error('Error:',err);
@@ -62,64 +70,54 @@ export class QuoteService {
       })
     );
   }
-submitQuickQuote(formData: QuickQuotes):Observable<any> {
-  const url = `${this.apiDomain}/Quote/AddQuickQuote`;
-  // const httpHeaders = this.getHeaders();
-  return this.httpClient.post<any>(url, formData).pipe(
-    tap((data) => console.log('Form submitted:', data)),
-    catchError((err) => this.handleError(err))
-  );
-}
 
-getAllDetailQuoteDetails(): Observable<any[]> {
-  const url = `${this.apiDomain}/Quote/GetAllDetailQuote`;
-  return this.httpClient.get<any[]>(url).pipe(
-    tap((data) => {
-      console.log(data);
-      return data;
-    }),
-    catchError((err) => this.handleError(err))
-  );
-}
+  getAllDetailQuoteDetails(): Observable<any[]> {
+    const url = `${this.apiDomain}/Quote/GetAllDetailQuote`;
+    return this.httpClient.get<any[]>(url).pipe(
+      tap((data) => {
+        console.log(data);
+        return data;
+      }),
+      catchError((err) => this.handleError(err))
+    );
+  }
 
-getAllQuickQuoteDetails(): Observable<any[]> {
-  const url = `${this.apiDomain}/Quote/GetAllQuickQuote`;
-  return this.httpClient.get<any[]>(url).pipe(
-    tap((data) => {
-      return data;
-    }),
-    catchError((err) => this.handleError(err))
-  );
-}
-
-
-
-deleteQuote(QuotesId:string): any {
-  if (QuotesId) {
-
-    const url = `${this.apiDomain}/Quote/deleteQuote/${QuotesId}`;
-  
-    return this.httpClient.delete(url).pipe(
+  getAllQuickQuoteDetails(): Observable<any[]> {
+    const url = `${this.apiDomain}/Quote/GetAllQuickQuote`;
+    return this.httpClient.get<any[]>(url).pipe(
       tap((data) => {
         return data;
       }),
       catchError((err) => this.handleError(err))
     );
   }
-}
 
-private handleError(error: HttpErrorResponse) {
-  let errorMessage = '';
-  if (error.error instanceof ErrorEvent) {
-    // Client-side error
-    errorMessage = `An error occurred: ${error.error.message}`;
-  } else {
-    // Server-side error
-    errorMessage = `Backend returned code ${error.status}, body was: ${error.error}`;
+  deleteQuote(QuotesId: string): any {
+    if (QuotesId) {
+
+      const url = `${this.apiDomain}/Quote/deleteQuote/${QuotesId}`;
+
+      return this.httpClient.delete(url).pipe(
+        tap((data) => {
+          return data;
+        }),
+        catchError((err) => this.handleError(err))
+      );
+    }
   }
-  console.error(errorMessage);
-  return throwError(() => errorMessage);
-}
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = `An error occurred: ${error.error.message}`;
+    } else {
+      // Server-side error
+      errorMessage = `Backend returned code ${error.status}, body was: ${error.error}`;
+    }
+    console.error(errorMessage);
+    return throwError(() => errorMessage);
+  }
 
 
   public getHeaders() {
