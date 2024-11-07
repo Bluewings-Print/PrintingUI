@@ -1,16 +1,18 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { ContactModel } from 'src/app/container/contact/contactModel/contact.model';
+import { ContactService } from 'src/app/container/contact/contactService/contact-service.service';
 
-interface ContactQuery {
-  queryId: string;
-  name: string;
-  phone: string;
-  email: string;
-  description: string;
-  message: string;
-  status: 'NEW' | 'PENDING' | 'RESOLVED';
-  isExpanded: boolean;
-}
+// interface ContactQuery {
+//   queryId: string;
+//   name: string;
+//   phone: string;
+//   email: string;
+//   description: string;
+//   message: string;
+//   status: 'NEW' | 'PENDING' | 'RESOLVED';
+//   isExpanded: boolean;
+// }
 
 @Component({
   selector: 'app-help-management',
@@ -33,30 +35,20 @@ interface ContactQuery {
     ])
   ]
 })
+
 export class HelpManagementComponent implements OnInit {
-  queries: ContactQuery[] = [];
-  filteredQueries: ContactQuery[] = [];
+  queries: ContactModel[] = [];
+  filteredQueries: ContactModel[] = [];
   searchTerm: string = '';
 
+  constructor(private contactService: ContactService) {}
+
   ngOnInit() {
-    // Simulated data - replace with actual API call
-    this.queries = [
-      {
-        queryId: 'Q001',
-        name: 'John Doe',
-        phone: '+1 234 567 8900',
-        email: 'john@example.com',
-        description: 'Product inquiry',
-        message: 'I would like to know more about your latest products.',
-        status: 'NEW',
-        isExpanded: false
-      },
-      // Add more sample data as needed
-    ];
+    this.queries = this.contactService.getAllContactDetails();
     this.filteredQueries = [...this.queries];
   }
 
-  toggleExpand(query: ContactQuery): void {
+  toggleExpand(query: ContactModel): void {
     // Close all other expanded queries
     this.queries.forEach(q => {
       if (q !== query) q.isExpanded = false;
@@ -67,9 +59,9 @@ export class HelpManagementComponent implements OnInit {
   filterQueries(): void {
     const term = this.searchTerm.toLowerCase();
     this.filteredQueries = this.queries.filter(query =>
-      query.name.toLowerCase().includes(term) ||
+      query.firstName.toLowerCase().includes(term) ||
       query.email.toLowerCase().includes(term) ||
-      query.queryId.toLowerCase().includes(term)
+      query.id.toLowerCase().includes(term)
     );
   }
 }

@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Contact } from '../contactModel/contact.model';
-
+import { ContactModel } from '../contactModel/contact.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContactServiceService {
+
+export class ContactService {
   private apiDomain = environment.apiDomain
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
-  submitContactDetail(formData: Contact): Observable<any> {
+  submitContactDetail(formData: ContactModel): Observable<any> {
     const url = `${this.apiDomain}/Contact/AddContact`;
     return this.httpClient.post<any>(url, formData).pipe(
       tap((data) => console.log('Form submitted:', data)),
@@ -30,14 +30,10 @@ export class ContactServiceService {
       catchError((err) => this.handleError(err))
     );
   }
-  
-  
-  
-  deleteContact(ContactId:string): any {
+
+  deleteContact(ContactId: string): any {
     if (ContactId) {
-  
       const url = `${this.apiDomain}/Contact/deleteContact/${ContactId}`;
-    
       return this.httpClient.delete(url).pipe(
         tap((data) => {
           return data;
@@ -46,7 +42,6 @@ export class ContactServiceService {
       );
     }
   }
-  
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 401) {
@@ -57,8 +52,6 @@ export class ContactServiceService {
       console.log('An error occured:', error.error)
       console.error(`BackEnd returned code ${error.status}, body was: `, error.error);
     }
-    // this.loggerService.logException(error);
-    // this.loaderService.isLoading(false);
     return throwError(() => error.error.message);
   }
 
@@ -77,5 +70,4 @@ export class ContactServiceService {
     const randomID = Math.floor(Math.random() * (max - min + 1)) + min; // Generate random number
     return randomID.toString(); // Convert to string
   }
-
 }
