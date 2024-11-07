@@ -51,9 +51,9 @@ export class QuoteService {
 
   submitDetailQuote(quote: FormData):Observable<any> {
     const url = `${this.apiDomain}/Quote/AddDetailedQuote`;
-    const httpHeaders = this.getHeaders();
+    // const httpHeaders = this.getHeaders();
     // const body = JSON.stringify(quote);
-    return this.httpClient.post<any>(url,quote,httpHeaders).pipe(
+    return this.httpClient.post<any>(url,quote).pipe(
       tap((data) => console.log('Form submitted:', data)),
       catchError((err) => this.handleError(err))
     );
@@ -67,19 +67,20 @@ submitQuickQuote(formData: QuickQuotes):Observable<any> {
   );
 }
 
-getAllDetailQuoteDetails(): any {
+getAllDetailQuoteDetails(): Observable<any[]> {
   const url = `${this.apiDomain}/Quote/GetAllDetailQuote`;
-  return this.httpClient.get<any>(url).pipe(
+  return this.httpClient.get<any[]>(url).pipe(
     tap((data) => {
+      console.log(data);
       return data;
     }),
     catchError((err) => this.handleError(err))
   );
 }
 
-getAllQuickQuoteDetails(): any {
+getAllQuickQuoteDetails(): Observable<any[]> {
   const url = `${this.apiDomain}/Quote/GetAllQuickQuote`;
-  return this.httpClient.get<any>(url).pipe(
+  return this.httpClient.get<any[]>(url).pipe(
     tap((data) => {
       return data;
     }),
@@ -103,19 +104,19 @@ deleteQuote(QuotesId:string): any {
   }
 }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 401) {
-      console.log('An error occured:', error.error)
-      console.error('An error occured:', error.error)
-    }
-    else {
-      console.log('An error occured:', error.error)
-      console.error(`BackEnd returned code ${error.status}, body was: `, error.error);
-    }
-    // this.loggerService.logException(error);
-    // this.loaderService.isLoading(false);
-    return throwError(() => error.error.message);
+private handleError(error: HttpErrorResponse) {
+  let errorMessage = '';
+  if (error.error instanceof ErrorEvent) {
+    // Client-side error
+    errorMessage = `An error occurred: ${error.error.message}`;
+  } else {
+    // Server-side error
+    errorMessage = `Backend returned code ${error.status}, body was: ${error.error}`;
   }
+  console.error(errorMessage);
+  return throwError(() => errorMessage);
+}
+
 
   public getHeaders() {
     let httpHeaders = null;

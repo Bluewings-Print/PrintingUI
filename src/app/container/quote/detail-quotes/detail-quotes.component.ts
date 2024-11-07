@@ -130,7 +130,6 @@ export class DetailQuotesComponent {
 
     const formData = new FormData();
     const detailedQuote: DetailedQuote = {
-     
       firstName: this.detailQuoteForm.get('firstName')?.value,
       lastName: this.detailQuoteForm.get('lastName')?.value,
       companyName: this.detailQuoteForm.get('companyName')?.value,
@@ -141,7 +140,8 @@ export class DetailQuotesComponent {
       country: this.detailQuoteForm.get('country')?.value,
       state: this.detailQuoteForm.get('state')?.value,
       zipcode: this.detailQuoteForm.get('zipcode')?.value,
-      orderDetails: []
+      orderDetails: [],
+      id: ''
     };
 
     // Process each order form

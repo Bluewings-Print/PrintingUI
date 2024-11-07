@@ -2,24 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { QuoteService } from 'src/app/container/quote/quoteService/quote.service';
 import { Subscription } from 'rxjs';
+import { QuickQuotes } from 'src/app/container/quote/quick-quotes/quickQuotes.model';
 
 
-interface QuickQuote {
-  id: number;
-  fullName: string;
-  email: string;
-  purpose: string;
-  quantity: number;
-  garmentType: string;
-  gender: string;
-  colour: string;
-  budget: number;
-  postCode: string;
-  dateRequired: Date;
-  datePosted: Date;
-  additionalInfo: string;
-  product_Image: string;
-}
 @Component({
   selector: 'app-quote-management',
   templateUrl: './quote-management.component.html',
@@ -39,11 +24,16 @@ interface QuickQuote {
       state('*', style({ height: '*', opacity: '1' })),
       transition('void <=> *', animate('300ms ease-in-out')),
     ]),
-  ],
+    trigger('detailExpand', [ // Add this trigger
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('300ms ease-out')),
+    ]),
+  ]
 })
 export class QuoteManagementComponent implements OnInit {
-  quotes: QuickQuote[] = [];
-  expandedQuoteId: number | null = null;
+  quotes: QuickQuotes[] = []; 
+  expandedQuoteId: string | null = null;
   showImages: { [key: number]: boolean } = {};
   loading = false;
   error: string | null = null;
@@ -65,10 +55,11 @@ export class QuoteManagementComponent implements OnInit {
   private loadQuotes(): void {
     this.loading = true;
     this.error = null;
-
+  
     this.subscription = this.quoteService.getAllQuickQuoteDetails().subscribe({
-      next: (data: QuickQuote[]) => {
-        this.quotes = data;
+      next: (data: any[]) => {
+        // Extracts each `entity` object
+        this.quotes = data.map((item: any) => item.entity);
         this.loading = false;
       },
       error: (error: Error) => {
@@ -82,15 +73,15 @@ export class QuoteManagementComponent implements OnInit {
     });
   }
 
-  toggleDetails(quoteId: number): void {
+  toggleDetails(quoteId: any): void {
     this.expandedQuoteId = this.expandedQuoteId === quoteId ? null : quoteId;
   }
 
-  toggleImages(quoteId: number): void {
+  toggleImages(quoteId: any): void {
     this.showImages[quoteId] = !this.showImages[quoteId];
   }
 
-  isExpanded(quoteId: number): boolean {
+  isExpanded(quoteId: any): boolean {
     return this.expandedQuoteId === quoteId;
   }
   retryLoad(): void {
