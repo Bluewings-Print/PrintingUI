@@ -18,6 +18,33 @@ export class ServicesComponent implements OnInit {
   successMessage = 'Form Submitted successfully';
   errorMessage = 'Error! Form did not submitted';
 
+  services = [
+    { name: 'Custom Embroidery', image: 'assets/public/heat-4.jpg' },
+    { name: 'Custom Printing', image: 'assets/public/vinyl-transfer.jpg' },
+    { name: 'Company Branding', image: 'assets/public/embroidery (1).jpg' },
+  ];
+
+  products = [
+    { name: 'Hoodies', image: 'assets/public/blackHoodie.png' },
+    { name: 'Polos', image: 'assets/public/blackPolo.png' },
+    { name: 'T-Shirts', image: 'assets/public/blackTshirt.png' },
+    { name: 'Caps', image: 'assets/public/blackCap.png' },
+  ];
+
+  features = [
+    { icon: '📷', text: 'Image Quality' },
+    { icon: '🎨', text: 'High-Quality Prints' },
+    { icon: '✂️', text: 'Custom Printing' },
+    { icon: '🏷️', text: 'Company Branding' },
+  ];
+
+  contactFields = [
+    { name: 'name', label: 'Name', type: 'text', required: true },
+    { name: 'email', label: 'Email Address', type: 'email', required: true },
+    { name: 'phone', label: 'Phone', type: 'tel', required: false },
+    { name: 'subject', label: 'Subject', type: 'text', required: false },
+    { name: 'message', label: 'Message', type: 'textarea', required: true },
+  ];
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService

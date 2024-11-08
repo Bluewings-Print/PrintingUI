@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Product } from '../productModel/product.model';
 import { ProductService } from '../../admin/side-panel/product-management/productService/product.service';
+import { Router } from '@angular/router';
 
 // interface Product {
 //   name: string;
@@ -48,7 +49,7 @@ export class MainProductComponent implements OnInit {
 
   filteredProducts: Product[] = [];
 
-  constructor(private productService: ProductService){}
+  constructor(private productService: ProductService,private router: Router){}
 
   ngOnInit(): void {
     this.filteredProducts = this.products;
@@ -132,5 +133,6 @@ export class MainProductComponent implements OnInit {
 
   customizeProduct(product: Product): void {
     // Implement customization logic
+    this.router.navigate(['/products/detailProduct'])
   }
 }
