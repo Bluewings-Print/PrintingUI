@@ -179,3 +179,29 @@
     padding: 2rem;
     color: #666;
   }
+
+  .image-container{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .product-image {
+    width: 120px;
+    height: 120px;
+    gap: 20px;
+    padding-left: 10px;
+    justify-content: space-between;
+    object-fit: cover; /* Ensures images are cropped to fit the 120x120 size */
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+
+  .product-image:hover{
+    transform: scale(1.05);
+  }
