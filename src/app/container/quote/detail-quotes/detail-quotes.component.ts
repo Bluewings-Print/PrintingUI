@@ -61,6 +61,10 @@ export class DetailQuotesComponent {
       backArtwork:  this.builder.control(null),
       lhSleeve:  this.builder.control(null),
       rhSleeve:  this.builder.control(null),
+      frontImagePath:this.builder.control(''),
+      backImagePath:this.builder.control(''),
+      lhSleevePath:this.builder.control(''),
+      rhSleevePath:this.builder.control(''),
       additionalInfo:  this.builder.control(''),
       // Preview controls
       frontArtworkPreview: [null],
@@ -70,7 +74,18 @@ export class DetailQuotesComponent {
     });
   }
   
-  onFileChange(event: any, controlName: string, orderIndex: number) {
+  async convertFileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        resolve(result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+  async onFileChange(event: any, controlName: string, orderIndex: number) {
     const file = event.target.files[0];
     if (file) {
       const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
@@ -87,15 +102,37 @@ export class DetailQuotesComponent {
         return;
       }
 
+    
       const orderForm = this.orderForms.at(orderIndex);
-      orderForm.get(controlName)?.setValue(file);
+      
+      try {
+        // Convert file to base64 and store it in the corresponding path control
+        const base64String = await this.convertFileToBase64(file);
+       
+        // Map the control names to their corresponding path names
+        const pathMapping: { [key: string]: string } = {
+          'frontArtwork': 'frontImagePath',
+          'backArtwork': 'backImagePath',
+          'lhSleeve': 'lhSleevePath',
+          'rhSleeve': 'rhSleevePath'
+        };
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        const previewControlName = `${controlName}Preview`;
-        orderForm.get(previewControlName)?.setValue(reader.result);
-      };
-      reader.readAsDataURL(file);
+        const pathControlName = pathMapping[controlName];
+        
+        if (pathControlName) {
+          // Update the form controls
+          orderForm.patchValue({
+            [controlName]: file,
+            [`${controlName}Preview`]: base64String,
+            [pathControlName]: base64String
+          });
+
+          // Log to verify the values are set correctly
+          console.log(`Updated ${pathControlName}:`, orderForm.get(pathControlName)?.value);
+        }
+      } catch (error) {
+        console.error('Error converting file to base64:', error);
+      }
     }
   }
     // if (file) {
@@ -129,6 +166,7 @@ export class DetailQuotesComponent {
 
   async onSubmit() {
     if (this.detailQuoteForm.invalid) {
+      console.error('Form is invalid');
       return;
     }
 
@@ -155,10 +193,10 @@ export class DetailQuotesComponent {
           gender: orderForm.get('gender')?.value,
           color: orderForm.get('color')?.value,
           sizeQuantity: {},
-          frontImagePath: '',
-          backImagePath: '',
-          lhSleevePath: '',
-          rhSleevePath: '',
+          frontImagePath: orderForm.get('frontImagePath')?.value || '',
+          backImagePath: orderForm.get('backImagePath')?.value || '',
+          lhSleevePath: orderForm.get('lhSleevePath')?.value || '',
+          rhSleevePath: orderForm.get('rhSleevePath')?.value || '',
           additionalInfo: orderForm.get('additionalInfo')?.value
         };
   
@@ -170,6 +208,12 @@ export class DetailQuotesComponent {
         if (value) {
           orderDetail.sizeQuantity[key] = value;
         }
+      });
+      console.log('Image Paths:', {
+        front: orderDetail.frontImagePath,
+        back: orderDetail.backImagePath,
+        lh: orderDetail.lhSleevePath,
+        rh: orderDetail.rhSleevePath
       });
 
       if(orderDetail.brand|| orderDetail.gender|| orderDetail.color||
@@ -205,9 +249,9 @@ export class DetailQuotesComponent {
         (response) => {
           console.log('Quote submitted successfully', response);
           this.detailQuoteForm.reset();
-          this.router.navigate(['/quote/quickQuote']).then(() => {
-            this.router.navigate(['/quote/detailQuote']);
-          });
+          // this.router.navigate(['/quote/quickQuote']).then(() => {
+          //   this.router.navigate(['/quote/detailQuote']);
+          // });
           // this.selectedFiles = [];
         },
         (error) => {
