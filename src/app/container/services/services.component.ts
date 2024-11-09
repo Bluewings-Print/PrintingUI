@@ -67,7 +67,7 @@ export class ServicesComponent implements OnInit {
     this.errorMessage = 'Error sending contact information!';
     this.successMessage = 'Contact information send successfully';
    let contact_ID = this.contactService.generateRandomContactID();
-    if (this.contactForm.invalid) {
+    if (this.contactForm.valid) {
       const formData = new ContactModel;
       formData.id = contact_ID;
       formData.firstName = this.contactForm.value.name;

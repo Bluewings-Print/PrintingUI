@@ -17,6 +17,7 @@ interface FilePreview {
 export class QuickQuotesComponent {
   quickQuoteForm: FormGroup;
   selectedFiles: FilePreview[] = [];
+  imagePaths: string[] = [];
 
   constructor(private builder: FormBuilder,private quoteService: QuoteService) {
     this.quickQuoteForm = this.builder.group({
@@ -70,27 +71,56 @@ export class QuickQuotesComponent {
   onFileSelected(event: any): void {
     const files = event.target.files as FileList;
 
-    if (files.length > 5) {
+    if (this.selectedFiles.length + files.length > 5) {
       alert('You can only upload up to 5 files.');
-      this.selectedFiles = [];
+      // this.selectedFiles = [];
+      // this.imagePaths = [];
       return;
     }
 
-    this.selectedFiles = Array.from(files).map(file => ({
-      file,
-      name: file.name,
-      size: `${(file.size / 1024).toFixed(2)} KB`,
-      url: URL.createObjectURL(file)
-    }));
-
-    this.quickQuoteForm.patchValue({ artwork: files });
+    Array.from(files).forEach(file => {
+      const url = URL.createObjectURL(file);
+      const filePreview: FilePreview = {
+        file,
+        name: file.name,
+        size: `${(file.size / 1024).toFixed(2)} KB`,
+        url: url
+      };
+      
+      // Add new file preview to the arrays
+      this.selectedFiles.push(filePreview);
+      this.imagePaths.push(url);
+    });
   }
+
+  removeFile(index: number): void {
+    // Release the object URL to free up memory
+    URL.revokeObjectURL(this.selectedFiles[index].url);
+    
+    // Remove the file from both arrays
+    this.selectedFiles.splice(index, 1);
+    this.imagePaths.splice(index, 1);
+  }
+
+
+  //   this.selectedFiles = Array.from(files).map(file => {
+  //     const url = URL.createObjectURL(file);
+  //     this.imagePaths.push(url); // Add each file URL to imagePaths
+  //     return {
+  //       file,
+  //       name: file.name,
+  //       size: `${(file.size / 1024).toFixed(2)} KB`,
+  //       url: url
+  //     };
+  //   });
+  //   this.imagePaths = this.selectedFiles.map(filePreview => filePreview.url);
+  // }
 
 
   onSubmit(): void {
     if (this.quickQuoteForm.valid) {
       // const formData = new FormData();
-      const quotes = new QuickQuotes;
+      const quotes = new QuickQuotes();
       quotes.fullName = this.quickQuoteForm.value.fullName;
       quotes.eventName = this.quickQuoteForm.value.purpose;
       quotes.email = this.quickQuoteForm.value.email;
@@ -101,31 +131,8 @@ export class QuickQuotesComponent {
       quotes.deliveryPostCode = this.quickQuoteForm.value.postcode;
       quotes.dateRequired = this.quickQuoteForm.value.dateRequired;
       quotes.additionalInfo = this.quickQuoteForm.value.additionalInfo;
-      // Append text fields to formData
-      // formData.append('fullName', this.quickQuoteForm.get('fullName')?.value || '');
-      // formData.append('eventName', this.quickQuoteForm.get('purpose')?.value || '');
-      // formData.append('email', this.quickQuoteForm.get('email')?.value || '');
-      // formData.append('quantity', this.quickQuoteForm.get('quantity')?.value || '');
-      // // .toString()
-      // formData.append('categoryId', this.quickQuoteForm.get('garmentType')?.value || '');
-      // formData.append('color', this.quickQuoteForm.get('colour')?.value || '');
-      // // formData.append(quotes.budget, this.quickQuoteForm.get('budget')?.value || '');
-      // formData.append('deliveryPostCode', this.quickQuoteForm.get('postcode')?.value || '');
-      // // formData.append('dateRequired', this.quickQuoteForm.get('dateRequired')?.value || '');
-      // formData.append('additionalInfo', this.quickQuoteForm.get('additionalInfo')?.value || '');
-
-      // // Append otherPurposeDetail, otherGarmentTypeDetail, and otherColourDetail if they are filled
-      // if (this.quickQuoteForm.value.otherPurposeDetail) {
-      //   formData.append('eventName', this.quickQuoteForm.value.otherPurposeDetail);
-      // }
-      // if (this.quickQuoteForm.value.otherGarmentTypeDetail) {
-      //   formData.append('categoryId', this.quickQuoteForm.value.otherGarmentTypeDetail);
-      // }
-      // if (this.quickQuoteForm.value.otherColourDetail) {
-      //   formData.append('color', this.quickQuoteForm.value.otherColourDetail);
-      // }
-  
-      // Convert gender selection to an array of selected genders
+      quotes.imagePath = this.imagePaths;
+      
       const selectedGenders = [];
       if (this.quickQuoteForm.value.gender.mens) selectedGenders.push('mens');
       if (this.quickQuoteForm.value.gender.ladies) selectedGenders.push('ladies');
