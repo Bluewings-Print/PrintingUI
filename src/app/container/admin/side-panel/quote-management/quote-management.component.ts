@@ -34,7 +34,7 @@ import { QuickQuotes } from 'src/app/container/quote/quick-quotes/quickQuotes.mo
 export class QuoteManagementComponent implements OnInit {
   quotes: QuickQuotes[] = []; 
   expandedQuoteId: string | null = null;
-  showImages: { [key: number]: boolean } = {};
+  showImages: { [key: string]: boolean } = {};
   loading = false;
   error: string | null = null;
   private subscription: Subscription | null = null;
@@ -78,9 +78,12 @@ export class QuoteManagementComponent implements OnInit {
   }
 
   toggleImages(quoteId: any): void {
-    this.showImages[quoteId] = !this.showImages[quoteId];
+    const key = String(quoteId);
+    this.showImages[key] = !this.showImages[key];
   }
 
+
+  
   isExpanded(quoteId: any): boolean {
     return this.expandedQuoteId === quoteId;
   }
