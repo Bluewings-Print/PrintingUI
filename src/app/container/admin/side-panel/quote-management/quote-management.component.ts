@@ -58,6 +58,7 @@ export class QuoteManagementComponent implements OnInit {
   
     this.subscription = this.quoteService.getAllQuickQuoteDetails().subscribe({
       next: (data: any[]) => {
+        console.log(data);
         // Extracts each `entity` object
         this.quotes = data.map((item: any) => item.entity);
         this.loading = false;

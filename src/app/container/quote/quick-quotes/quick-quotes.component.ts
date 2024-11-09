@@ -8,6 +8,7 @@ interface FilePreview {
   name: string;
   size: string;
   url: string;
+  base64: string;
 }
 @Component({
   selector: 'app-quick-quotes',
@@ -17,7 +18,7 @@ interface FilePreview {
 export class QuickQuotesComponent {
   quickQuoteForm: FormGroup;
   selectedFiles: FilePreview[] = [];
-  imagePaths: string[] = [];
+  // imagePaths: string[] = [];
 
   constructor(private builder: FormBuilder,private quoteService: QuoteService) {
     this.quickQuoteForm = this.builder.group({
@@ -68,38 +69,40 @@ export class QuickQuotesComponent {
     control?.updateValueAndValidity();
   }
 
-  onFileSelected(event: any): void {
+  async onFileSelected(event: any): Promise<void> {
     const files = event.target.files as FileList;
 
     if (this.selectedFiles.length + files.length > 5) {
       alert('You can only upload up to 5 files.');
-      // this.selectedFiles = [];
-      // this.imagePaths = [];
       return;
     }
 
-    Array.from(files).forEach(file => {
-      const url = URL.createObjectURL(file);
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const base64 = await this.convertFileToBase64(file);
       const filePreview: FilePreview = {
         file,
         name: file.name,
         size: `${(file.size / 1024).toFixed(2)} KB`,
-        url: url
+        url: URL.createObjectURL(file),
+        base64 // Store the base64 string here
       };
-      
-      // Add new file preview to the arrays
       this.selectedFiles.push(filePreview);
-      this.imagePaths.push(url);
+    }
+  }
+
+  async convertFileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
     });
   }
 
   removeFile(index: number): void {
-    // Release the object URL to free up memory
     URL.revokeObjectURL(this.selectedFiles[index].url);
-    
-    // Remove the file from both arrays
     this.selectedFiles.splice(index, 1);
-    this.imagePaths.splice(index, 1);
   }
 
 
@@ -131,7 +134,7 @@ export class QuickQuotesComponent {
       quotes.deliveryPostCode = this.quickQuoteForm.value.postcode;
       quotes.dateRequired = this.quickQuoteForm.value.dateRequired;
       quotes.additionalInfo = this.quickQuoteForm.value.additionalInfo;
-      quotes.imagePath = this.imagePaths;
+      // quotes.imagePath = this.imagePaths;
       
       const selectedGenders = [];
       if (this.quickQuoteForm.value.gender.mens) selectedGenders.push('mens');
@@ -140,6 +143,8 @@ export class QuickQuotesComponent {
       // formData.append('genders', JSON.stringify(selectedGenders));
       quotes.genders = selectedGenders;
 
+
+      quotes.imagePath = this.selectedFiles.map(file => file.base64);
       // Append each selected file to formData
       // this.selectedFiles.forEach((filePreview, index) => {
       //   formData.append('imagePath', filePreview.file, filePreview.name);
