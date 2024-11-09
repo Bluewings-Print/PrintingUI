@@ -3,7 +3,7 @@ export class QuickQuotes {
     // docType: string = 'quickQuote'; // assuming a default docType for the model, adjust if needed
     fullName!: string;
     eventName!: string;
-    // imagePath: string[] = []; // to store the file paths of uploaded images
+    imagePath: string[] = []; // to store the file paths of uploaded images
     email!: string;
     quantity!: string;
     categoryId!: string;
