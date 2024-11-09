@@ -56,14 +56,20 @@
                             </tr>
                         </tbody>
                     </table>
-                    <!-- <div class="images-section">
-                        <button class="image-toggle-btn" (click)="toggleImages(detail.id)">
-                            {{ showImages[detail.id] ? 'Hide Images' : 'Show Images' }}
-                          </button>
-                        <div class="image-container" *ngIf="showImages[detail.id]">
-                            <img [src]="detail.product_Image" alt="Product Image">
-                          </div>
-                      </div> -->
+                    <div class="images-section">
+                        <button class="image-toggle-btn" (click)="toggleImages(order.id)">
+                            {{ showImages[order.id] ? 'Hide Images' : 'Show Images' }}
+                        </button>
+                        <div class="image-container" *ngIf="showImages[order.id]">
+                            <div *ngFor="let detail of order.orderDetails">
+                                <h3>{{detail.brand}}</h3>
+                                <img *ngIf="detail.frontImagePath" [src]="detail.frontImagePath" alt="Front Image">
+                                <img *ngIf="detail.backImagePath" [src]="detail.backImagePath" alt="Back Image">
+                                <img *ngIf="detail.lhSleevePath" [src]="detail.lhSleevePath" alt="Left Sleeve Image">
+                                <img *ngIf="detail.rhSleevePath" [src]="detail.rhSleevePath" alt="Right Sleeve Image">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

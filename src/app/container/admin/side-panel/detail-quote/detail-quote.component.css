@@ -2,7 +2,7 @@
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
 }
 
 h1 {
@@ -87,33 +87,50 @@ th {
     font-weight: 600;
     text-align: left;
 }
-
 .images-section {
     margin-top: 16px;
     padding-top: 16px;
     border-top: 1px solid #e0e0e0;
-  }
-  
-  .image-toggle-btn {
-    padding: 6px 12px;
+    text-align: center;
+}
+
+.image-toggle-btn {
+    padding: 8px 16px;
     background: #6c757d;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s;
-  }
-  
-  .image-toggle-btn:hover {
+    margin-bottom: 8px;
+}
+
+.image-toggle-btn:hover {
     background: #5a6268;
-  }
-  
-  .image-container {
-    margin-top: 16px;
-  }
-  
-  .image-container img {
-    max-width: 100%;
-    height: auto;
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+
+    padding: 10px;
+    justify-content: center;
+}
+
+.image-container img {
+    width: 120px;
+    height: 120px;
+    gap: 20px;
+    padding-left: 10px;
+    justify-content: space-between;
+    object-fit: cover; /* Ensures images are cropped to fit the 120x120 size */
     border-radius: 4px;
-  }
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.image-container img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
