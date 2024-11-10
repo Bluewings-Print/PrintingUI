@@ -1,79 +1,61 @@
-<!-- product-details.component.html -->
-<div class="product-container">
+<div *ngIf="product" class="product-container">
   <nav class="breadcrumb">
-    <a href="/">Home</a> / <a href="/clothing">Clothing</a> /
-    <span>T-Shirts</span>
+    <a href="/">Home</a> / <a routerLink="/products/mainProduct">Clothing</a> / <span>T-Shirts</span>
   </nav>
 
   <div class="product-content">
     <div class="image-section">
-      <div
-        class="image-container"
-        #imageContainer
-        (mousemove)="handleZoom($event)"
-        (mouseleave)="resetZoom()"
-      >
-        <img [src]="product.imageUrl" [alt]="product.name" #productImage />
+      <div class="image-container" #imageContainer (mousemove)="handleZoom($event)" (mouseleave)="resetZoom()">
+        <img [src]="product?.imageUrl" [alt]="product?.name" #productImage />
       </div>
       <div class="thumbnail-list">
-        <button
-          *ngFor="let img of product.images"
-          (click)="changeImage(img)"
-          [class.active]="img === product.imageUrl"
-        >
-          <img [src]="img" [alt]="product.name" />
+        <button *ngFor="let img of product?.images" (click)="changeImage(img)" [class.active]="img === product?.imageUrl">
+          <img [src]="img" [alt]="product?.name" />
         </button>
       </div>
     </div>
 
     <div class="product-info">
-      <h1>{{ product.name }}</h1>
-      <div class="price">{{ product.price | currency }}</div>
+      <h1>{{ product?.name }}</h1>
+      <!-- <div class="price">{{ product?.price | currency }}</div> -->
 
       <div class="details">
-        <div class="detail-item">
+        <div class="detail-item" *ngIf="product?.fit">
           <span class="label">Fit:</span>
-          <span>{{ product.fit }}</span>
+          <span>{{ product?.fit }}</span>
         </div>
-        <div class="detail-item">
+        <div class="detail-item" *ngIf="product?.material">
           <span class="label">Material:</span>
-          <span>{{ product.material }}</span>
+          <span>{{ product?.material }}</span>
         </div>
-        <div class="detail-item">
+        <div class="detail-item" *ngIf="product?.weight">
           <span class="label">Weight:</span>
-          <span>{{ product.weight }}</span>
+          <span>{{ product?.weight }}</span>
         </div>
       </div>
 
-      <div class="color-selection">
+      <div class="color-selection" *ngIf="product?.colors?.length">
         <h3>Available Colors</h3>
         <div class="color-grid">
-          <button
-            *ngFor="let color of product.colors"
-            [style.backgroundColor]="color.code"
-            [class.selected]="color.code === selectedColor"
-            (click)="selectColor(color.code)"
-            [attr.aria-label]="'Select ' + color.name"
-          >
+          <button *ngFor="let color of product?.colors" [style.backgroundColor]="color.code"
+            [class.selected]="color.code === selectedColor" (click)="selectColor(color.code)"
+            [attr.aria-label]="'Select ' + color.name">
             <span class="sr-only">{{ color.name }}</span>
           </button>
         </div>
       </div>
 
-      <div class="size-selection">
+      <div class="size-selection" *ngIf="product?.sizes?.length">
         <h3>Select Size</h3>
         <div class="size-grid">
-          <button
-            *ngFor="let size of product.sizes"
-            [class.selected]="size === selectedSize"
-            (click)="selectSize(size)"
-          >
+          <button *ngFor="let size of product?.sizes" [class.selected]="size === selectedSize"
+            (click)="selectSize(size)">
             {{ size }}
           </button>
         </div>
       </div>
 
-      <button class="add-to-cart" (click)="addToCart()">Order now</button>
+      <button class="order-now" (click)="orderNow()">Order now</button>
     </div>
   </div>
 </div>
