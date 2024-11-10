@@ -145,10 +145,27 @@ export class QuickQuotesComponent {
 
 
       quotes.imagePath = this.selectedFiles.map(file => file.base64);
-      // Append each selected file to formData
+      
       // this.selectedFiles.forEach((filePreview, index) => {
       //   formData.append('imagePath', filePreview.file, filePreview.name);
       // });
+
+
+      // Check if purpose is "other" and use alternative field if necessary
+      quotes.eventName = this.quickQuoteForm.value.purpose === 'other'
+        ? this.quickQuoteForm.value.otherPurposeDetail
+        : this.quickQuoteForm.value.purpose;
+
+           // Check if garmentType is "other" and use alternative field if necessary
+      quotes.categoryId = this.quickQuoteForm.value.garmentType === 'other'
+      ? this.quickQuoteForm.value.otherGarmentTypeDetail
+      : this.quickQuoteForm.value.garmentType;
+
+    // Check if colour is "other" and use alternative field if necessary
+    quotes.color = this.quickQuoteForm.value.colour === 'other'
+      ? this.quickQuoteForm.value.otherColourDetail
+      : this.quickQuoteForm.value.colour;
+
   
       // Call the service to submit form data
       this.quoteService.submitQuickQuote(quotes).subscribe({

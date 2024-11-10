@@ -33,10 +33,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '1',
       name: 'Mens Half-Sleeve T-Shirt',
       price: 24.99,
-      imageUrl: 'https://example.com/mens-tshirt1.jpg',
+      imageUrl: 'assets/public/pro1a.jpg',
       images: [
-        'https://example.com/mens-tshirt1.jpg',
-        'https://example.com/mens-tshirt1-back.jpg'
+        'assets/public/pro1a.jpg',
+        'assets/public/pro1b.jpg'
       ],
       fit: 'Regular fit',
       material: '100% Cotton',
@@ -51,10 +51,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '2',
       name: 'Mens Full-Sleeve T-Shirt',
       price: 29.99,
-      imageUrl: 'https://example.com/mens-tshirt2.jpg',
+      imageUrl: 'assets/public/pro2a.jpg',
       images: [
-        'https://example.com/mens-tshirt2.jpg',
-        'https://example.com/mens-tshirt2-back.jpg'
+        'assets/public/pro2a.jpg',
+        'assets/public/pro2b.jpg'
       ],
       fit: 'Slim fit',
       material: 'Polyester blend',
@@ -69,10 +69,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '3',
       name: 'Mens Classic Hoodie',
       price: 49.99,
-      imageUrl: 'https://example.com/mens-hoodie1.jpg',
+      imageUrl: 'assets/public/pro3a.jpg',
       images: [
-        'https://example.com/mens-hoodie1.jpg',
-        'https://example.com/mens-hoodie1-back.jpg'
+        'assets/public/pro3a.jpg',
+        'assets/public/pro3b.jpg'
       ],
       fit: 'Relaxed fit',
       material: 'Fleece',
@@ -87,10 +87,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '4',
       name: 'Mens Pullover Hoodie',
       price: 59.99,
-      imageUrl: 'https://example.com/mens-hoodie2.jpg',
+      imageUrl: 'assets/public/pro4a.jpg',
       images: [
-        'https://example.com/mens-hoodie2.jpg',
-        'https://example.com/mens-hoodie2-back.jpg'
+        'assets/public/pro4a.jpg',
+        'assets/public/pro4b.jpg'
       ],
       fit: 'Regular fit',
       material: 'Cotton and Polyester blend',
@@ -107,10 +107,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '5',
       name: 'Womens Crop T-Shirt',
       price: 19.99,
-      imageUrl: 'https://example.com/womens-tshirt1.jpg',
+      imageUrl: 'assets/public/pro5a.jpg',
       images: [
-        'https://example.com/womens-tshirt1.jpg',
-        'https://example.com/womens-tshirt1-back.jpg'
+        'assets/public/pro5a.jpg',
+        'assets/public/pro5b.jpg'
       ],
       fit: 'Casual fit',
       material: 'Cotton and Polyester blend',
@@ -125,10 +125,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '6',
       name: 'Womens Relaxed T-Shirt',
       price: 25.99,
-      imageUrl: 'https://example.com/womens-tshirt2.jpg',
+      imageUrl: 'assets/public/pro6a.jpg',
       images: [
-        'https://example.com/womens-tshirt2.jpg',
-        'https://example.com/womens-tshirt2-back.jpg'
+        'assets/public/pro6a.jpg',
+        'assets/public/pro6b.jpg'
       ],
       fit: 'Loose fit',
       material: 'Viscose',
@@ -143,10 +143,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '7',
       name: 'Womens Cozy Hoodie',
       price: 39.99,
-      imageUrl: 'https://example.com/womens-hoodie1.jpg',
+      imageUrl: 'assets/public/pro7a.jpg',
       images: [
-        'https://example.com/womens-hoodie1.jpg',
-        'https://example.com/womens-hoodie1-back.jpg'
+        'assets/public/pro7a.jpg',
+        'assets/public/pro7b.jpg'
       ],
       fit: 'Regular fit',
       material: 'Fleece',
@@ -161,10 +161,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '8',
       name: 'Womens Zip-Up Hoodie',
       price: 45.99,
-      imageUrl: 'https://example.com/womens-hoodie2.jpg',
+      imageUrl: 'assets/public/pro8a.jpg',
       images: [
-        'https://example.com/womens-hoodie2.jpg',
-        'https://example.com/womens-hoodie2-back.jpg'
+        'assets/public/pro8a.jpg',
+        'assets/public/pro8b.jpg'
       ],
       fit: 'Regular fit',
       material: 'Cotton and Polyester blend',
@@ -181,10 +181,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '9',
       name: 'Kids Graphic T-Shirt',
       price: 14.99,
-      imageUrl: 'https://example.com/kids-tshirt1.jpg',
+      imageUrl: 'assets/public/pro9a.jpg',
       images: [
-        'https://example.com/kids-tshirt1.jpg',
-        'https://example.com/kids-tshirt1-back.jpg'
+        'assets/public/pro9a.jpg',
+        'assets/public/pro9b.jpg'
       ],
       fit: 'Loose fit',
       material: '100% Cotton',
@@ -199,10 +199,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '10',
       name: 'Kids Striped T-Shirt',
       price: 16.99,
-      imageUrl: 'https://example.com/kids-tshirt2.jpg',
+      imageUrl: 'assets/public/pro10a.jpg',
       images: [
-        'https://example.com/kids-tshirt2.jpg',
-        'https://example.com/kids-tshirt2-back.jpg'
+        'assets/public/pro10a.jpg',
+        'assets/public/pro10b.jpg'
       ],
       fit: 'Regular fit',
       material: 'Cotton blend',
@@ -217,10 +217,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '11',
       name: 'Kids Lightweight Hoodie',
       price: 29.99,
-      imageUrl: 'https://example.com/kids-hoodie1.jpg',
+      imageUrl: 'assets/public/pro11a.jpg',
       images: [
-        'https://example.com/kids-hoodie1.jpg',
-        'https://example.com/kids-hoodie1-back.jpg'
+        'assets/public/pro11a.jpg',
+        'assets/public/pro11b.jpg'
       ],
       fit: 'Regular fit',
       material: 'Fleece',
@@ -235,10 +235,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '12',
       name: 'Kids Fleece Hoodie',
       price: 34.99,
-      imageUrl: 'https://example.com/kids-hoodie2.jpg',
+      imageUrl: 'assets/public/pro12a.jpg',
       images: [
-        'https://example.com/kids-hoodie2.jpg',
-        'https://example.com/kids-hoodie2-back.jpg'
+        'assets/public/pro12a.jpg',
+        'assets/public/pro12b.jpg'
       ],
       fit: 'Regular fit',
       material: 'Fleece',
@@ -254,10 +254,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '13',
       name: 'Mens Classic Polo',
       price: 39.99,
-      imageUrl: 'https://example.com/mens-polo1.jpg',
+      imageUrl: 'assets/public/pro13a.jpg',
       images: [
-        'https://example.com/mens-polo1.jpg',
-        'https://example.com/mens-polo1-back.jpg'
+        'assets/public/pro13a.jpg',
+        'assets/public/pro13b.jpg'
       ],
       fit: 'Classic fit',
       material: 'Cotton',
@@ -272,10 +272,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '14',
       name: 'Mens Slim Fit Polo',
       price: 42.99,
-      imageUrl: 'https://example.com/mens-polo2.jpg',
+      imageUrl: 'assets/public/pro14a.jpg',
       images: [
-        'https://example.com/mens-polo2.jpg',
-        'https://example.com/mens-polo2-back.jpg'
+        'assets/public/pro14a.jpg',
+        'assets/public/pro14b.jpg'
       ],
       fit: 'Slim fit',
       material: 'Polyester blend',
@@ -292,10 +292,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '15',
       name: 'Womens Short Sleeve Polo',
       price: 34.99,
-      imageUrl: 'https://example.com/womens-polo1.jpg',
+      imageUrl: 'assets/public/pro15a.jpg',
       images: [
-        'https://example.com/womens-polo1.jpg',
-        'https://example.com/womens-polo1-back.jpg'
+        'assets/public/pro15a.jpg',
+        'assets/public/pro15b.jpg'
       ],
       fit: 'Regular fit',
       material: 'Cotton blend',
@@ -310,10 +310,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '16',
       name: 'Womens Casual Polo',
       price: 36.99,
-      imageUrl: 'https://example.com/womens-polo2.jpg',
+      imageUrl: 'assets/public/pro16a.jpg',
       images: [
-        'https://example.com/womens-polo2.jpg',
-        'https://example.com/womens-polo2-back.jpg'
+        'assets/public/pro16a.jpg',
+        'assets/public/pro16b.jpg'
       ],
       fit: 'Loose fit',
       material: 'Viscose',
@@ -330,10 +330,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '17',
       name: 'Kids Polo Shirt',
       price: 18.99,
-      imageUrl: 'https://example.com/kids-polo1.jpg',
+      imageUrl: 'assets/public/pro17a.jpg',
       images: [
-        'https://example.com/kids-polo1.jpg',
-        'https://example.com/kids-polo1-back.jpg'
+        'assets/public/pro17a.jpg',
+        'assets/public/pro17b.jpg'
       ],
       fit: 'Relaxed fit',
       material: '100% Cotton',
@@ -348,10 +348,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '18',
       name: 'Kids Cotton Polo',
       price: 21.99,
-      imageUrl: 'https://example.com/kids-polo2.jpg',
+      imageUrl: 'assets/public/pro18a.jpg',
       images: [
-        'https://example.com/kids-polo2.jpg',
-        'https://example.com/kids-polo2-back.jpg'
+        'assets/public/pro18a.jpg',
+        'assets/public/pro18b.jpg'
       ],
       fit: 'Classic fit',
       material: 'Cotton',
@@ -368,10 +368,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '19',
       name: 'Mens Snapback Cap',
       price: 15.99,
-      imageUrl: 'https://example.com/mens-cap1.jpg',
+      imageUrl: 'assets/public/pro19a.jpg',
       images: [
-        'https://example.com/mens-cap1.jpg',
-        'https://example.com/mens-cap1-side.jpg'
+        'assets/public/pro19a.jpg',
+        'assets/public/pro19b.jpg'
       ],
       fit: 'One Size',
       material: 'Polyester',
@@ -386,10 +386,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '20',
       name: 'Mens Trucker Cap',
       price: 17.99,
-      imageUrl: 'https://example.com/mens-cap2.jpg',
+      imageUrl: 'assets/public/pro20a.jpg',
       images: [
-        'https://example.com/mens-cap2.jpg',
-        'https://example.com/mens-cap2-side.jpg'
+        'assets/public/pro20a.jpg',
+        'assets/public/pro20b.jpg'
       ],
       fit: 'One Size',
       material: 'Cotton and Mesh',
@@ -406,10 +406,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '21',
       name: 'Womens Baseball Cap',
       price: 14.99,
-      imageUrl: 'https://example.com/womens-cap1.jpg',
+      imageUrl: 'assets/public/pro21a.jpg',
       images: [
-        'https://example.com/womens-cap1.jpg',
-        'https://example.com/womens-cap1-side.jpg'
+        'assets/public/pro21a.jpg',
+        'assets/public/pro21b.jpg'
       ],
       fit: 'One Size',
       material: 'Polyester',
@@ -424,10 +424,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '22',
       name: 'Womens Sun Hat',
       price: 19.99,
-      imageUrl: 'https://example.com/womens-cap2.jpg',
+      imageUrl: 'assets/public/pro22a.png',
       images: [
-        'https://example.com/womens-cap2.jpg',
-        'https://example.com/womens-cap2-side.jpg'
+        'assets/public/pro22a.png',
+        'assets/public/pro22b.png'
       ],
       fit: 'One Size',
       material: 'Cotton',
@@ -444,10 +444,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '23',
       name: 'Kids Adventure Cap',
       price: 9.99,
-      imageUrl: 'https://example.com/kids-cap1.jpg',
+      imageUrl: 'assets/public/pro23a.jpg',
       images: [
-        'https://example.com/kids-cap1.jpg',
-        'https://example.com/kids-cap1-side.jpg'
+        'assets/public/pro23a.jpg',
+        'assets/public/pro23b.jpg'
       ],
       fit: 'One Size',
       material: 'Polyester',
@@ -462,10 +462,10 @@ export class ProductDetailsComponent implements OnInit {
       id: '24',
       name: 'Kids Snapback Cap',
       price: 12.99,
-      imageUrl: 'https://example.com/kids-cap2.jpg',
+      imageUrl: 'assets/public/pro24a.jpg',
       images: [
-        'https://example.com/kids-cap2.jpg',
-        'https://example.com/kids-cap2-side.jpg'
+        'assets/public/pro24a.jpg',
+        'assets/public/pro24b.jpg'
       ],
       fit: 'One Size',
       material: 'Cotton blend',
