@@ -64,28 +64,22 @@
         </div>
     </section>
 
-    <section class="services">
+    <section class="services" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
         <h2>Services we offer</h2>
         <div class="service-slider-container">
-            <button class="slider-btn prev" onclick="moveSlide(-1)">
+            <button class="slider-btn prev" (click)="moveSlide(-1)">
                 <i class="fas fa-chevron-left"></i>
             </button>
             <div class="service-slider">
-                <div class="service-slides" id="serviceSlides">
-                    <div class="service-slide">
-                        <img src="assets/public/customEmbroidery.png" alt="Custom embroidery">
-                        <h3>Custom embroidery</h3>
-                        <a href="#quote" class="get-quote-btn">Get a quote</a>
+                <div class="service-slides" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
+                    <div class="service-slide" *ngFor="let service of services">
+                        <img [src]="service.img" [alt]="service.alt">
+                        <h3>{{ service.title }}</h3>
+                        <a routerLink="/quote/quickQuote" class="get-quote-btn">Get a quote</a>
                     </div>
-                    <div class="service-slide">
-                        <img src="path/to/screen-printing.jpg" alt="Screen Printing">
-                        <h3>Screen Printing</h3>
-                        <a href="#quote" class="get-quote-btn">Get a quote</a>
-                    </div>
-                    <!-- Add more slides as needed -->
                 </div>
             </div>
-            <button class="slider-btn next" onclick="moveSlide(1)">
+            <button class="slider-btn next" (click)="moveSlide(1)">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
