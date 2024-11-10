@@ -1,10 +1,8 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { QuoteService } from '../quoteService/quote.service';
 import { DetailedQuote, OrderDetails } from './detailQuotes.model';
 import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-detail-quotes',
@@ -14,7 +12,7 @@ import { Router } from '@angular/router';
 export class DetailQuotesComponent {
   detailQuoteForm!: FormGroup;
 
-    get orderForms(): FormArray {
+  get orderForms(): FormArray {
     return this.detailQuoteForm.get('orderForms') as FormArray;
   }
 
@@ -24,39 +22,40 @@ export class DetailQuotesComponent {
     private router: Router
   ) { }
 
- 
+
   ngOnInit(): void {
     this.detailQuoteForm = this.builder.group({
       firstName: this.builder.control('', [Validators.required]),
-      lastName:  this.builder.control('', [Validators.required]),
+      lastName: this.builder.control('', [Validators.required]),
       companyName: this.builder.control(''),
-      email:  this.builder.control('', [Validators.required, Validators.email]),
-      phone:  this.builder.control(''),
-      address:  this.builder.control(''),
-      city:  this.builder.control(''),
-      state:  this.builder.control(''),
-      country:  this.builder.control(''),
-      zipcode:  this.builder.control(''),
+      email: this.builder.control('', [Validators.required, Validators.email]),
+      phone: this.builder.control(''),
+      address: this.builder.control(''),
+      city: this.builder.control(''),
+      state: this.builder.control(''),
+      country: this.builder.control(''),
+      zipcode: this.builder.control(''),
       orderForms: this.builder.array([this.createOrderForm()])
     });
   }
 
   createOrderForm(): FormGroup {
     return this.builder.group({
-      brand:  this.builder.control(''),
-      gender:  this.builder.control(''),
-      color:  this.builder.control(''),
+      brand: this.builder.control(''),
+      gender: this.builder.control(''),
+      color: this.builder.control(''),
       sizeQuantity: this.builder.group({
-        'S-6':  this.builder.control(''),
-        'S-8':  this.builder.control(''),
-        'M-10':  this.builder.control(''),
-        'L-12':  this.builder.control(''),
-        'XL-14':  this.builder.control(''),
-        '2XL-16':  this.builder.control(''),
-        '3XL-18':  this.builder.control(''),
-        '4XL-20':  this.builder.control(''),
-        '5XL-22':  this.builder.control('')
+        'S-6': this.builder.control(''),
+        'S-8': this.builder.control(''),
+        'M-10': this.builder.control(''),
+        'L-12': this.builder.control(''),
+        'XL-14': this.builder.control(''),
+        '2XL-16': this.builder.control(''),
+        '3XL-18': this.builder.control(''),
+        '4XL-20': this.builder.control(''),
+        '5XL-22': this.builder.control('')
       }),
+
       frontArtwork:  this.builder.control(null),
       backArtwork:  this.builder.control(null),
       lhSleeve:  this.builder.control(null),
@@ -66,6 +65,7 @@ export class DetailQuotesComponent {
       lhSleevePath:this.builder.control(''),
       rhSleevePath:this.builder.control(''),
       additionalInfo:  this.builder.control(''),
+
       // Preview controls
       frontArtworkPreview: [null],
       backArtworkPreview: [null],
@@ -73,6 +73,7 @@ export class DetailQuotesComponent {
       rhSleevePreview: [null]
     });
   }
+
   
   async convertFileToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -86,11 +87,12 @@ export class DetailQuotesComponent {
     });
   }
   async onFileChange(event: any, controlName: string, orderIndex: number) {
+
     const file = event.target.files[0];
     if (file) {
       const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
-      
+
       if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
         console.error('Invalid file type');
         return;
@@ -135,16 +137,16 @@ export class DetailQuotesComponent {
       }
     }
   }
-    // if (file) {
-    //   // Create an image preview URL
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     const previewControlName = `${controlName}Preview`;
-    //     // Store the preview URL in a custom control to bind it in the template
-    //     this.orderForms.at(orderIndex).get(previewControlName)?.setValue(reader.result);
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
+  // if (file) {
+  //   // Create an image preview URL
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     const previewControlName = `${controlName}Preview`;
+  //     // Store the preview URL in a custom control to bind it in the template
+  //     this.orderForms.at(orderIndex).get(previewControlName)?.setValue(reader.result);
+  //   };
+  //   reader.readAsDataURL(file);
+  // }
   // }
   toggleOrderForm(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
@@ -187,7 +189,7 @@ export class DetailQuotesComponent {
 
     // Process each order form
     this.orderForms.controls.forEach((orderForm: any) => {
-      if(orderForm.valid){
+      if (orderForm.valid) {
         const orderDetail: OrderDetails = {
           brand: orderForm.get('brand')?.value,
           gender: orderForm.get('gender')?.value,
@@ -199,6 +201,7 @@ export class DetailQuotesComponent {
           rhSleevePath: orderForm.get('rhSleevePath')?.value || '',
           additionalInfo: orderForm.get('additionalInfo')?.value
         };
+
   
 
          // Process size quantities
@@ -216,32 +219,42 @@ export class DetailQuotesComponent {
         rh: orderDetail.rhSleevePath
       });
 
-      if(orderDetail.brand|| orderDetail.gender|| orderDetail.color||
-        Object.keys(orderDetail.sizeQuantity).length>0
-      ){
 
-        detailedQuote.orderDetails.push(orderDetail);
+        // Process size quantities
+        const sizeQuantityGroup = orderForm.get('sizeQuantity');
+        Object.keys(sizeQuantityGroup.controls).forEach(key => {
+          const value = sizeQuantityGroup.get(key)?.value;
+          if (value) {
+            orderDetail.sizeQuantity[key] = value;
+          }
+        });
+
+        if (orderDetail.brand || orderDetail.gender || orderDetail.color ||
+          Object.keys(orderDetail.sizeQuantity).length > 0
+        ) {
+
+          detailedQuote.orderDetails.push(orderDetail);
+        }
+        // const files = {
+        //   // frontArtwork: orderForm.get('frontArtwork').value,
+        //   // backArtwork: orderForm.get('backArtwork').value,
+        //   // lhSleeve: orderForm.get('lhSleeve').value,
+        //   // rhSleeve: orderForm.get('rhSleeve').value
+        //   frontImagePath: orderForm.get('frontArtwork').value,
+        //   backImagePath: orderForm.get('backArtwork').value,
+        //   lhSleevePath: orderForm.get('lhSleeve').value,
+        //   rhSleevePath: orderForm.get('rhSleeve').value
+        // };
+
+        // Object.entries(files).forEach(([key, file]) => {
+        //   if (file) {
+        //     formData.append(orderDetails[${index}].${key}, file);
+        //   }
+        // });
+
       }
-  // const files = {
-      //   // frontArtwork: orderForm.get('frontArtwork').value,
-      //   // backArtwork: orderForm.get('backArtwork').value,
-      //   // lhSleeve: orderForm.get('lhSleeve').value,
-      //   // rhSleeve: orderForm.get('rhSleeve').value
-      //   frontImagePath: orderForm.get('frontArtwork').value,
-      //   backImagePath: orderForm.get('backArtwork').value,
-      //   lhSleevePath: orderForm.get('lhSleeve').value,
-      //   rhSleevePath: orderForm.get('rhSleeve').value
-      // };
 
-      // Object.entries(files).forEach(([key, file]) => {
-      //   if (file) {
-      //     formData.append(orderDetails[${index}].${key}, file);
-      //   }
-      // });
 
-      }
-       
-    
     });
 
     try {

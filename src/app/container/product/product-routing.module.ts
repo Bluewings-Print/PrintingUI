@@ -10,7 +10,7 @@ const routes: Routes = [
     title: 'Main Product Page'
   },
   {
-    path: 'detailProduct',
+    path: 'detailedProduct/:id',
     component: ProductDetailsComponent,
     title: 'Product Details Page'
   }
