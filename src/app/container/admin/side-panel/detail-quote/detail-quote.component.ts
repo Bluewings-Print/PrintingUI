@@ -29,7 +29,7 @@ import { Subscription } from 'rxjs';
 export class DetailQuoteComponent implements OnInit, OnDestroy {
   quotes: DetailedQuote[] = [];
   expandedQuoteId: string | null = null;
-  showImages: { [key: number]: boolean } = {};
+  showImages: { [key: string]: boolean } = {};
   loading = false;
   error: string | null = null;
   private subscription: Subscription | null = null;
@@ -71,7 +71,7 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
     return this.expandedQuoteId === quoteId;
   }
 
-  toggleImages(quoteId: any): void {
+  toggleImages(quoteId: string): void {
     this.showImages[quoteId] = !this.showImages[quoteId];
   }
 

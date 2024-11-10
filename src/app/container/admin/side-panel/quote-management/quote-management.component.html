@@ -55,7 +55,7 @@
           </div>
           <div class="detail-item">
             <span class="label">Budget:</span>
-            <span class="value">{{quote.budget | currency}}</span>
+            <span class="value">{{quote.budget }}</span>
           </div>
           <div class="detail-item">
             <span class="label">Postcode:</span>
@@ -77,12 +77,14 @@
         </div>
 
         <div class="images-section">
-          <!-- <button class="image-toggle-btn" (click)="toggleImages(quote.id)">
+          <button class="image-toggle-btn" (click)="toggleImages(quote.id)">
               {{ showImages[quote.id] ? 'Hide Images' : 'Show Images' }}
-            </button> -->
-              <!-- <div class="image-container" *ngIf="showImages[quote.id]">
-                  <img [src]="quote.product_Image" alt="Product Image">
-                </div> -->
+            </button>
+            <div class="image-container" *ngIf="showImages[quote.id]">
+              <div *ngFor="let image of quote.imagePath">
+                <img [src]="image" alt="Product Image" class="product-image">
+                </div>
+              </div>
         </div>
       </div>
     </div>
