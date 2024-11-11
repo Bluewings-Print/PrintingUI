@@ -1,4 +1,4 @@
-import { Component,ElementRef,Renderer2,ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,35 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  @ViewChild('navLinks') navLinks!: ElementRef;
-  @ViewChild('burgerIcon') burgerIcon!: ElementRef;
-  @ViewChild('closeIcon') closeIcon!: ElementRef;
-  showShadow: boolean = false;
-  activeTab: string = 'screen';
+menuValue: boolean = false;
+  menu_icon: string = 'bi bi-list';
 
-  constructor(private renderer: Renderer2,
-    private router:Router
-  ) {}
-
-  ngOnInit(): void {
-    window.addEventListener('scroll', this.onScroll.bind(this));
+  openMenu() {
+    this.menuValue = !this.menuValue;
+    this.menu_icon = this.menuValue ? 'bi bi-x' : 'bi bi-list';
   }
 
-  showMenu(): void {
-    this.renderer.addClass(this.navLinks.nativeElement, 'show');
+  closeMenu() {
+    this.menuValue = false;
+    this.menu_icon = 'bi bi-list';
   }
-
-  hideMenu(): void {
-    this.renderer.removeClass(this.navLinks.nativeElement, 'show');
-  }
-
-  onScroll(): void {
-    this.showShadow = window.scrollY > 0;
-  }
-  // detailQuote():void{
-  //   this.router.navigate(['/quickQuote']);
-  // }
-  // quickQuote():void{
-  //   this.router.navigate(['/detailQuote']);
-  // }
 }
