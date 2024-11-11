@@ -1,24 +1,25 @@
-<header [ngClass]="{ 'shadow': showShadow }" class="sticky-header">
+<header class="sticky-header">
   <nav>
-    <div #navLinks class="nav-links">
-      <i #closeIcon class="fa fa-window-close" (click)="hideMenu()"></i>
+    <div class="menu-icon" (click)="openMenu()">
+      <i class="{{menu_icon}}"></i>
+    </div>
+    <div class="nav-links" [ngClass]="{'mobile_menu': menuValue}">
       <ul>
-        <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-        <li><a routerLink="/services" routerLinkActive="active">Services</a></li>
-        <li><a routerLink="/products/mainProduct" routerLinkActive="active">Products</a></li>
-        <li><a routerLink="/priceList" routerLinkActive="active">PriceList</a></li>
-        <li><a routerLink="/howToOrder" routerLinkActive="active">How to order</a></li>
-        <li><a routerLink="/faq" routerLinkActive="active">FAQ</a></li>
+        <li><a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Home</a></li>
+        <li><a routerLink="/services" routerLinkActive="active" (click)="closeMenu()">Services</a></li>
+        <li><a routerLink="/products/mainProduct" routerLinkActive="active" (click)="closeMenu()">Products</a></li>
+        <li><a routerLink="/priceList" routerLinkActive="active" (click)="closeMenu()">PriceList</a></li>
+        <li><a routerLink="/howToOrder" routerLinkActive="active" (click)="closeMenu()">How to order</a></li>
+        <li><a routerLink="/faq" routerLinkActive="active" (click)="closeMenu()">FAQ</a></li>
         <li class="nav-item dropdown">
           <a href="#" class="dropbtn">Quote</a>
           <div class="dropdown-content">
-            <a routerLink="/quote/quickQuote" routerLinkActive="active">Quick Quote</a>
-            <a routerLink="/quote/detailQuote" routerLinkActive="active">Detail Quote</a>
+            <a routerLink="/quote/quickQuote" routerLinkActive="active" (click)="closeMenu()">Quick Quote</a>
+            <a routerLink="/quote/detailQuote" routerLinkActive="active" (click)="closeMenu()">Detail Quote</a>
           </div>
         </li>
-        <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a></li>
       </ul>
     </div>
-    <i #burgerIcon class="fa fa-bars" (click)="showMenu()"></i>
   </nav>
 </header>
