@@ -12,8 +12,8 @@
 
 .container {
   max-width: 1200px;
-  margin: 0 40px;
-  padding-top: 30px;
+  margin: 0 20px;
+  padding-top: 20px;
 }
 
 .grid-container {
@@ -526,3 +526,263 @@
   }
 }
  */
+
+ @media (max-width: 768px) {
+    .container {
+        margin: 0 15px;
+    }
+    
+    .container h1:first-child {
+        font-size: 3em !important;
+    }
+    
+    .container h1 {
+        font-size: 2em !important;
+    }
+}
+
+/* Grid Container Layout */
+/* .grid-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 20px 0;
+} */
+
+@media (max-width: 768px) {
+    .grid-container {
+        flex-direction: column;
+    }
+    
+    .grid-heading {
+        width: 100% !important;
+        text-align: center;
+    }
+    
+    .grid {
+        flex-direction: column;
+        gap: 30px !important;
+    }
+}
+
+/* Features Section */
+.features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 2rem;
+}
+
+@media (max-width: 992px) {
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .features {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}
+
+/* Popular Services Section */
+.popular-services {
+    padding: 2rem 0;
+}
+
+.carousel-container {
+    width: 95%;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1200px) {
+    .carousel-track {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-track {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-track {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Show Service Section */
+.show-service {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 2rem;
+}
+
+@media (max-width: 992px) {
+    .show-service {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .show-service {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Custom Slide Container */
+.custom-slide-container {
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.custom-heading {
+    font-size: 3rem;
+}
+
+@media (max-width: 768px) {
+    .custom-heading {
+        font-size: 2rem;
+    }
+}
+
+/* Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 992px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Contact Section */
+.contact-us {
+    padding: 2rem;
+}
+
+.row {
+    display: flex;
+    gap: 30px;
+}
+
+@media (max-width: 992px) {
+    .row {
+        flex-direction: column;
+    }
+    
+    .contact-col, .contact-form {
+        width: 100% !important;
+    }
+}
+
+/* Form Responsiveness */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .form-group input,
+    .form-group textarea {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .submit-btn {
+        width: 100%;
+    }
+}
+
+/* Location Map */
+.location {
+    padding: 2rem 0;
+}
+
+.location iframe {
+    width: 100%;
+    height: 400px;
+}
+
+@media (max-width: 576px) {
+    .location iframe {
+        height: 300px;
+    }
+}
+
+/* Image Container Responsiveness */
+.image-container {
+    width: 100%;
+    height: 200px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Feature Cards */
+.feature {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+/* Additional Mobile Optimizations */
+@media (max-width: 576px) {
+    .container h2 {
+        font-size: 1em;
+    }
+    
+    .feature svg {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .contact-col h1 {
+        font-size: 2rem !important;
+    }
+    
+    .contact-col div {
+        margin-bottom: 20px;
+    }
+}
+
+/* Navigation Links Responsiveness */
+.nav-links ul {
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .nav-links ul li {
+        width: 100%;
+        text-align: center;
+    }
+}
