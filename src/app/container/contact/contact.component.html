@@ -23,11 +23,18 @@
   </main> -->
 <section class="contact-us">
 
+     <!-- Success/Error Messages -->
+  <div class="alert alert-success" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
     <div class="row">
 
         <div class="contact-col">
             <h4>Contact Us</h4>
-            <h1>Have questions? Get in touch!</h1>
+            <h1>Have questions?<br> Get in touch!</h1>
             <div>
                 <i class="fa fa-home"></i>
                 <span>
@@ -110,7 +117,8 @@
                 </label>
                 <textarea formControlName="message" name="message" required></textarea>
             </div>
-            <button type="submit" class="submit-btn">Get in Touch</button>
+            <button type="submit" class="submit-btn" [disabled]="isLoading"> <span *ngIf="!isLoading">Get in Touch</span>
+                <span *ngIf="isLoading">Sending...</span></button>
             <div class="privacy-policy">
                 <input type="checkbox" id="privacy" name="privacy" required>
                 <label for="privacy">I agree with the site's <a href="#">privacy policy</a>.</label>
