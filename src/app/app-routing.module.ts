@@ -6,11 +6,13 @@ import { PriceListComponent } from './container/price-list/price-list.component'
 import { HowToOrderComponent } from './container/how-to-order/how-to-order.component';
 import { FaqComponent } from './container/faq/faq.component';
 import { ContactComponent } from './container/contact/contact.component';
+import { ReadMoreComponent } from './read-more/read-more.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home' },
   { path: 'home', component: HomeComponent, title: 'Home' },
   { path: 'services', component: ServicesComponent, title: 'Our Services' },
+  { path: 'services/details', component: ReadMoreComponent },
   {
     path: 'products',
     loadChildren: () => import('./container/product/product.module').then(m => m.ProductModule),

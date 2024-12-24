@@ -291,7 +291,7 @@
   border-radius: 10px;
 }
 
-.read-more {
+.read-more-button {
   /* font-family: 'Poppins', sans-serif; */
   color: black;
   text-decoration: none;
@@ -300,7 +300,7 @@
   margin-top: 10px;
 }
 
-.read-more:hover {
+.read-more-button:hover {
   text-decoration: underline;
 }
 

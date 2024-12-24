@@ -298,11 +298,15 @@ header {
 .service-slider {
   overflow: hidden;
   border-radius: 20px;
+  /* Add this to prevent overflow */
+  width: 100%;
 }
 
 .service-slides {
   display: flex;
   transition: transform 0.5s ease;
+  /* Remove any potential gaps */
+  width: 100%;
 }
 
 .service-slide {
@@ -310,8 +314,12 @@ header {
   padding: 2rem;
   background: white;
   border-radius: 20px;
-  margin: 0 15px;
+  /* Remove margins that cause overlap */
+  margin: 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  /* Ensure slides take exactly 100% width */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .service-slide img {
@@ -343,6 +351,8 @@ header {
   justify-content: center;
   color: white;
   transition: all 0.3s ease;
+  /* Increase z-index to ensure buttons are clickable */
+  z-index: 2;
 }
 
 .slider-btn:hover {
