@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { SidePanelComponent } from './container/admin/side-panel/side-panel.component';
+import { ReadMoreComponent } from './read-more/read-more.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SidePanelComponent } from './container/admin/side-panel/side-panel.comp
     HowToOrderComponent,
     FaqComponent,
     ContactComponent,
-    SidePanelComponent
+    SidePanelComponent,
+    ReadMoreComponent
   ],
   imports: [
     BrowserModule,
