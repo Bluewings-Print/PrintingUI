@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { QuoteService } from '../quoteService/quote.service';
 import { QuickQuotes } from './quickQuotes.model';
+import { ToastrService } from 'ngx-toastr';
 interface FilePreview {
   file: File;
   name: string;
@@ -20,7 +21,7 @@ export class QuickQuotesComponent {
   selectedFiles: FilePreview[] = [];
   // imagePaths: string[] = [];
 
-  constructor(private builder: FormBuilder,private quoteService: QuoteService) {
+  constructor(private builder: FormBuilder,private quoteService: QuoteService, private toastr: ToastrService) {
     this.quickQuoteForm = this.builder.group({
       fullName:  this.builder.control('',[Validators.required]),
       purpose: this.builder.control('', [Validators.required]),
@@ -135,7 +136,7 @@ export class QuickQuotesComponent {
       quotes.dateRequired = this.quickQuoteForm.value.dateRequired;
       quotes.additionalInfo = this.quickQuoteForm.value.additionalInfo;
       // quotes.imagePath = this.imagePaths;
-      
+
       const selectedGenders = [];
       if (this.quickQuoteForm.value.gender.mens) selectedGenders.push('mens');
       if (this.quickQuoteForm.value.gender.ladies) selectedGenders.push('ladies');
@@ -145,7 +146,7 @@ export class QuickQuotesComponent {
 
 
       quotes.imagePath = this.selectedFiles.map(file => file.base64);
-      
+
       // this.selectedFiles.forEach((filePreview, index) => {
       //   formData.append('imagePath', filePreview.file, filePreview.name);
       // });
@@ -166,22 +167,26 @@ export class QuickQuotesComponent {
       ? this.quickQuoteForm.value.otherColourDetail
       : this.quickQuoteForm.value.colour;
 
-  
+
       // Call the service to submit form data
       this.quoteService.submitQuickQuote(quotes).subscribe({
         next: (response) => {
           console.log('Quote submitted successfully', response);
+          this.toastr.success('Product added successfully', 'Success');
           // Optional: Reset the form and selected files
           this.quickQuoteForm.reset();
           this.selectedFiles = [];
         },
         error: (error) => {
+          this.toastr.error('Error submitting quote');
           console.error('Error submitting quote', error);
         }
       });
     } else {
+      this.toastr.error('Form is not valid');
       console.error('Form is invalid');
     }
+    this.toastr.error('error while submitting the Form ');
   }
 
 }

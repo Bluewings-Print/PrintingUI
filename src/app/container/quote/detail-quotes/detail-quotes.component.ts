@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { QuoteService } from '../quoteService/quote.service';
 import { DetailedQuote, OrderDetails } from './detailQuotes.model';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -21,10 +22,11 @@ export class DetailQuotesComponent {
   constructor(
     private builder: FormBuilder,
     private quotesService: QuoteService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
- 
+
   ngOnInit(): void {
     this.detailQuoteForm = this.builder.group({
       firstName: this.builder.control('', [Validators.required]),
@@ -73,7 +75,7 @@ export class DetailQuotesComponent {
       rhSleevePreview: [null]
     });
   }
-  
+
   async convertFileToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -90,25 +92,27 @@ export class DetailQuotesComponent {
     if (file) {
       const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
-      
+
       if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
         console.error('Invalid file type');
+        this.toastr.error('Invalid file type');
         return;
       }
 
       const maxSize = 10 * 1024 * 1024; // 10MB
       if (file.size > maxSize) {
         console.error('File too large');
+        this.toastr.error('File too large');
         return;
       }
 
-    
+
       const orderForm = this.orderForms.at(orderIndex);
-      
+
       try {
         // Convert file to base64 and store it in the corresponding path control
         const base64String = await this.convertFileToBase64(file);
-       
+
         // Map the control names to their corresponding path names
         const pathMapping: { [key: string]: string } = {
           'frontArtwork': 'frontImagePath',
@@ -118,7 +122,7 @@ export class DetailQuotesComponent {
         };
 
         const pathControlName = pathMapping[controlName];
-        
+
         if (pathControlName) {
           // Update the form controls
           orderForm.patchValue({
@@ -129,6 +133,8 @@ export class DetailQuotesComponent {
 
           // Log to verify the values are set correctly
           console.log(`Updated ${pathControlName}:`, orderForm.get(pathControlName)?.value);
+          // this.toastr.error('Invalid file type');
+
         }
       } catch (error) {
         console.error('Error converting file to base64:', error);
@@ -167,6 +173,7 @@ export class DetailQuotesComponent {
   async onSubmit() {
     if (this.detailQuoteForm.invalid) {
       console.error('Form is invalid');
+      this.toastr.error('Form is Invalid');
       return;
     }
 
@@ -199,7 +206,7 @@ export class DetailQuotesComponent {
           rhSleevePath: orderForm.get('rhSleevePath')?.value || '',
           additionalInfo: orderForm.get('additionalInfo')?.value
         };
-  
+
 
          // Process size quantities
       const sizeQuantityGroup = orderForm.get('sizeQuantity');
@@ -240,14 +247,15 @@ export class DetailQuotesComponent {
       // });
 
       }
-       
-    
+
+
     });
 
     try {
       await this.quotesService.submitDetailQuote(detailedQuote).subscribe(
         (response) => {
           console.log('Quote submitted successfully', response);
+          this.toastr.success('Quote submitted successfully', 'Success');
           this.detailQuoteForm.reset();
           // this.router.navigate(['/quote/quickQuote']).then(() => {
           //   this.router.navigate(['/quote/detailQuote']);
@@ -256,10 +264,12 @@ export class DetailQuotesComponent {
         },
         (error) => {
           console.error('Error submitting quote:', error);
+          this.toastr.error('Error submitting quote');
         }
       );
     } catch (error) {
       console.error('Error submitting quote:', error);
+      this.toastr.error('Error submitting quote');
     }
   }
 }
