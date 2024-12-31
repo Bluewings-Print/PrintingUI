@@ -30,10 +30,10 @@ export class DetailQuotesComponent {
   ngOnInit(): void {
     this.detailQuoteForm = this.builder.group({
       firstName: this.builder.control('', [Validators.required]),
-      lastName:  this.builder.control('', [Validators.required]),
+      lastName:  this.builder.control(''),
       companyName: this.builder.control(''),
       email:  this.builder.control('', [Validators.required, Validators.email]),
-      phone:  this.builder.control(''),
+      phone:  this.builder.control('',[Validators.required]),
       address:  this.builder.control(''),
       city:  this.builder.control(''),
       state:  this.builder.control(''),

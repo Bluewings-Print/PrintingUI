@@ -36,11 +36,11 @@ export class QuickQuotesComponent {
         ladies: [false],
         kids: [false]
       }),
-      colour:this.builder.control('', [Validators.required]),
+      colour:this.builder.control(''),
       otherColourDetail:this.builder.control(''),
-      budget: this.builder.control('', [Validators.required]),
-      postcode: this.builder.control(''),
-      dateRequired: this.builder.control(''),
+      budget: this.builder.control(''),
+      postcode: this.builder.control('', [Validators.required]),
+      dateRequired: this.builder.control('', [Validators.required]),
       additionalInfo:this.builder.control(''),
       // terms: [false, Validators.requiredTrue]
     });
