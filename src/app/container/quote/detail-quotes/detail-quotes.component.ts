@@ -141,6 +141,20 @@ export class DetailQuotesComponent {
       }
     }
   }
+
+  // onFileChange(event: Event, fieldName: string, index: number): void {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files[0]) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       const previewControl = this.orderForms.at(index).get(`${fieldName}Preview`);
+  //       if (previewControl) {
+  //         previewControl.setValue(reader.result);
+  //       }
+  //     };
+  //     reader.readAsDataURL(input.files[0]);
+  //   }
+  // }
     // if (file) {
     //   // Create an image preview URL
     //   const reader = new FileReader();
@@ -153,13 +167,14 @@ export class DetailQuotesComponent {
     // }
   // }
   toggleOrderForm(event: Event): void {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    if (isChecked) {
-      this.addOrder();
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.orderForms.push(this.createOrderForm());
     } else if (this.orderForms.length > 1) {
-      this.removeOrder();
+      this.orderForms.removeAt(this.orderForms.length - 1);
     }
   }
+
   removeOrder(): void {
     if (this.orderForms.length > 1) {
       this.orderForms.removeAt(this.orderForms.length - 1);
