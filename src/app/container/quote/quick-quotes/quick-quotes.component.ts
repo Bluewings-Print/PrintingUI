@@ -180,13 +180,40 @@ export class QuickQuotesComponent {
         error: (error) => {
           this.toastr.error('Error submitting quote');
           console.error('Error submitting quote', error);
-        }
-      });
-    } else {
-      this.toastr.error('Form is not valid');
-      console.error('Form is invalid');
-    }
-    this.toastr.error('error while submitting the Form ');
+      }
+  });
+} else {
+  this.showValidationErrors();
+}
+}
+
+private showValidationErrors(): void {
+  const controls = this.quickQuoteForm.controls;
+  let errorMessage = 'Please fill in the following required fields:\n';
+
+  if (controls['fullName'].invalid) {
+      errorMessage += '- Full Name\n';
   }
+  if (controls['purpose'].invalid) {
+      errorMessage += '- Purpose\n';
+  }
+  if (controls['garmentType'].invalid) {
+      errorMessage += '- Garment Type\n';
+  }
+  if (controls['email'].invalid) {
+      errorMessage += '- Email\n';
+  }
+  if (controls['quantity'].invalid) {
+      errorMessage += '- Quantity\n';
+  }
+  if (controls['postcode'].invalid) {
+      errorMessage += '- Delivery Postcode\n';
+  }
+  if (controls['dateRequired'].invalid) {
+      errorMessage += '- Date Required\n';
+  }
+
+  this.toastr.error(errorMessage, 'Validation Errors');
+}
 
 }

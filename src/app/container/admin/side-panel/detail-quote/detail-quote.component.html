@@ -1,81 +1,80 @@
 <main>
-    <div class="loading-spinner" *ngIf="loading">
-        <div class="spinner"></div>
-        <p>Loading quotes...</p>
-    </div>
+  <div class="loading-spinner" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Loading quotes...</p>
+  </div>
 
-    <div class="error-message" *ngIf="error">
-        <p>{{ error }}</p>
-        <button (click)="retryLoad()" class="retry-btn">Retry</button>
-    </div>
+  <div class="error-message" *ngIf="error">
+      <p>{{ error }}</p>
+      <button (click)="retryLoad()" class="retry-btn">Retry</button>
+  </div>
 
-    <div class="order-history-container">
-        <h1>Order Detail History</h1>
+  <div class="order-history-container">
+      <h1>Order Detail History</h1>
 
-        <div class="order-list" *ngIf="!loading && !error">
-            <div class="order-header-labels">
-                <span>Order ID</span>
-                <span>Customer Name</span>
-                <span>Company</span>
-                <span>Created Date</span>
-            </div>
+      <div class="order-list" *ngIf="!loading && !error">
+          <div class="order-header-labels">
+              <span>Order ID</span>
+              <span>Customer Name</span>
+              <span>Company</span>
+              <span>Created Date</span>
+          </div>
 
-            <div *ngFor="let order of quotes; let i = index" class="order-item" [@fadeInOut]>
-                <div class="order-header" (click)="toggleDetails(order.id)">
-                    <span>#{{ order.orderDetails[0].brand || 'N/A' }}</span>
-                    <span>{{ order.firstName }} {{ order.lastName }}</span>
-                    <span>{{ order.companyName }}</span>
-                    <!-- <span>{{ order.createdDate | date:'dd.MM.yyyy H:mm' }}</span> -->
-                    <button class="expand-btn">
-                        {{ isExpanded(order.id) ? 'Hide Details' : 'Show Details' }}
-                    </button>
-                </div>
+          <div *ngFor="let order of quotes; let i = index" class="order-item" [@fadeInOut]>
+              <div class="order-header" (click)="toggleDetails(order.id)">
+                  <span>#{{ order.orderDetails && order.orderDetails.length > 0 ? order.orderDetails[0].brand : 'N/A' }}</span>
+                  <span>{{ order.firstName }} {{ order.lastName }}</span>
+                  <span>{{ order.companyName }}</span>
+                  <button class="expand-btn">
+                      {{ isExpanded(order.id) ? 'Hide Details' : 'Show Details' }}
+                  </button>
+              </div>
 
-                <div class="order-details" *ngIf="isExpanded(order.id)" [@expandCollapse]>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Brand</th>
-                                <th>Gender</th>
-                                <th>Color</th>
-                                <th>Size Quantity</th>
-                                <th>Additional Info</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let detail of order.orderDetails">
-                                <td>{{ detail.brand }}</td>
-                                <td>{{ detail.gender }}</td>
-                                <td>{{ detail.color }}</td>
-                                <td>
-                                    <ng-container *ngFor="let size of detail.sizeQuantity | keyvalue">
-                                        {{ size.key }}: {{ size.value }}<p></p>
-                                    </ng-container>
-                                </td>
-                                <td>{{ detail.additionalInfo }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="images-section">
-                        <button class="image-toggle-btn" (click)="toggleImages(order.id)">
-                            {{ showImages[order.id] ? 'Hide Images' : 'Show Images' }}
-                        </button>
-                        <div class="image-container" *ngIf="showImages[order.id]">
-                            <div *ngFor="let detail of order.orderDetails">
-                                <h3>{{detail.brand}}</h3>
-                                <img *ngIf="detail.frontImagePath" [src]="detail.frontImagePath" alt="Front Image">
-                                <img *ngIf="detail.backImagePath" [src]="detail.backImagePath" alt="Back Image">
-                                <img *ngIf="detail.lhSleevePath" [src]="detail.lhSleevePath" alt="Left Sleeve Image">
-                                <img *ngIf="detail.rhSleevePath" [src]="detail.rhSleevePath" alt="Right Sleeve Image">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+              <div class="order-details" *ngIf="isExpanded(order.id)" [@expandCollapse]>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Brand</th>
+                              <th>Gender</th>
+                              <th>Color</th>
+                              <th>Size Quantity</th>
+                              <th>Additional Info</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let detail of order.orderDetails">
+                              <td>{{ detail.brand || 'N/A' }}</td>
+                              <td>{{ detail.gender || 'N/A' }}</td>
+                              <td>{{ detail.color || 'N/A' }}</td>
+                              <td>
+                                  <ng-container *ngFor="let size of detail.sizeQuantity | keyvalue">
+                                      {{ size.key }}: {{ size.value }}<p></p>
+                                  </ng-container>
+                              </td>
+                              <td>{{ detail.additionalInfo || 'N/A' }}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <div class="images-section">
+                      <button class="image-toggle-btn" (click)="toggleImages(order.id)">
+                          {{ showImages[order.id] ? 'Hide Images' : 'Show Images' }}
+                      </button>
+                      <div class="image-container" *ngIf="showImages[order.id]">
+                          <div *ngFor="let detail of order.orderDetails">
+                              <h3>{{ detail.brand || 'N/A' }}</h3>
+                              <img *ngIf="detail.frontImagePath" [src]="detail.frontImagePath" alt="Front Image">
+                              <img *ngIf="detail.backImagePath" [src]="detail.backImagePath" alt="Back Image">
+                              <img *ngIf="detail.lhSleevePath" [src]="detail.lhSleevePath" alt="Left Sleeve Image">
+                              <img *ngIf="detail.rhSleevePath" [src]="detail.rhSleevePath" alt="Right Sleeve Image">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
-    <div class="no-data" *ngIf="!loading && !error && quotes.length === 0">
-        <p>No quotes found.</p>
-    </div>
+  <div class="no-data" *ngIf="!loading && !error && quotes.length === 0">
+      <p>No quotes found.</p>
+  </div>
 </main>

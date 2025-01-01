@@ -166,12 +166,21 @@ export class DetailQuotesComponent {
     //   reader.readAsDataURL(file);
     // }
   // }
-  toggleOrderForm(event: Event): void {
+  toggleOrderForm(event: Event, index: number): void {
     const checkbox = event.target as HTMLInputElement;
     if (checkbox.checked) {
-      this.orderForms.push(this.createOrderForm());
-    } else if (this.orderForms.length > 1) {
-      this.orderForms.removeAt(this.orderForms.length - 1);
+      // Only add a new order form if the current one is valid
+      if (this.orderForms.at(index).valid) {
+        this.orderForms.push(this.createOrderForm());
+      } else {
+        this.toastr.error('Please fill in the current order details before adding a new one.');
+        checkbox.checked = false; // Uncheck the checkbox if the current form is invalid
+      }
+    } else {
+      // Remove the last order form only if there are more than one
+      if (this.orderForms.length > 1) {
+        this.orderForms.removeAt(this.orderForms.length - 1);
+      }
     }
   }
 
@@ -181,14 +190,15 @@ export class DetailQuotesComponent {
     }
   }
 
-  addOrder(): void {
-    this.orderForms.push(this.createOrderForm());
-  }
-
+  // addOrder(): void {
+  //   this.orderForms.push(this.createOrderForm());
+  // }
+  // (click)="addOrder()" 
   async onSubmit() {
     if (this.detailQuoteForm.invalid) {
+      this.showValidationErrors();
       console.error('Form is invalid');
-      this.toastr.error('Form is Invalid');
+      // this.toastr.error('Form is Invalid');
       return;
     }
 
@@ -238,31 +248,11 @@ export class DetailQuotesComponent {
         rh: orderDetail.rhSleevePath
       });
 
-      if(orderDetail.brand|| orderDetail.gender|| orderDetail.color||
-        Object.keys(orderDetail.sizeQuantity).length>0
-      ){
-
+      if (orderDetail.brand || orderDetail.gender || orderDetail.color || Object.keys(orderDetail.sizeQuantity).length > 0) {
         detailedQuote.orderDetails.push(orderDetail);
-      }
-  // const files = {
-      //   // frontArtwork: orderForm.get('frontArtwork').value,
-      //   // backArtwork: orderForm.get('backArtwork').value,
-      //   // lhSleeve: orderForm.get('lhSleeve').value,
-      //   // rhSleeve: orderForm.get('rhSleeve').value
-      //   frontImagePath: orderForm.get('frontArtwork').value,
-      //   backImagePath: orderForm.get('backArtwork').value,
-      //   lhSleevePath: orderForm.get('lhSleeve').value,
-      //   rhSleevePath: orderForm.get('rhSleeve').value
-      // };
-
-      // Object.entries(files).forEach(([key, file]) => {
-      //   if (file) {
-      //     formData.append(orderDetails[${index}].${key}, file);
-      //   }
-      // });
+    }
 
       }
-
 
     });
 
@@ -287,4 +277,33 @@ export class DetailQuotesComponent {
       this.toastr.error('Error submitting quote');
     }
   }
+  private showValidationErrors(): void {
+    const controls = this.detailQuoteForm.controls;
+    let errorMessage = 'Please fill in the following required fields:\n';
+
+    if (controls['firstName'].invalid) {
+        errorMessage += '- First Name\n';
+    }
+    if (controls['email'].invalid) {
+        errorMessage += '- Email\n';
+    }
+    if (controls['phone'].invalid) {
+        errorMessage += '- Phone\n';
+    }
+
+    // Check each order form for required fields
+    this.orderForms.controls.forEach((orderForm: any, index: number) => {
+        if (orderForm.get('brand').invalid) {
+            errorMessage += `- Brand in Order ${index + 1}\n`;
+        }
+        if (orderForm.get('gender').invalid) {
+            errorMessage += `- Gender in Order ${index + 1}\n`;
+        }
+        if (orderForm.get('color').invalid) {
+            errorMessage += `- Color in Order ${index + 1}\n`;
+        }
+    });
+
+    this.toastr.error(errorMessage, 'Validation Errors');
+}
 }
