@@ -45,10 +45,7 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group half-width">
-                <label for="quantity">Quantity</label>
-                <input type="number" id="quantity" formControlName="quantity" placeholder="Value" required>
-            </div>
+
 
             <div class="form-group half-width">
                 <label for="garmentType">Garment Type</label>
@@ -66,6 +63,10 @@
                 </select>
                 <input type="text" formControlName="otherGarmentTypeDetail" placeholder="Please specify" *ngIf="quickQuoteForm.get('garmentType')?.value === 'other'">
             </div>
+            <div class="form-group half-width">
+              <label for="quantity">Quantity</label>
+              <input type="number" id="quantity" formControlName="quantity" placeholder="Value" required>
+          </div>
         </div>
 
         <div class="form-row">
@@ -81,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="form-group half-width">
+            <div class="form-group ">
                 <label for="colour">Colour</label>
                 <select id="colour" formControlName="colour">
                     <option value="Black">Black</option>
@@ -113,7 +114,7 @@
                     <label for="postcode">Delivery Postcode</label>
                     <input type="text" id="postcode" name="postcode" placeholder="Value" formControlName="postcode">
                 </div>
-                <div class="form-group third-width">
+                <div class="form-group third-width date-required">
                     <label for="dateRequired">Date Required</label>
                     <input type="date" id="dateRequired" name="dateRequired" placeholder="Choose date" formControlName="dateRequired">
                 </div>
