@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +7,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy{
+  constructor(private router: Router) {}
   currentSlide = 0;
   autoSlideInterval: any;
 
@@ -31,7 +33,9 @@ export class HomeComponent implements OnInit, OnDestroy{
       title: 'Company Branding'
     },
   ];
-
+  selectProduct(garmentType: string) {
+    this.router.navigate(['/quote/quickQuote'], { queryParams: { garmentType } });
+  }
   ngOnInit() {
     this.startAutoSlide();
   }

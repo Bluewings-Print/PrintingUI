@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { QuoteService } from '../quoteService/quote.service';
 import { QuickQuotes } from './quickQuotes.model';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 interface FilePreview {
   file: File;
   name: string;
@@ -21,7 +22,7 @@ export class QuickQuotesComponent {
   selectedFiles: FilePreview[] = [];
   // imagePaths: string[] = [];
 
-  constructor(private builder: FormBuilder,private quoteService: QuoteService, private toastr: ToastrService) {
+  constructor(private builder: FormBuilder,private quoteService: QuoteService, private toastr: ToastrService,private route: ActivatedRoute) {
     this.quickQuoteForm = this.builder.group({
       fullName:  this.builder.control('',[Validators.required]),
       purpose: this.builder.control('', [Validators.required]),
@@ -47,6 +48,12 @@ export class QuickQuotesComponent {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const garmentType = params['garmentType'];
+      if (garmentType) {
+        this.quickQuoteForm.patchValue({ garmentType });
+      }
+    });
     this.quickQuoteForm.get('purpose')?.valueChanges.subscribe(value => {
       this.toggleOtherField(value, 'otherPurposeDetail');
     });

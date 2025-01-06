@@ -92,12 +92,14 @@ body {
 .contact-section {
   text-align: center;
   margin-top: 3rem;
+  margin-bottom: 20px;
   /* Removed opacity */
 }
 
-.contact-button {
-  background: var(--dark);
-  color: var(--white);
+.contact-buttons {
+  margin-top: 10px;
+  background-color: #2c2c2c;
+  color: white;
   border: none;
   padding: 1rem 2rem;
   border-radius: 25px;
@@ -106,10 +108,14 @@ body {
   transition: transform 0.3s ease;
 }
 
-.contact-button:hover {
+.contact-buttons:hover {
   transform: scale(1.05);
 }
 
+.contact-buttons:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--primary-color);
+}
 @media (max-width: 768px) {
   .header h1 {
     font-size: 2rem;

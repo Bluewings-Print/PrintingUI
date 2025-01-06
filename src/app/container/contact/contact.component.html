@@ -15,7 +15,7 @@
           <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
         </div>
         <button type="submit" class="submit-btn">Send Message</button>
-  
+
         <div class="message-success" id="messageSuccess">Your message has been sent successfully!</div>
         <div class="message-error" id="messageError">Oops! Something went wrong. Please try again.</div>
       </form>
@@ -33,9 +33,9 @@
     <div class="row">
 
         <div class="contact-col">
-            <h4>Contact Us</h4>
-            <h1>Have questions?<br> Get in touch!</h1>
-            <div>
+              <h4>Contact Us</h4>
+              <h1>Have questions?<br> Get in touch!</h1>
+            <!-- <div>
                 <i class="fa fa-home"></i>
                 <span>
                     <h5>Australia 55</h5>
@@ -55,8 +55,8 @@
                     <h5>blueWings&#64;gmail.com</h5>
                     <p>Email us your query</p>
                 </span>
-            </div>
-        </div>
+            </div> -->
+
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" id="contactForm" class="contact-form">
             <div class="form-group">
                 <label for="name">
@@ -119,18 +119,16 @@
             </div>
             <button type="submit" class="submit-btn" [disabled]="isLoading"> <span *ngIf="!isLoading">Get in Touch</span>
                 <span *ngIf="isLoading">Sending...</span></button>
-            <div class="privacy-policy">
+            <!-- <div class="privacy-policy">
                 <input type="checkbox" id="privacy" name="privacy" required>
                 <label for="privacy">I agree with the site's <a href="#">privacy policy</a>.</label>
-            </div>
+            </div> -->
         </form>
+      </div>
     </div>
 </section>
 
 
 <section class="location">
-    <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.2934402579444!2d88.32162637428576!3d22.530677934507462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027759a95318a1%3A0x9531bad5148a697f!2sInspire%20you%20creations!5e0!3m2!1sen!2sin!4v1730875237504!5m2!1sen!2sin"
-        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11963.595909389282!2d147.1190908304837!3d-41.44141362552407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa70a6da53576d95%3A0x55c5ef99d859f3bd!2s56%20Wellington%20St%2C%20Launceston%20TAS%207250%2C%20Australia!5e0!3m2!1sen!2sin!4v1736149648204!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </section>

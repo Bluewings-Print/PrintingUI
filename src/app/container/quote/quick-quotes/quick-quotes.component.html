@@ -2,7 +2,7 @@
     <form [formGroup]="quickQuoteForm" (ngSubmit)="onSubmit()" id="quickQuoteForm">
         <h1>QUICK QUOTE</h1>
         <p>For a more detailed quote form <a routerLink="/quote/detailQuote" routerLinkActive="active">click here</a></p>
-        
+
         <div class="form-row">
             <div class="form-group">
                 <label for="fullName">Full Name</label>
@@ -118,21 +118,21 @@
                     <input type="date" id="dateRequired" name="dateRequired" placeholder="Choose date" formControlName="dateRequired">
                 </div>
             </div>
-    
+
             <div class="form-row">
                 <div class="form-group">
                     <label for="additionalInfo">Additional Info</label>
                     <textarea id="additionalInfo" name="additionalInfo" placeholder="Value" formControlName="additionalInfo"></textarea>
                 </div>
             </div>
-      
+
 
         <div class="form-row footer-form">
-            <div class="form-group-tick">
+            <!-- <div class="form-group-tick">
                 <input type="checkbox" id="terms"  required>
                 <label for="terms">I accept the terms</label>
                 <a href="#" class="terms-link">Read our T&Cs</a>
-            </div>
+            </div> -->
         </div>
 
         <button type="submit">Save</button>

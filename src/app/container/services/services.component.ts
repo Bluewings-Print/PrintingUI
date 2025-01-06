@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from '../contact/contactService/contact-service.service';
 import { ContactModel } from '../contact/contactModel/contact.model';
+import { Router } from '@angular/router';
 // import { ContactServiceService } from '../services/contact-service.service';
 // import { Contact } from '../contactModel/contact.model';
 
@@ -17,6 +18,8 @@ export class ServicesComponent implements OnInit {
   isLoading = false;
   successMessage = 'Form Submitted successfully';
   errorMessage = 'Error! Form did not submitted';
+
+
 
   services = [
     { name: 'Custom Embroidery', image: 'assets/public/heat-4.jpg' },
@@ -47,7 +50,8 @@ export class ServicesComponent implements OnInit {
   ];
   constructor(
     private formBuilder: FormBuilder,
-    private contactService: ContactService
+    private contactService: ContactService,
+    private router: Router
   ) {}
 
 
@@ -60,7 +64,9 @@ export class ServicesComponent implements OnInit {
       message:this.formBuilder.control('', [Validators.required])
     });
   }
-
+  selectProduct(garmentType: string) {
+    this.router.navigate(['/quote/quickQuote'], { queryParams: { garmentType } });
+  }
   // Submit the contact form
   onSubmit(): void {
     this.isSubmitted = true;

@@ -13,11 +13,11 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, title: 'Home' },
   { path: 'services', component: ServicesComponent, title: 'Our Services' },
   { path: 'services/details', component: ReadMoreComponent },
-  {
-    path: 'products',
-    loadChildren: () => import('./container/product/product.module').then(m => m.ProductModule),
-    title: 'Products'
-  },
+  // {
+  //   path: 'products',
+  //   loadChildren: () => import('./container/product/product.module').then(m => m.ProductModule),
+  //   title: 'Products'
+  // },
   {
     path: 'auth',
     loadChildren: () => import('./container/auth/auth.module').then(m => m.AuthModule),
@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./container/admin/side-panel/side-panel.module').then(m => m.SidePanelModule),
     title: 'Admin Panel'
   },
-  { path: 'priceList', component: PriceListComponent, title: 'Price List' },
+  // { path: 'priceList', component: PriceListComponent, title: 'Price List' },
   { path: 'howToOrder', component: HowToOrderComponent, title: 'How to Order' },
   { path: 'faq', component: FaqComponent, title: 'Frequently Asked Questions' },
   { path: 'contact', component: ContactComponent, title: 'Contact Us' },
