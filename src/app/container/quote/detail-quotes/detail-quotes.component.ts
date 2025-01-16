@@ -89,6 +89,14 @@ export class DetailQuotesComponent {
   }
   async onFileChange(event: any, controlName: string, orderIndex: number) {
     const file = event.target.files[0];
+    const maxSizeInBytes = 1 * 1024 * 1024; // 1 M
+    if (file.size > maxSizeInBytes) {
+      this.toastr.error(
+        `File size too large: ${file.name}. Maximum allowed size is 1 MB.`,
+        'File Upload Error'
+      );
+      return;
+    }
     if (file) {
       const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
@@ -98,6 +106,7 @@ export class DetailQuotesComponent {
         this.toastr.error('Invalid file type');
         return;
       }
+
 
       const maxSize = 10 * 1024 * 1024; // 10MB
       if (file.size > maxSize) {
@@ -193,7 +202,7 @@ export class DetailQuotesComponent {
   // addOrder(): void {
   //   this.orderForms.push(this.createOrderForm());
   // }
-  // (click)="addOrder()" 
+  // (click)="addOrder()"
   async onSubmit() {
     if (this.detailQuoteForm.invalid) {
       this.showValidationErrors();

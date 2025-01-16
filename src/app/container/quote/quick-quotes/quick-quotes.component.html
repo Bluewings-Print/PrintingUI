@@ -26,6 +26,9 @@
         <div class="form-group">
             <label for="artwork">Upload your Artwork</label>
             <input type="file" id="artwork" (change)="onFileSelected($event)" multiple accept="image/*">
+            <!-- <div class="div">
+              <h3>only png,jpg,jped</h3>
+            </div> -->
             <label for="artwork" class="file-label">Select files (up to 5)</label>
             <div class="file-preview" *ngIf="selectedFiles.length > 0">
                 <div *ngFor="let file of selectedFiles; let i = index" class="file-preview-item">

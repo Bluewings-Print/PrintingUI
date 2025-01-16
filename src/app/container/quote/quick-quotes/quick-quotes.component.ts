@@ -81,12 +81,35 @@ export class QuickQuotesComponent {
     const files = event.target.files as FileList;
 
     if (this.selectedFiles.length + files.length > 5) {
-      alert('You can only upload up to 5 files.');
+      this.toastr.error('You can only upload up to 5 files.', 'File Upload Error');
       return;
     }
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      const allowedExtensions = ['png', 'jpeg', 'jpg', 'gif'];
+      const maxSizeInBytes = 1 * 1024 * 1024; // 1 M
+
+       // Validate file extension
+    if (!allowedExtensions.includes(fileExtension || '')) {
+      this.toastr.error(
+        `Invalid file type: ${file.name}. Allowed types are: png, jpeg, jpg, gif.`,
+        'File Upload Error'
+      );
+      continue;
+    }
+
+       // Validate file size
+       if (file.size > maxSizeInBytes) {
+        this.toastr.error(
+          `File size too large: ${file.name}. Maximum allowed size is 1 MB.`,
+          'File Upload Error'
+        );
+        continue;
+      }
+
+
       const base64 = await this.convertFileToBase64(file);
       const filePreview: FilePreview = {
         file,
@@ -97,6 +120,10 @@ export class QuickQuotesComponent {
       };
       this.selectedFiles.push(filePreview);
     }
+
+    // if (this.selectedFiles.length > 0) {
+    //   this.toastr.success('Files added successfully.', 'File Upload Success');
+    // }
   }
 
   async convertFileToBase64(file: File): Promise<string> {
