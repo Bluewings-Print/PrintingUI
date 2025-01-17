@@ -89,10 +89,10 @@ export class DetailQuotesComponent {
   }
   async onFileChange(event: any, controlName: string, orderIndex: number) {
     const file = event.target.files[0];
-    const maxSizeInBytes = 1 * 1024 * 1024; // 1 M
+    const maxSizeInBytes = 2 * 1024 * 1024; // 1 M
     if (file.size > maxSizeInBytes) {
       this.toastr.error(
-        `File size too large: ${file.name}. Maximum allowed size is 1 MB.`,
+        `File size too large: ${file.name}. Maximum allowed size is 2 MB.`,
         'File Upload Error'
       );
       return;

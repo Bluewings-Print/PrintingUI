@@ -89,7 +89,7 @@ export class QuickQuotesComponent {
       const file = files[i];
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
       const allowedExtensions = ['png', 'jpeg', 'jpg', 'gif'];
-      const maxSizeInBytes = 1 * 1024 * 1024; // 1 M
+      const maxSizeInBytes = 2 * 1024 * 1024; // 2 M
 
        // Validate file extension
     if (!allowedExtensions.includes(fileExtension || '')) {
@@ -103,7 +103,7 @@ export class QuickQuotesComponent {
        // Validate file size
        if (file.size > maxSizeInBytes) {
         this.toastr.error(
-          `File size too large: ${file.name}. Maximum allowed size is 1 MB.`,
+          `File size too large: ${file.name}. Maximum allowed size is 2 MB.`,
           'File Upload Error'
         );
         continue;
