@@ -89,7 +89,7 @@ export class QuickQuotesComponent {
       const file = files[i];
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
       const allowedExtensions = ['png', 'jpeg', 'jpg', 'gif'];
-      const maxSizeInBytes = 2 * 1024 * 1024; // 2 M
+      const maxSizeInBytes = 5 * 1024 * 1024; // 2 M
 
        // Validate file extension
     if (!allowedExtensions.includes(fileExtension || '')) {
@@ -103,29 +103,73 @@ export class QuickQuotesComponent {
        // Validate file size
        if (file.size > maxSizeInBytes) {
         this.toastr.error(
-          `File size too large: ${file.name}. Maximum allowed size is 2 MB.`,
+          `File size too large: ${file.name}. Maximum allowed size is 5 MB.`,
           'File Upload Error'
         );
         continue;
       }
 
+// Resize and compress the image
+const compressedFile = await this.resizeAndCompressImage(file, 0.67); // 60% quality
+const base64 = await this.convertFileToBase64(compressedFile);
 
-      const base64 = await this.convertFileToBase64(file);
-      const filePreview: FilePreview = {
-        file,
-        name: file.name,
-        size: `${(file.size / 1024).toFixed(2)} KB`,
-        url: URL.createObjectURL(file),
-        base64 // Store the base64 string here
-      };
-      this.selectedFiles.push(filePreview);
-    }
-
+const filePreview: FilePreview = {
+  file: compressedFile,
+  name: compressedFile.name,
+  size: `${(compressedFile.size / 1024).toFixed(2)} KB`,
+  url: URL.createObjectURL(compressedFile),
+  base64 // Store the base64 string here
+};
+this.selectedFiles.push(filePreview);
+}
     // if (this.selectedFiles.length > 0) {
     //   this.toastr.success('Files added successfully.', 'File Upload Success');
     // }
   }
 
+ 
+  private async resizeAndCompressImage(file: File, targetSize: number): Promise<File> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        img.src = event.target?.result as string;
+      };
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+  
+        // Set initial dimensions
+        let width = img.width;
+        let height = img.height;
+  
+        // Calculate new dimensions to maintain aspect ratio
+        const aspectRatio = width / height;
+        const targetWidth = Math.sqrt(targetSize * 1024 * 1024 * aspectRatio);
+        const targetHeight = targetWidth / aspectRatio;
+  
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+  
+        ctx?.drawImage(img, 0, 0, targetWidth, targetHeight);
+  
+        // Convert canvas to Blob with quality adjustment
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const newFile = new File([blob], file.name, { type: file.type });
+            resolve(newFile);
+          } else {
+            reject(new Error('Canvas is empty'));
+          }
+        }, file.type, 0.8); // Adjust quality as needed
+      };
+  
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  }
   async convertFileToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
