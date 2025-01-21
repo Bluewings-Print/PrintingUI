@@ -4,7 +4,7 @@ import { QuoteService } from '../quoteService/quote.service';
 import { DetailedQuote, OrderDetails } from './detailQuotes.model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
+import imageCompression from 'browser-image-compression';
 
 
 @Component({
@@ -89,10 +89,11 @@ export class DetailQuotesComponent {
   }
   async onFileChange(event: any, controlName: string, orderIndex: number) {
     const file = event.target.files[0];
-    const maxSizeInBytes = 2 * 1024 * 1024; // 1 M
+    const orderForm = this.orderForms.at(orderIndex);
+    const maxSizeInBytes = 1 * 1024 * 1024; // 1 M
     if (file.size > maxSizeInBytes) {
       this.toastr.error(
-        `File size too large: ${file.name}. Maximum allowed size is 2 MB.`,
+        `File size too large: ${file.name}. Maximum allowed size is 1 MB.`,
         'File Upload Error'
       );
       return;
@@ -102,27 +103,31 @@ export class DetailQuotesComponent {
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
 
       if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
-        console.error('Invalid file type');
+        // console.error('Invalid file type');
         this.toastr.error('Invalid file type');
         return;
       }
 
+      // const orderForm = this.orderForms.at(orderIndex);
 
-      const maxSize = 10 * 1024 * 1024; // 10MB
-      if (file.size > maxSize) {
-        console.error('File too large');
-        this.toastr.error('File too large');
-        return;
-      }
-
-
-      const orderForm = this.orderForms.at(orderIndex);
-
+  // Check if required fields are filled
+  if (!orderForm.get('brand')?.value || !orderForm.get('gender')?.value || !orderForm.get('color')?.value || !orderForm.get('additionalInfo')?.value) {
+    this.toastr.error('Please fill in Brand, Gender, Color, and Additional Info before uploading images.');
+    return;
+  }
+      const options = {
+        maxSizeMB: 0.01, // Set the maximum size to 1MB
+        maxWidthOrHeight: 1920, // Optional: set max width or height
+        useWebWorker: true, // Use web worker for non-blocking compression
+      };
+      
+      
       try {
-        // Convert file to base64 and store it in the corresponding path control
-        const base64String = await this.convertFileToBase64(file);
+        const compressedFile = await imageCompression(file, options);
+        const base64String = await this.convertFileToBase64(compressedFile);
 
         // Map the control names to their corresponding path names
+        const orderForm = this.orderForms.at(orderIndex);
         const pathMapping: { [key: string]: string } = {
           'frontArtwork': 'frontImagePath',
           'backArtwork': 'backImagePath',
@@ -135,7 +140,7 @@ export class DetailQuotesComponent {
         if (pathControlName) {
           // Update the form controls
           orderForm.patchValue({
-            [controlName]: file,
+            [controlName]: compressedFile,
             [`${controlName}Preview`]: base64String,
             [pathControlName]: base64String
           });

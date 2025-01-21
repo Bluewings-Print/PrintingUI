@@ -11,6 +11,9 @@
           <div class="form-group half-width">
             <label for="firstName">First Name</label>
             <input type="text" id="firstName" formControlName="firstName" placeholder="First Name" />
+            <div *ngIf="detailQuoteForm.get('firstName')?.invalid && (detailQuoteForm.get('firstName')?.touched || detailQuoteForm.get('firstName')?.dirty)">
+              <small class="error-message">First Name is required.</small>
+            </div>
           </div>
           <div class="form-group half-width">
             <label for="lastName">Last Name</label>
@@ -25,10 +28,17 @@
           <div class="form-group half-width">
             <label for="email">Email</label>
             <input type="email" id="email" formControlName="email" placeholder="Email" />
+            <div *ngIf="detailQuoteForm.get('email')?.invalid && (detailQuoteForm.get('email')?.touched || detailQuoteForm.get('email')?.dirty)">
+              <small class="error-message">Valid Email is required.</small>
+            </div>
           </div>
+
           <div class="form-group half-width">
             <label for="phone">Phone</label>
             <input type="tel" id="phone" formControlName="phone" placeholder="Phone number" />
+            <div *ngIf="detailQuoteForm.get('phone')?.invalid && (detailQuoteForm.get('phone')?.touched || detailQuoteForm.get('phone')?.dirty)">
+              <small class="error-message">Phone number is required.</small>
+            </div>
           </div>
         </div>
         <div class="form-group">
@@ -72,7 +82,13 @@
           </div>
           <div class="form-group third-width">
             <label for="styleName">Gender</label>
-            <input type="text" formControlName="gender" placeholder="Gender" />
+            <select type="text" formControlName="gender" placeholder="Gender">
+            <!-- <option value="">+ Choose</option> -->
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Kids">Kids</option>
+            <option value="Unisex">Unisex</option>
+            </select>
           </div>
           <div class="form-group third-width">
             <label for="color">Color</label>

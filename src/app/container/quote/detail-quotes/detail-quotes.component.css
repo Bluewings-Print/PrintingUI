@@ -11,6 +11,10 @@ box-shadow: 0 0 10px rgba(0,0,0,0.1);
 width: 100%;
 max-width: 1000px;
 }
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+}
 
 h1, h2 {
 margin-top: 0;
@@ -89,12 +93,19 @@ font-weight: bold;
 input[type="text"],
 input[type="email"],
 input[type="tel"],
+select,
 textarea {
 width: 100%;
 padding: 8px;
 border: 1px solid #ddd;
 border-radius: 4px;
 box-sizing: border-box;
+}
+
+select {
+  appearance: none;
+  background: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right 12px center;
+  background-size: 16px;
 }
 
 .file-input {
